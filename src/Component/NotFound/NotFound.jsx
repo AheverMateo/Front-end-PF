@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {
 
-    // Para implementar agregar esto como una Route en App.jsx:
+    // Para implementar la página NotFound agregar lo siguiente como una Route en App.jsx:
     // <Route path="*" element={<NotFound/>} />
     // Cualquier ruta no especificada renderizará NotFound
 
