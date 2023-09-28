@@ -47,4 +47,4 @@ const CardFav = ({ name, id, price, stock, valoration, characteristics }) => {
     );
   };
   
-  export default CardFav;// esto se debe convinar con la card original 
+  export default CardFav;// esto se debe convinar con la card original....
