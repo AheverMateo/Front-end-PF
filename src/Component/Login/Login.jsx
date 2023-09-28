@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Style from "./Login.module.css"
 import Validation from '../Validation/Validation'
-import GoogleLogin from 'react-google-login'
-import { gapi } from 'gapi-script' // Help to connect API Google
+//import GoogleLogin from 'react-google-login'
+//import { gapi } from 'gapi-script' // Help to connect API Google
 
 
 const Login = () => {
