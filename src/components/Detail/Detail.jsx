@@ -21,11 +21,11 @@ const Detail = () => {
     };
     
     const favoriteHandler = () => {
-        //agregar a Db o a donde?
+        //agregar a Db
     };
     
     const addReview = () => {
-        //subir a database?
+        //subir a database
     };
 
     // const {idMovie}= useParams();
