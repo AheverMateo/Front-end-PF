@@ -1,0 +1,22 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 100vh;
+}
+
+.campos {
+    margin-top: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+input {
+    height: 50px;
+    width: 200px;
+    background: transparent;
+    outline: none;
+    color: #797979;
+    font-size: 19px;
+}
