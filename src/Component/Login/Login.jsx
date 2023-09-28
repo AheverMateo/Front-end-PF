@@ -34,14 +34,17 @@ const Login = () => {
         <form>
             <div className={Style.campos}>
              <input  type="text" name="name" value={login.name} onChange={handleChange} placeholder="Name"/>
-             {error.name && <span>{error.name}</span>}  
+             {error.name && <p>{error.name}</p>}  
             </div>
             
             <div className={Style.campos}>
              <input  type="password" name="password" value={login.password} onChange={handleChange} placeholder="Password"/>
-             {error.password && <span>{error.password}</span>}
+             {error.password && <p>{error.password}</p>}
             </div>
-            <button>log in</button>
+            
+            <div>
+                <button>log in</button>
+            </div>
         </form>
     </div>
   )
