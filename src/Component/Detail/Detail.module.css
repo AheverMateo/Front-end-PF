@@ -1,0 +1,53 @@
+.main {
+    display: flex;
+    flex-direction: row;
+}
+.detail {
+    display: flex;
+    margin: 2rem;
+}
+.detail img {
+    width: 100%;
+    border-radius: 10px;
+}
+.detail .description {
+    width: 91%;
+    padding-left: 1rem;
+}
+.detail button {
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    width: 10rem;
+    margin-top: 5px;
+    align-self: center;
+    font-weight: 600;
+    border: 1px;
+    background-color: #00B9AE;
+}
+
+.clicker {
+    display: inline-block;
+    width: 100px;
+    height: 50px;
+    color:#FFF;
+  }
+  .clicker.hidden {
+    display: none;
+  }
+  .hiddendiv {
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s;
+  }
+  .hiddendiv.nr2 {
+    background-color: red;
+  }
+  
+  #showDescription:target ~ div a[href="#showDescription"],
+  #showReviews:target ~ div a[href="#showReviews"] {
+    display: none;
+  }
+  #showDescription:target ~ div a[href="#hidediv1"],
+  #showReviews:target ~ div a[href="#hidediv2"] {
+    display: inline-block;
+  }

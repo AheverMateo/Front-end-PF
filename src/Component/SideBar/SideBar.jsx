@@ -5,6 +5,7 @@ import homeIcon from "../../assets/round_home_white_24dp.png";
 import profileIcon from "../../assets/round_person_outline_white_24dp.png";
 import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
+import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png"
 
 const SideBar = () => {
   return (
@@ -22,8 +23,12 @@ const SideBar = () => {
           <img src={favoriteIcon} />
           <div>Favorites</div>
         </Link>
+        <Link to="">
+            <img src={shoppingCartIcon} />
+            <div>Cart</div>
+        </Link>
 
-        <h3>Categories</h3>
+        <h3>Genre</h3>
         <h3>General</h3>
         <Link to="">
           <img src={profileIcon} />
