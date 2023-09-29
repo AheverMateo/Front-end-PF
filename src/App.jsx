@@ -12,7 +12,6 @@ function App() {
         <Route exact path='/login' element={<Login/>}/>
         <Route exact path='/List' element={<ListCards/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/>
-
         <Route path="*" element={<NotFound/>}/> 
       </Routes>
     </div>
