@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Style from "./Login.module.css"
 import Validation from '../Validation/Validation'
+import LogInMenu from '../LogInMenu/LogInMenu'
+import { Link } from 'react-router-dom/dist'
+import { Formik } from 'formik';
 //import GoogleLogin from 'react-google-login'
 //import { gapi } from 'gapi-script' // Help to connect API Google
 
@@ -37,14 +40,14 @@ const Login = () => {
       const [userGoogle, setUserGoogle] = useState({})
 
     // Initializar services Google
-     useEffect(()=>{
-        const start = ()=>{
-            gapi.auth2.init({
-                clientId: clientID,
-            })
-        }
-        gapi.load("client:auth2", start)
-     }, [])
+    //  useEffect(()=>{
+    //     const start = ()=>{
+    //         gapi.auth2.init({
+    //             clientId: clientID,
+    //         })
+    //     }
+    //     gapi.load("client:auth2", start)
+    //  }, [])
 
 
      const onSuccess = (response)=>{
@@ -57,31 +60,73 @@ const Login = () => {
      }
 
   return (
-    <div className={Style.conteiner}>
-        <form>
+    <div className={Style.container}>
+        <LogInMenu />
+        <div className={Style.form}>
+        <h2>Log In</h2>
+        <p>Use your credentials to start enjoying!</p>
+        <Formik
+       initialValues={{ email: '', password: '' }}
+       validate={values => {
+         const errors = {};
+         if (!values.email) {
+           errors.email = 'Required';
+         } else if (
+           !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+         ) {
+           errors.email = 'Invalid email address';
+         }
+         return errors;
+       }}
+       onSubmit={(values, { setSubmitting }) => {
+         setTimeout(() => {
+           alert(JSON.stringify(values, null, 2));
+           setSubmitting(false);
+         }, 400);
+       }}
+     >
+       {({
+         values,
+         errors,
+         touched,
+         handleChange,
+         handleBlur,
+         handleSubmit,
+         isSubmitting,
+         /* and other goodies */
+       }) => (
+        <form onSubmit={handleSubmit}>
             <div className={Style.campos}>
-             <input  type="text" name="name" value={login.name} onChange={handleChange} placeholder="Name"/>
-             {error.name && <p>{error.name}</p>}  
+             <input   type="email"
+             name="email"
+             onChange={handleChange}
+             onBlur={handleBlur}
+             value={values.email} placeholder="E-mail"/>
+             <label>{errors.email && touched.email && errors.email}</label>
             </div>
             
             <div className={Style.campos}>
-             <input  type="password" name="password" value={login.password} onChange={handleChange} placeholder="Password"/>
-             {error.password && <p>{error.password}</p>}
+             <input  type="password" name="password" value={values.password} onChange={handleChange} placeholder="Password"/>
+             
             </div>
             
             <div>
-                <button>log in</button>
+                <button type="submit" disabled={isSubmitting}>Log in</button>
             </div>
 
         </form>
-            <div>
+         )}
+         </Formik>
+        <p>New to NonFlix? <Link to="/Register">Register Now!</Link></p>
+        </div>
+            {/* <div>
                 <GoogleLogin
                     clientId={clientID}
                     onSuccess={onSuccess}
                     onFailure={onFailure}
                     cookiePolicy={"single_host_policy"}
                 />
-            </div>
+            </div> */}
 
     </div>
   )

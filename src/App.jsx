@@ -4,6 +4,7 @@ import  NonRegisteredHome  from "./views/NonRegisteredHome/NonRegisteredHome";
 import Register from './Component/Register/Register';
 import {Routes, Route} from "react-router-dom"
 import Login from './Component/Login/Login'
+import NotFound from './Component/NotFound/NotFound'
 import Paginado from './Component/Paginado/Paginado';
 
 function App() {
@@ -12,9 +13,11 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route exact path='/login' element={<Login/>}/>
+        <Route exact path='/Login' element={<Login/>}/>
         <Route exact path='/paginado' element={<Paginado/>}/>
+        <Route exact path='/Register' element={<Register/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/> 
+        <Route exact path='/NotFound' element={<NotFound />}/> 
       </Routes>
     </div>
   )

@@ -9,23 +9,24 @@
     border-radius: 15px;
     padding-bottom: 2rem;
 }
-.main form {
+form {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     padding-top: 1rem;
 }
-.main form input {
+form input {
     border-radius: 5px;
     height: 1.2rem;
     width: 18rem;
+    border: 1px;
 }
 .main p {
     padding: 0 2rem;
     text-align: center;
     margin: 0;
 }
-.main form button {
+form button {
     border-radius: 0.5rem;
     height: 2.5rem;
     width: 10rem;
