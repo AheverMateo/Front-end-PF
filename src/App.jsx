@@ -1,7 +1,7 @@
 import {Routes, Router, Route} from "react-router-dom"
 import Login from './Component/Login/Login'
-import Paginado from './Component/Paginado/Paginado'
 import NonRegisteredHome from './Views/NonRegisteredHome/NonRegisteredHome'
+import ListCards from "./Component/ListCards/ListCards"
 function App() {
 
 
@@ -9,8 +9,9 @@ function App() {
     <div>
       <Routes>
         <Route exact path='/login' element={<Login/>}/>
-        <Route exact path='/paginado' element={<Paginado/>}/>
+        <Route exact path='/List' element={<ListCards/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/> 
+
       </Routes>
     </div>
   )
