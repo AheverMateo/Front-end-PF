@@ -1,24 +1,13 @@
 import React from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, Dot } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import logo from '../../assets/NONFLIX-LOGO.png';
 import megalodon from '../../assets/megalodon2.jpg';
 import style  from './NonRegisteredHome.module.css'
+import LogInMenu from '../../Component/LogInMenu/LogInMenu';
 const NonRegisteredHome = () =>  {
     return (
         <div className={style.main}>
-        <div className={style.header}>
-        <div className={style.logo}>
-            <img src={logo} alt="NonFlix" />
-        </div>
-        <div className={style.options}>
-            <ul>
-                <a href=''><li>Register Now</li></a>
-                <a href=''><li>Log In</li></a>
-            </ul>
-            </div>
-        </div>
-        
+        <LogInMenu />
         <CarouselProvider
         naturalSlideWidth={70}
         naturalSlideHeight={20}

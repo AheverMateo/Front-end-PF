@@ -1,22 +1,20 @@
-.container {
+.container form {
+    align-items: center;
+}
+.container .form {
+    color: #f3f3f3;
+    background-color: #21242D;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 26rem;
+    border-radius: 15px;
+    padding-bottom: 2rem;
+
 }
 
-.campos {
-    margin-top: 55px;
+.form .campos {
     display: flex;
-    flex-direction: column;
-    gap: 25px;
-}
-
-input {
-    height: 50px;
-    width: 200px;
-    background: transparent;
-    outline: none;
-    color: #797979;
-    font-size: 19px;
+    flex-direction: column-reverse;
 }
