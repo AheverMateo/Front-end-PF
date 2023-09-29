@@ -9,6 +9,7 @@ import Paginado from './Component/Paginado/Paginado';
 import Detail from './Component/Detail/Detail';
 
 import NotFound from "./Component/NotFound/NotFound"
+import ListCards from "./Component/ListCards/ListCards"
 function App() {
 
 
@@ -16,7 +17,7 @@ function App() {
     <div>
       <Routes>
         <Route exact path='/Login' element={<Login/>}/>
-        <Route exact path='/paginado' element={<Paginado/>}/>
+        <Route exact path='/List' element={<ListCards/>}/>
         <Route exact path='/Register' element={<Register/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/>
         <Route path="/Detail" element={<Detail />} />
