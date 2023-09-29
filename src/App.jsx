@@ -8,7 +8,6 @@ import NotFound from './Component/NotFound/NotFound'
 import Paginado from './Component/Paginado/Paginado';
 import Detail from './Component/Detail/Detail';
 
-import NotFound from "./Component/NotFound/NotFound"
 function App() {
 
 
