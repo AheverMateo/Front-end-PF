@@ -8,6 +8,7 @@ import NotFound from './Component/NotFound/NotFound'
 import Paginado from './Component/Paginado/Paginado';
 import Detail from './Component/Detail/Detail';
 
+import NotFound from "./Component/NotFound/NotFound"
 function App() {
 
 
@@ -17,9 +18,10 @@ function App() {
         <Route exact path='/Login' element={<Login/>}/>
         <Route exact path='/paginado' element={<Paginado/>}/>
         <Route exact path='/Register' element={<Register/>}/>
-        <Route exact path='/' element={<NonRegisteredHome/>}/> 
+        <Route exact path='/' element={<NonRegisteredHome/>}/>
         <Route path="/Detail" element={<Detail />} />
         <Route exact path='/NotFound' element={<NotFound />}/> 
+        <Route path="*" element={<NotFound/>}/> 
       </Routes>
     </div>
   )
