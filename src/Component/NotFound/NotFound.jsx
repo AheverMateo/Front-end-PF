@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import SideBar from "../SideBar/SideBar";
+import style from './NotFound.module.css';
 
 const NotFound = () => {
 
@@ -12,11 +14,14 @@ const NotFound = () => {
     };
 
     return(
-        <div className="notfound_container">
-            <h1>Oops! Página no encontrada</h1>
-            <h2>404</h2>
-            <h2>No podemos encontrar la página que buscaste</h2>
+        <div className={style.main}>
+        <SideBar />
+        <div className={style.notFound}>
+            <h1>Oops! Page not found</h1>
+            <h2>404 Error</h2>
+            <h2></h2>
             <button onClick={goHome}>Volver a Home</button>
+        </div>
         </div>
     )
 };
