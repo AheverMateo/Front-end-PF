@@ -1,0 +1,37 @@
+.first-container{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(20, 44, 88);
+    color: aliceblue;
+    height: 75vh;
+    width: 100vw;
+}
+.h1{
+    text-align: center;
+    background-color: rgb(30, 52, 100);
+}
+.first-form-div{
+    width: 50vw;
+}
+.second-form-div{
+    width: 50vw;
+}
+.image-shown{
+    max-width: 300px;
+    max-height: 400px;
+}
+.ok-val{
+    background-color: rgb(33, 119, 76);
+    margin-left: 45%;
+    color: aliceblue;
+    width: 100px;
+    height: 50px;
+    border-radius: 15px;
+}
+.not-ok{
+    text-align: center;
+    color: red;
+}
+.input-divs{
+    margin: 3%;
+}
