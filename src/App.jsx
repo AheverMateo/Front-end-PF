@@ -5,9 +5,10 @@ import Register from './Component/Register/Register';
 import {Routes, Route} from "react-router-dom"
 import Login from './Component/Login/Login'
 import NotFound from './Component/NotFound/NotFound'
-import Paginado from './Component/Paginado/Paginado';
+//import Paginado from './Component/Paginado/Paginado';
 import Detail from './Component/Detail/Detail';
-import ListCards from "./Component/ListCards/ListCards"
+import Home from './Component/Home/Home';
+
 function App() {
 
 
@@ -15,9 +16,9 @@ function App() {
     <div>
       <Routes>
         <Route exact path='/Login' element={<Login/>}/>
-        <Route exact path='/List' element={<ListCards/>}/>
         <Route exact path='/Register' element={<Register/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/>
+        <Route exact path='/Home' element={<Home/>}/>
         <Route path="/Detail" element={<Detail />} />
         <Route path="*" element={<NotFound/>}/> 
       </Routes>
