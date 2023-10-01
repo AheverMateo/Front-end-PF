@@ -1,6 +1,5 @@
 import axios from "axios";
-import { GET_MOVIES, GET_DETAIL, GET_MOVIES_BY_GENRE } from "./actionsTypes";
-
+import { GET_MOVIES, GET_DETAIL, GET_NAME, GET_MOVIES_BY_GENRE } from "./actionsTypes";
 
 export const getMovies = () => {
    
@@ -20,6 +19,7 @@ export const getMovies = () => {
 }
 
 export const getDetailMovie = (id) => {
+export const getDetailMovie = (id) => {
     return async (dispatch) => {
         try {
             const detail = await axios.get(`http://localhost:3001/Nonflix/movies/${id}`)
@@ -30,6 +30,21 @@ export const getDetailMovie = (id) => {
             })
         } catch (error) {
             
+        }
+    }
+}
+
+export const getByName = (name) => {
+    return async (dispatch) => {
+        try {
+            const endpoint= await axios.get(`http://localhost:3001/Nonflix/movies/name?name=${name}`) 
+            const response = endpoint.data
+            dispatch({
+                type: GET_NAME,
+                payload: response,
+            })
+        } catch (error) {
+            console.log(error);
         }
     }
 }

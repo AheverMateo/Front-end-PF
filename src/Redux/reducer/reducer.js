@@ -1,12 +1,14 @@
 import {
   GET_MOVIES,
-  GET_DETAIL,
+  GET_DETAIL, GET_NAME,
   GET_MOVIES_BY_GENRE,
 } from "../actions/actionsTypes";
 const initialState = {
   Allmovies: [],
   movieDetail: [],
   filteredMovies: [],
+    movies_name: [],
+
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -26,6 +28,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filteredMovies: action.payload,
       };
+        case GET_NAME:
+            return {
+                ...state,
+                movies_name: action.payload
+            }
     default:
       return {
         ...state,

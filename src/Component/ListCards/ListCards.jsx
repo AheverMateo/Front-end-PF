@@ -1,10 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import Card from "../Card/Card";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { getMovies } from "../../Redux/actions/actions";
+import React from 'react'
+import { useDispatch, useSelector} from 'react-redux'
+import { useState, useEffect } from 'react';
+import Card from '../Card/Card';
+import { getMovies } from '../../Redux/actions/actions';
 import style from "./ListCards.module.css";
 
 const ListCards = () => {
