@@ -1,33 +1,43 @@
-import { GET_MOVIES, GET_DETAIL, GET_NAME } from "../actions/actionsTypes";
+import {
+  GET_MOVIES,
+  GET_DETAIL, GET_NAME,
+  GET_MOVIES_BY_GENRE,
+} from "../actions/actionsTypes";
 const initialState = {
-    Allmovies: [],
-    details: [],
+  Allmovies: [],
+  movieDetail: [],
+  filteredMovies: [],
     movies_name: [],
 
-}
+};
 
 const rootReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case GET_MOVIES:
-            return {
-                ...state,
-                Allmovies: action.payload
-            }
-        case GET_DETAIL:
-            return {
-                ...state,
-                details: action.payload
-            }
+  switch (action.type) {
+    case GET_MOVIES:
+      return {
+        ...state,
+        Allmovies: action.payload,
+      };
+    case GET_DETAIL:
+      return {
+        ...state,
+        movieDetail: action.payload,
+      };
+    case GET_MOVIES_BY_GENRE:
+      return {
+        ...state,
+        filteredMovies: action.payload,
+      };
         case GET_NAME:
             return {
                 ...state,
                 movies_name: action.payload
             }
-        default:
-            return {
-                ...state
-        }
-    }
-}
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 
-export default rootReducer
+export default rootReducer;

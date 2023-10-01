@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_MOVIES, GET_DETAIL, GET_NAME } from "./actionsTypes";
+import { GET_MOVIES, GET_DETAIL, GET_NAME, GET_MOVIES_BY_GENRE } from "./actionsTypes";
 
 export const getMovies = () => {
    
@@ -18,6 +18,7 @@ export const getMovies = () => {
     }
 }
 
+export const getDetailMovie = (id) => {
 export const getDetailMovie = (id) => {
     return async (dispatch) => {
         try {
@@ -44,6 +45,21 @@ export const getByName = (name) => {
             })
         } catch (error) {
             console.log(error);
+        }
+    }
+}
+export const getMoviesByGenre = (genre) => {
+    return async (dispatch) => {
+        try {
+            const genreCall = await axios.get(`http://localhost:3001/Nonflix/movies/genre?genre=${genre}`)
+            const moviesFiltered = genreCall.data.Movies
+            
+            dispatch({
+                type: GET_MOVIES_BY_GENRE,
+                payload: moviesFiltered
+            })
+        } catch (error) {
+            
         }
     }
 }
