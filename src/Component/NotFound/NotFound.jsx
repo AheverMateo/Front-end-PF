@@ -10,7 +10,7 @@ const NotFound = () => {
 
     const navigate = useNavigate();
     const goHome = () => {
-        navigate("/")//puse "/" como la ruta de home, cambiarlo si no es así
+        navigate("/home")//puse "/" como la ruta de home, cambiarlo si no es así
     };
 
     return(

@@ -19,7 +19,7 @@ function App() {
         <Route exact path='/Register' element={<Register/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/>
         <Route exact path='/Home' element={<Home/>}/>
-        <Route path="/Detail" element={<Detail />} />
+        <Route path='/Detail/:id' element={<Detail />} />
         <Route path="*" element={<NotFound/>}/> 
       </Routes>
     </div>

@@ -1,22 +1,13 @@
 import { useState, useEffect } from "react";
+import {useSelector, useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import SideBar from "../SideBar/SideBar";
 import style from "./Detail.module.css";
-const url = "endpoint detail";
+import { getDetailMovie } from "../../Redux/actions/actions";
 
 const Detail = () => {
-  const [movie, setMovie] = useState({
-    //harcodeo, reemplazar por el codigo comentado más abajo
-    name: "Matrix",
-    duration: 120,
-    description:
-      "Thomas Anderson lleva una doble vida: por el día es programador en una importante empresa de software, y por la noche un hacker informático llamado Neo. Su vida no volverá a ser igual cuando unos misteriosos personajes le inviten a descubrir la pregunta que no le deja dormir: ¿qué es Matrix?",
-    cover:
-      "https://http2.mlstatic.com/D_NQ_NP_756444-MLA46741993452_072021-O.webp",
-    torrent: "",
-  }); //faltaria un rating para las movies en la db?
-
+  const [movie, setMovie] = useState({});
+ 
   const [addedToCart, setAddedToCart] = useState(false);
   const addToCart = () => {
     setAddedToCart(true);
@@ -31,36 +22,32 @@ const Detail = () => {
     //subir a database
   };
 
-  const {idMovie}= useParams();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const selectedMovie = useSelector((state) => state.movieDetail);
 
   useEffect(() => {
-      axios(`${url}${idMovie}`).then(({ data }) => {
-         if (data.name) {
-            setMovie(data);
-         } else {
-            window.alert('No se encontró esa película');
-         }
-      });
-      return setMovie({});
-  }, [idMovie]);
+    dispatch(getDetailMovie(id));
+  }, [id]);
 
   return (
     <div className={style.main}>
       <SideBar />
       <div className={style.detail}>
         <div className={style.poster}>
-          <img src={movie.cover}></img>
+          <img src={selectedMovie.image}></img>
           {/* acá podría haber un render condicional, si ya esta en favorites: opción para sacarlo,
                     si no esta opción para agregarlo */}
-          <button onClick={favoriteHandler}>Add to favorites</button>
+          {/* <button onClick={favoriteHandler}>Add to favorites</button> */}
         </div>
-        
+
         <div className={style.description}>
-          <h2 className={style.title}>{movie.name}</h2>
-          <h3>Duration: {movie.duration} min</h3>
-          <p>Rating: 7/10</p>
-          <p>{movie.description}</p>
-          <button onClick={addToCart}>Add to cart</button>
+          <h2 className={style.title}>{selectedMovie.title}</h2>
+          <h3>Duration: {selectedMovie.duration} min</h3>
+          {/* <p>Rating: 7/10</p> */}
+          <p>{selectedMovie.description}</p>
+          <p>Price: </p><p>$5.00 USD</p>
+          <button onClick={addToCart} type="submit">Add to cart</button>
           <p>{addedToCart ? "Movie has been added to your cart" : ""}</p>
         </div>
 
