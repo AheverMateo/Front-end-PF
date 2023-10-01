@@ -1,4 +1,5 @@
 import ListCards from "../ListCards/ListCards";
+import SearchBar from "../SearchBar/SearchBar";
 import SideBar from "../SideBar/SideBar";
 import style from "./Home.module.css";
 
@@ -7,6 +8,7 @@ const Home = () => {
         <div className={style.home}>
             <SideBar />
             <ListCards />
+            <SearchBar/>
         </div>
     )
 }

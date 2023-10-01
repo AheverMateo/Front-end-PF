@@ -2,8 +2,6 @@ import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import { useState, useEffect } from 'react';
 import Card from '../Card/Card';
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { getMovies } from '../../Redux/actions/actions';
 import style from "./ListCards.module.css";
 
@@ -12,6 +10,7 @@ const ListCards = () => {
   useEffect(() => {
     dispatch(getMovies());
   }, []);
+
     const movies = useSelector((state) => state.Allmovies) 
     
     const [currentPage, setCurrentPage] = useState(1)
@@ -19,8 +18,7 @@ const ListCards = () => {
     const maxPage = Math.ceil(movies.length / pageSize) 
     const startIdx = currentPage * pageSize;
     const endIdx = startIdx + pageSize;
-    const MovieRender = movies.slice(startIdx, endIdx);
-    console.log(MovieRender);
+    const MovieRender = movies.slice(startIdx, endIdx);;
 
     const goToPage = (page) => {
         if (page >= 1 && page <= maxPage) {
