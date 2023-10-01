@@ -1,7 +1,9 @@
-import { GET_MOVIES, GET_DETAIL } from "../actions/actionsTypes";
+import { GET_MOVIES, GET_DETAIL, GET_NAME } from "../actions/actionsTypes";
 const initialState = {
     Allmovies: [],
     details: [],
+    movies_name: [],
+
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -15,6 +17,11 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 details: action.payload
+            }
+        case GET_NAME:
+            return {
+                ...state,
+                movies_name: action.payload
             }
         default:
             return {

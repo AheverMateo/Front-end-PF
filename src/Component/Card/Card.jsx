@@ -3,8 +3,8 @@ import React from 'react'
 const Card = ({props}) => {
   return (
     <div>
-      <img src={props.image} alt="" />
-      <p>{props.year}</p>
+      <h3>{props.title}</h3>
+      <h3>{props.duration}</h3>
     </div>
   )
 }

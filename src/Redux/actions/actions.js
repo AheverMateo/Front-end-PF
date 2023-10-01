@@ -1,11 +1,9 @@
 import axios from "axios";
-import { GET_MOVIES, GET_DETAIL } from "./actionsTypes";
-
+import { GET_MOVIES, GET_DETAIL, GET_NAME } from "./actionsTypes";
 
 export const getMovies = () => {
     return async (dispatch) =>{
         try {
-            console.log('Solicitud de películas iniciada');
             const movie = await axios.get("http://localhost:3001/Nonflix/movies")
             const dataMovie = movie.data
             dispatch({
@@ -18,10 +16,10 @@ export const getMovies = () => {
     }
 }
 
-export const getDetailMovie = () => {
+export const getDetailMovie = (id) => {
     return async (dispatch) => {
         try {
-            const detail = await axios.get("http://localhost:3001/Nonflix/movies/")
+            const detail = await axios.get(`http://localhost:3001/Nonflix/movies/${id}`)
             const dataDetail = detail.data
             dispatch({
                 type: GET_DETAIL,
@@ -29,6 +27,22 @@ export const getDetailMovie = () => {
             })
         } catch (error) {
             
+        }
+    }
+}
+
+export const getByName = (name) => {
+    return async (dispatch) => {
+        try {
+            const endpoint= await axios.get(`http://localhost:3001/Nonflix/movies/name?name=${name}`) 
+            console.log(endpoint);
+            const response = endpoint.data
+            dispatch({
+                type: GET_NAME,
+                payload: response
+            })
+        } catch (error) {
+            console.log(error);
         }
     }
 }
