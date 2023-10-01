@@ -15,7 +15,7 @@ const SideBar = () => {
       </div>
       <div className={style.menu}>
         <h3>Menu</h3>
-        <Link to="/">
+        <Link to="/Home">
           <img src={homeIcon} />
           <div>Home</div>
         </Link>

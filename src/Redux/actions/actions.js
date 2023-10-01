@@ -19,10 +19,10 @@ export const getMovies = () => {
     }
 }
 
-export const getDetailMovie = () => {
+export const getDetailMovie = (id) => {
     return async (dispatch) => {
         try {
-            const detail = await axios.get("http://localhost:3001/Nonflix/movies/")
+            const detail = await axios.get(`http://localhost:3001/Nonflix/movies/${id}`)
             const dataDetail = detail.data
             dispatch({
                 type: GET_DETAIL,
