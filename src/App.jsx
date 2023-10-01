@@ -4,10 +4,12 @@ import  NonRegisteredHome  from "./views/NonRegisteredHome/NonRegisteredHome";
 import Register from './Component/Register/Register';
 import {Routes, Route} from "react-router-dom"
 import Login from './Component/Login/Login'
-//import NotFound from "./Component/NotFound"
+import NotFound from './Component/NotFound/NotFound'
+//import Paginado from './Component/Paginado/Paginado';
 import Detail from './Component/Detail/Detail';
-import SearchBar from './Component/SearchBar/SearchBar';
-import ListCards from './Component/ListCards/ListCards';
+
+import NotFound from "./Component/NotFound/NotFound"
+import ListCards from "./Component/ListCards/ListCards"
 function App() {
 
 
@@ -17,9 +19,9 @@ function App() {
         <Route exact path='/Login' element={<Login/>}/>
         <Route exact path='/Register' element={<Register/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/>
+        <Route exact path='/Home' element={<Home/>}/>
         <Route path="/Detail" element={<Detail />} />
-        <Route exact path='/card' element= {<ListCards/>}/>
-        <Route exact path='/busca' element= {<SearchBar/>}/>
+        <Route path="*" element={<NotFound/>}/> 
       </Routes>
     </div>
   )

@@ -2,19 +2,20 @@ import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import { useState, useEffect } from 'react';
 import Card from '../Card/Card';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { getMovies } from '../../Redux/actions/actions';
+import style from "./ListCards.module.css";
 
 const ListCards = () => {
-  const dispatch = useDispatch()
-
-  useEffect(()=> {
-      dispatch(getMovies())
-  },[dispatch])
-
-    const movies = useSelector((state) => state.Allmovies)
-    console.log(movies);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMovies());
+  }, []);
+    const movies = useSelector((state) => state.Allmovies) 
+    
     const [currentPage, setCurrentPage] = useState(1)
-    const pageSize = 6
+    const pageSize = 12;
     const maxPage = Math.ceil(movies.length / pageSize) 
     const startIdx = currentPage * pageSize;
     const endIdx = startIdx + pageSize;
@@ -30,7 +31,7 @@ const ListCards = () => {
       
   return (
     <div>
-        <div>
+        <div className={style.cards}>
             {MovieRender.map(props => {
                 return (
                   <Card

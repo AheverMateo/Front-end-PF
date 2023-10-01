@@ -29,6 +29,21 @@ const SideBar = () => {
         </Link>
 
         <h3>Genre</h3>
+        <Link to=""><div>Action</div></Link>
+        <Link to=""><div>Adventure</div></Link>
+        <Link to=""> <div>Biography</div></Link>
+        <Link to=""><div>Comedy</div></Link>
+        <Link to=""><div>Crime</div></Link>
+        <Link to=""><div>Documentary</div></Link>
+        <Link to=""><div>Drama</div></Link>
+        <Link to=""><div>Family</div></Link>
+        <Link to=""><div>Fantasy</div></Link>
+        <Link to=""><div>Horror</div></Link>
+        <Link to=""><div>Mistery</div></Link>
+        <Link to=""><div>Romance</div></Link>
+        <Link to=""><div>Sci-Fi</div></Link>
+        <Link to=""> <div>Sport</div></Link>
+        <Link to=""><div>Thriller</div></Link>
         <h3>General</h3>
         <Link to="">
           <img src={profileIcon} />

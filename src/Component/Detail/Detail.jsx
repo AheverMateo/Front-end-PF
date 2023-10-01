@@ -31,18 +31,18 @@ const Detail = () => {
     //subir a database
   };
 
-  // const {idMovie}= useParams();
+  const {idMovie}= useParams();
 
-  // useEffect(() => {
-  //     axios(`${url}${idMovie}`).then(({ data }) => {
-  //        if (data.name) {
-  //           setMovie(data);
-  //        } else {
-  //           window.alert('No se encontró esa película');
-  //        }
-  //     });
-  //     return setMovie({});
-  // }, [idMovie]);
+  useEffect(() => {
+      axios(`${url}${idMovie}`).then(({ data }) => {
+         if (data.name) {
+            setMovie(data);
+         } else {
+            window.alert('No se encontró esa película');
+         }
+      });
+      return setMovie({});
+  }, [idMovie]);
 
   return (
     <div className={style.main}>
@@ -52,31 +52,21 @@ const Detail = () => {
           <img src={movie.cover}></img>
           {/* acá podría haber un render condicional, si ya esta en favorites: opción para sacarlo,
                     si no esta opción para agregarlo */}
-          <button onClick={favoriteHandler}>Agregar a Favoritos</button>
+          <button onClick={favoriteHandler}>Add to favorites</button>
         </div>
-        <a href="#showDescription" className="clicker" tabindex="1">
-          Description
-        </a>
-        <a href="#showDescription" className="clicker hidden" tabindex="1">
-          Description
-        </a>
-        <div className="description hiddendiv nr1" >
+        
+        <div className={style.description}>
           <h2 className={style.title}>{movie.name}</h2>
           <h3>Duration: {movie.duration} min</h3>
           <p>Rating: 7/10</p>
           <p>{movie.description}</p>
-          <button onClick={addToCart}>Agregar al carrito</button>
+          <button onClick={addToCart}>Add to cart</button>
           <p>{addedToCart ? "Movie has been added to your cart" : ""}</p>
         </div>
-        <a href="#showReviews" className="clicker" tabindex="2">
-          Reviews
-        </a>
-        <a href="#showReviews" class="clicker hidden" tabindex="2">
-          Reviews
-        </a>
-        <div className="reviews hiddendiv nr2" >
-          {/* reemplazar pepito por un user name, 
-                y el review traerlo de la base de datos a un estado local por ej*/}
+
+        {/* <div className="reviews hiddendiv nr2">
+          { reemplazar pepito por un user name, 
+                y el review traerlo de la base de datos a un estado local por ej}
           <div>
             <p>Pepito:</p>
             <p>Que buena peli!</p>
@@ -87,9 +77,7 @@ const Detail = () => {
             <textarea name="review"></textarea>
             <button onClick={addReview}>Enviar</button>
           </label>
-        </div>
-        
-  
+        </div> */}
       </div>
     </div>
   );

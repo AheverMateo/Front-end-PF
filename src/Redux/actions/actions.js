@@ -2,8 +2,10 @@ import axios from "axios";
 import { GET_MOVIES, GET_DETAIL, GET_NAME } from "./actionsTypes";
 
 export const getMovies = () => {
+   
     return async (dispatch) =>{
         try {
+            
             const movie = await axios.get("http://localhost:3001/Nonflix/movies")
             const dataMovie = movie.data
             dispatch({
