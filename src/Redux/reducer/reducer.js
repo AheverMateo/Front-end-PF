@@ -15,9 +15,7 @@ const initialState = {
   genreFilter: [],
   currentPage: 1,
   itemsPerPage: 12,
-  //checkSource: 0,
   homeFilters: [],
-  movies_name: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -95,7 +93,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_NAME:
       return {
         ...state,
-        movies_name: action.payload,
+        homeFilters: action.payload,
       };
     default:
       return {

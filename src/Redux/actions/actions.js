@@ -25,7 +25,21 @@ export const getMovies = () => {
     }
   };
 };
-
+export const getByName = (name) => {
+  return async (dispatch) => {
+      try {
+          const endpoint= await axios.get(`http://localhost:3001/Nonflix/movies/name?name=${name}`) 
+          console.log(endpoint);
+          const response = endpoint.data
+          dispatch({
+              type: GET_NAME,
+              payload: response,
+          })
+      } catch (error) {
+          console.log(error);
+      }
+  }
+}
 
 export const getDetailMovie = (id) => {
   return async (dispatch) => {
