@@ -20,11 +20,11 @@ const SearchBar = () => {
 
   return (
     <div className='search_div'>
-      <label name="search">Búsqueda
+      <label name="search">Search by title: 
         <input className="search_input" name='search' value={inputSearch} 
-        onChange={handleInput} placeholder='Nombre de la película'/>
+        onChange={handleInput} />
       </label>
-      <button onClick={handleSearch}>Buscar</button>
+      <button onClick={handleSearch}>Search</button>
     </div>
   )
 };

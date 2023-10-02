@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Style from "./Login.module.css";
 import Validation from "../Validation/Validation";
@@ -78,11 +79,18 @@ const Login = () => {
             
             return errors;
           }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
-              setSubmitting(false);
-            }, 400);
+          onSubmit={async (values) => {
+            try {
+              const response = await axios.get(`http://localhost:3001/Nonflix/login?email=${values.email}&password=${values.password}`) 
+              //console.log(endpoint);
+              //console.log(response);
+              if(response.status === 200) {
+                window.location.href = "/Home"
+              }
+              
+          } catch (error) {
+              console.log(error);
+          }
           }}
         >
           {({

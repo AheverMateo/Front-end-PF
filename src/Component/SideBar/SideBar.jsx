@@ -79,7 +79,7 @@ const SideBar = () => {
           <img src={profileIcon} />
           <div>Perfil</div>
         </Link>
-        <Link to="">
+        <Link to="/">
           <img src={logOutIcon} />
           <div>Logout</div>
         </Link>
