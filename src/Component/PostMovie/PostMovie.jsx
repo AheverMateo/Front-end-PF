@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postMovieValidation } from "../Validation/postMovieValidation";
 import axios from "axios";
-import "./PostMovie.css"
+import "./PostMovie.css";
+import Swal from 'sweetalert2';
+import "@sweetalert2/theme-dark/dark.css";
 
 const PostMovie = () => {
 
@@ -44,9 +46,18 @@ const PostMovie = () => {
         try {
             setMovie({...movie, year: Number(movie.year)});
            await axios.post(`http://localhost:3001/movie`, movie);
-           window.alert("Se ha agregado la película")
+           Swal.fire({
+            icon: "success",
+            title: 'Éxito!',
+            text: 'Se ha agregado tu película',
+            })
         } catch (error) {
-            window.alert("No se pudo agregar la película")
+            Swal.fire({
+                icon: "error",
+                title: 'Oops...',
+                text: 'No se pudo crear tu película',
+                footer: error.message
+            })
         }
     };
 
