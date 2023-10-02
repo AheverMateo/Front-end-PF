@@ -1,6 +1,7 @@
 import {
   GET_MOVIES,
   GET_DETAIL,
+  GET_NAME,
   GET_MOVIES_BY_GENRE,
   CLEAR_FILTER,
   GET_MOVIES_BY_YEAR,
@@ -16,6 +17,7 @@ const initialState = {
   itemsPerPage: 12,
   //checkSource: 0,
   homeFilters: [],
+  movies_name: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -59,7 +61,7 @@ const rootReducer = (state = initialState, action) => {
       }
     case GET_MOVIES_BY_LANG:
       let filteredByLang = [];
-      
+
       if (state.byGenre.length > 0) {
         filteredByLang = state.byGenre.filter((movie) => {
           return movie.language === action.payload;
@@ -89,6 +91,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         currentPage: action.payload,
+      };
+    case GET_NAME:
+      return {
+        ...state,
+        movies_name: action.payload,
       };
     default:
       return {

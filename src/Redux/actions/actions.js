@@ -7,7 +7,9 @@ import {
   GET_MOVIES_BY_YEAR,
   GET_MOVIES_BY_LANG,
   SET_CURRENT_PAGE,
+  GET_NAME
 } from "./actionsTypes";
+
 
 export const getMovies = () => {
   return async (dispatch) => {
@@ -23,6 +25,7 @@ export const getMovies = () => {
     }
   };
 };
+
 
 export const getDetailMovie = (id) => {
   return async (dispatch) => {
