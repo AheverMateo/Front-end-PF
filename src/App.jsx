@@ -8,6 +8,7 @@ import Login from './Component/Login/Login'
 import Home from './Component/Home/Home';
 import Detail from './Component/Detail/Detail';
 import NotFound from "./Component/NotFound/NotFound"
+import PostMovie from "./Component/PostMovie/PostMovie"
 function App() {
 
 
@@ -19,7 +20,8 @@ function App() {
         <Route exact path='/' element={<NonRegisteredHome/>}/>
         <Route exact path='/Home' element={<Home/>}/>
         <Route path='/Detail/:id' element={<Detail />} />
-        <Route path="*" element={<NotFound/>}/> 
+        <Route path="*" element={<NotFound/>}/>
+        <Route path='/PostMovie' element={<PostMovie/>}/>  
       </Routes>
     </div>
   )
