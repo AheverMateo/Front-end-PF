@@ -1,0 +1,11 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+.pagination div {
+    cursor: pointer;
+}
+.pagination div:hover, .pagination .actual {
+    color:#00B9AE
+}

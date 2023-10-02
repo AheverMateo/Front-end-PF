@@ -7,12 +7,22 @@ import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 import { useDispatch } from "react-redux";
-import { getMoviesByGenre } from "../../Redux/actions/actions";
+import {
+  clearFilter,
+  getMoviesByGenre,
+  setCurrentPage,
+} from "../../Redux/actions/actions";
 
 const SideBar = () => {
   const dispatch = useDispatch();
+
   const handleCategoryClick = (event) => {
+    dispatch(setCurrentPage(1));
     dispatch(getMoviesByGenre(event.target.id));
+  };
+
+  const handleHomeClick = () => {
+    dispatch(clearFilter());
   };
   const genres = [
     "Action",
@@ -40,7 +50,7 @@ const SideBar = () => {
         <h3>Menu</h3>
         <Link to="/Home">
           <img src={homeIcon} />
-          <div>Home</div>
+          <div onClick={() => handleHomeClick()}>Home</div>
         </Link>
         <Link to="">
           <img src={favoriteIcon} />
@@ -52,9 +62,13 @@ const SideBar = () => {
         </Link>
 
         <h3>Genre</h3>
-        {genres.map((genre) => (
+        {genres.map((genre, index) => (
           <Link to="/Home">
-            <div onClick={(event) => handleCategoryClick(event)} id={genre}>
+            <div
+              key={index}
+              onClick={(event) => handleCategoryClick(event)}
+              id={genre}
+            >
               {genre}
             </div>
           </Link>
