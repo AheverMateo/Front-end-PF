@@ -1,11 +1,13 @@
+
+
 import React, { useEffect, useState } from 'react'
 import Style from "./Login.module.css"
 import Validation from '../Validation/Validation'
 import LogInMenu from '../LogInMenu/LogInMenu'
 import { Link } from 'react-router-dom/dist'
 import { Formik } from 'formik';
-//import GoogleLogin from 'react-google-login'
-//import { gapi } from 'gapi-script' // Help to connect API Google
+import GoogleLogin from 'react-google-login'
+import { gapi } from 'gapi-script' // Help to connect API Google
 
 
 const Login = () => {
@@ -40,14 +42,14 @@ const Login = () => {
       const [userGoogle, setUserGoogle] = useState({})
 
     // Initializar services Google
-    //  useEffect(()=>{
-    //     const start = ()=>{
-    //         gapi.auth2.init({
-    //             clientId: clientID,
-    //         })
-    //     }
-    //     gapi.load("client:auth2", start)
-    //  }, [])
+     useEffect(()=>{
+        const start = ()=>{
+            gapi.auth2.init({
+                clientId: clientID,
+            })
+        }
+        gapi.load("client:auth2", start)
+     }, [])
 
 
      const onSuccess = (response)=>{
@@ -119,14 +121,14 @@ const Login = () => {
          </Formik>
         <p>New to NonFlix? <Link to="/Register">Register Now!</Link></p>
         </div>
-            {/* <div>
+            <div>
                 <GoogleLogin
                     clientId={clientID}
                     onSuccess={onSuccess}
                     onFailure={onFailure}
                     cookiePolicy={"single_host_policy"}
                 />
-            </div> */}
+            </div>
 
     </div>
   )

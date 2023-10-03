@@ -1,0 +1,4 @@
+.leftButton {
+    float: left; /* Alinea el botón a la izquierda */
+    margin-right: 10px; /* Agrega un margen derecho opcional para separarlo de otros elementos */
+  }
