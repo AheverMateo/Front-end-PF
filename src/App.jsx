@@ -2,20 +2,18 @@
 import './App.css'
 import  NonRegisteredHome  from "./views/NonRegisteredHome/NonRegisteredHome";
 import Register from './Component/Register/Register';
-import {Routes, Route,  useLocation} from "react-router-dom"
+import {Routes, Route} from "react-router-dom"
 import Login from './Component/Login/Login'
 //import NotFound from './Component/NotFound/NotFound'
 import Home from './Component/Home/Home';
 import Detail from './Component/Detail/Detail';
 import NotFound from "./Component/NotFound/NotFound"
 import Cart from './Component/Cart/Cart';
-import SideBar from './Component/SideBar/SideBar';
 import PostMovie from "./Component/PostMovie/PostMovie"
 function App() {
-  const { pathname } = useLocation()
+ 
   return (
-    <div style= {{display: "flex"}}>
-      {pathname !== "/" && <SideBar/>}
+    <div>
       <Routes>
         <Route exact path='/Login' element={<Login/>}/>
         <Route exact path='/Register' element={<Register/>}/>
