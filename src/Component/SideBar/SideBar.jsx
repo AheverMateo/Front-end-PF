@@ -42,30 +42,32 @@ const SideBar = () => {
           <img src={homeIcon} />
           <div>Home</div>
         </Link>
-        <Link to="">
+        <Link >
           <img src={favoriteIcon} />
           <div>Favorites</div>
         </Link>
-        <Link to="">
+        <Link to="/Cart">
           <img src={shoppingCartIcon} />
           <div>Cart</div>
         </Link>
 
         <h3>Genre</h3>
-        {genres.map((genre) => (
-          <Link to="/Home">
-            <div onClick={(event) => handleCategoryClick(event)} id={genre}>
-              {genre}
-            </div>
-          </Link>
-        ))}
+        {
+          genres.map((genre) => {
+            <Link to="/Home">
+              <div onClick={(event) => handleCategoryClick(event)} id={genre}>
+                {genre}
+              </div>
+            </Link>
+          })
+        }
 
         <h3>General</h3>
-        <Link to="">
+        <Link >
           <img src={profileIcon} />
           <div>Perfil</div>
         </Link>
-        <Link to="">
+        <Link >
           <img src={logOutIcon} />
           <div>Logout</div>
         </Link>

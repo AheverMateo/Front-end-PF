@@ -1,5 +1,13 @@
 import axios from "axios";
-import { GET_MOVIES, GET_DETAIL, GET_NAME, GET_MOVIES_BY_GENRE } from "./actionsTypes";
+import { 
+    GET_MOVIES, 
+    GET_DETAIL, 
+    GET_NAME, 
+    GET_MOVIES_BY_GENRE, 
+    ADD_TO_CART,
+    REMOVE_FROM_CART
+   
+} from "./actionsTypes";
 
 export const getMovies = () => {
    
@@ -28,7 +36,7 @@ export const getDetailMovie = (id) => {
                 payload: dataDetail
             })
         } catch (error) {
-            
+            console.log(error.message);
         }
     }
 }
@@ -58,7 +66,20 @@ export const getMoviesByGenre = (genre) => {
                 payload: moviesFiltered
             })
         } catch (error) {
-            
+            console.log(error.message);
         }
+    }
+}
+export const addToCart = (movie) => {
+    
+    return {
+        type: ADD_TO_CART,
+        payload: movie
+    }
+}
+export const removeFromCart = (id) => {
+    return {
+        type:REMOVE_FROM_CART,
+        payload:id
     }
 }
