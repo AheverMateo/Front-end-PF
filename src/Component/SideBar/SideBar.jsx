@@ -6,23 +6,30 @@ import profileIcon from "../../assets/round_person_outline_white_24dp.png";
 import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  clearFilter,
-  getMoviesByGenre,
+  filterParameters,
   setCurrentPage,
 } from "../../Redux/actions/actions";
 
 const SideBar = () => {
   const dispatch = useDispatch();
+  const stateFilterParams = useSelector((state)=> state.filterParameters)
 
   const handleCategoryClick = (event) => {
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[0] = event.target.id;
+    copyFilterParameters[3] = null;
     dispatch(setCurrentPage(1));
-    dispatch(getMoviesByGenre(event.target.id));
+    dispatch(filterParameters(copyFilterParameters));
   };
 
   const handleHomeClick = () => {
-    dispatch(clearFilter());
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[0] = "Home";
+    copyFilterParameters[3] = null;
+    dispatch(filterParameters(copyFilterParameters));
+    dispatch(setCurrentPage(1));
   };
   const genres = [
     "Action",
@@ -63,7 +70,7 @@ const SideBar = () => {
 
         <h3>Genre</h3>
         {genres.map((genre, index) => (
-          <Link to="/Home">
+          <Link to="/Home" key={index}>
             <div
               key={index}
               onClick={(event) => handleCategoryClick(event)}

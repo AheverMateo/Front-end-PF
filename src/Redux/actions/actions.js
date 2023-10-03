@@ -2,14 +2,10 @@ import axios from "axios";
 import {
   GET_MOVIES,
   GET_DETAIL,
-  GET_MOVIES_BY_GENRE,
-  CLEAR_FILTER,
-  GET_MOVIES_BY_YEAR,
-  GET_MOVIES_BY_LANG,
   SET_CURRENT_PAGE,
-  GET_NAME
+  GET_NAME,
+  FILTER,
 } from "./actionsTypes";
-
 
 export const getMovies = () => {
   return async (dispatch) => {
@@ -25,21 +21,42 @@ export const getMovies = () => {
     }
   };
 };
-export const getByName = (name) => {
+export const getByName = (parameters) => {
+  const name = parameters[0];
+  const year = parameters[1];
+  const lang = parameters[2];
+
   return async (dispatch) => {
-      try {
-          const endpoint= await axios.get(`http://localhost:3001/Nonflix/movies/name?name=${name}`) 
-          console.log(endpoint);
-          const response = endpoint.data
-          dispatch({
-              type: GET_NAME,
-              payload: response,
-          })
-      } catch (error) {
-          console.log(error);
+    try {
+      let url = `http://localhost:3001/Nonflix/movies/name?name=${name}`;
+
+      if (year !== undefined && year !== null) {
+        url += `&year=${year}`;
       }
-  }
-}
+
+      if (lang !== undefined && lang !== null) {
+        url += `&lang=${lang}`;
+      }
+      console.log(url);
+      const getMovies = await axios.get(url);
+      const response = getMovies.data;
+      if (response.length > 0) {
+        dispatch({
+          type: GET_NAME,
+          payload: response,
+        });
+      } else {
+        dispatch({
+          type: GET_NAME,
+          payload: "No movies found",
+        });
+      }
+    } catch (error) {
+      const errorMsg = error.message;
+      window.alert(errorMsg);
+    }
+  };
+};
 
 export const getDetailMovie = (id) => {
   return async (dispatch) => {
@@ -52,56 +69,50 @@ export const getDetailMovie = (id) => {
         type: GET_DETAIL,
         payload: dataDetail,
       });
-    } catch (error) {}
+    } catch (error) {console.log(error.message)}
   };
 };
-export const getMoviesByGenre = (genre) => {
-  return async (dispatch) => {
-    try {
-      const genreCall = await axios.get(
-        `http://localhost:3001/Nonflix/movies/genre?genre=${genre}`
-      );
-      const moviesFiltered = genreCall.data.Movies;
 
-      dispatch({
-        type: GET_MOVIES_BY_GENRE,
-        payload: moviesFiltered,
-      });
-    } catch (error) {}
-  };
-};
-export const filterByYear = (year) => {
+export const filterParameters = (parameters) => {
+  const origin = parameters[0];
+  const year = parameters[1];
+  const lang = parameters[2];
+
   return async (dispatch) => {
     try {
-      dispatch({
-        type: GET_MOVIES_BY_YEAR,
-        payload: year,
-      });
-    } catch (error) {}
-  };
-};
-export const filterByLang = (lang) => {
-  return async (dispatch) => {
-    try {
-      dispatch({
-        type: GET_MOVIES_BY_LANG,
-        payload: lang,
-      });
-    } catch (error) {}
+      let url = `http://localhost:3001/Nonflix/movies/filters?origin=${origin}`;
+
+      if (year !== undefined && year !== null) {
+        url += `&year=${year}`;
+      }
+
+      if (lang !== undefined && lang !== null) {
+        url += `&lang=${lang}`;
+      }
+      const getMovies = await axios.get(url);
+      const moviesFiltered =
+        origin === "Home" ? getMovies.data : getMovies.data.Movies;
+
+      if (moviesFiltered.length > 0) {
+        dispatch({
+          type: FILTER,
+          payload: moviesFiltered,
+        });
+      } else {
+        dispatch({
+          type: FILTER,
+          payload: "No movies found",
+        });
+      }
+    } catch (error) {
+      const errorMsg = error.response.data.message;
+      return errorMsg;
+    }
   };
 };
 export const setCurrentPage = (currentPage) => {
   return {
     type: SET_CURRENT_PAGE,
     payload: currentPage,
-  };
-};
-export const clearFilter = () => {
-  return async (dispatch) => {
-    try {
-      dispatch({
-        type: CLEAR_FILTER,
-      });
-    } catch (error) {}
   };
 };

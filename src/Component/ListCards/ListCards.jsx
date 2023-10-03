@@ -1,8 +1,8 @@
-import React from 'react'
-import { useDispatch, useSelector} from 'react-redux'
-import { useState, useEffect } from 'react';
-import Card from '../Card/Card';
-import { getMovies } from '../../Redux/actions/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import Card from "../Card/Card";
+import { getMovies } from "../../Redux/actions/actions";
 import style from "./ListCards.module.css";
 import Pagination from "../Pagination/Pagination";
 
@@ -12,35 +12,26 @@ const ListCards = ({ id }) => {
     dispatch(getMovies());
   }, []);
   const movies = useSelector((state) => state.Allmovies);
-  const genreFilter = useSelector((state) => state.genreFilter);
-  const homeFilters = useSelector((state) => state.homeFilters);
   const currentPage = useSelector((state) => state.currentPage);
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
-
-  let moviesToShow = [];
-
-  if (genreFilter.length > 0) {
-    moviesToShow = genreFilter;
+  const filteredMovies = useSelector((state) => state.filteredMovies);
+  let moviesToDisplay;
+  if (filteredMovies === "No movies found") {
+    console.log(filteredMovies);
+    moviesToDisplay = movies;
   } else {
-    if (homeFilters.length > 0) {
-      moviesToShow = homeFilters;
-    } else {
-      moviesToShow = movies;
-    }
+    moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
   }
-  // genreFilter.length
-  //   ? (moviesToShow = genreFilter)
-  //   : (moviesToShow = movies);
 
-  const paginationSize = Math.ceil(moviesToShow.length / 12);
+  const paginationSize = Math.ceil(moviesToDisplay.length / 12);
 
-  if (moviesToShow.length > 0) {
+  if (moviesToDisplay.length > 0) {
     return (
       <div>
         <h2></h2>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>
-          {moviesToShow.map((props, itemIndex) => {
+          {moviesToDisplay.map((props, itemIndex) => {
             const lastIndex = itemsPerPage * currentPage - 1;
             const firstIndex = lastIndex - 11;
 

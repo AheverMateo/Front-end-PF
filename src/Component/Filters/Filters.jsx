@@ -1,23 +1,52 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import style from "./Filters.module.css";
-import { clearFilter, filterByLang, filterByYear, getMovies, setCurrentPage } from "../../Redux/actions/actions";
+import {
+  getMovies,
+  setCurrentPage,
+  filterParameters,
+  getByName,
+} from "../../Redux/actions/actions";
 
 const Filters = () => {
   const dispatch = useDispatch();
+  const stateFilterParams = useSelector((state) => state.filterParameters);
 
   const handleYearChange = (event) => {
-    dispatch(filterByYear(event.target.value));
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[1] = event.target.value;
+    if (copyFilterParameters[3] === "search") {
+      dispatch(getByName(copyFilterParameters));
+    } else {
+      dispatch(filterParameters(copyFilterParameters));
+    }
     dispatch(setCurrentPage(1));
   };
 
   const handleLangChange = (event) => {
-    dispatch(filterByLang(event.target.value));
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[2] = event.target.value;
+    if (copyFilterParameters[3] === "search") {
+      dispatch(getByName(copyFilterParameters));
+    } else {
+      dispatch(filterParameters(copyFilterParameters));
+    }
     dispatch(setCurrentPage(1));
-  }
+  };
 
   const handleReset = () => {
-    dispatch(clearFilter());
-  }
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[1] = null;
+    copyFilterParameters[2] = null;
+    dispatch(filterParameters(copyFilterParameters));
+    const selectLanguage = document.getElementById("selectLanguage");
+    if (selectLanguage) {
+      selectLanguage.value = "lang";
+    }
+    const selectYear = document.getElementById("selectYear");
+    if (selectYear) {
+      selectYear.value = "year";
+    }
+  };
   return (
     <div>
       <h3>Filter by:</h3>
@@ -25,11 +54,13 @@ const Filters = () => {
       <div className={style.year}>
         <label>Year: </label>
         <select
-          id="year"
+          id="selectYear"
           name="year"
           onChange={(event) => handleYearChange(event)}
         >
-          <option value="">year</option>
+          <option value="year">
+            Year
+          </option>
 
           <option value="1900">1900</option>
           <option value="1901">1901</option>
@@ -158,13 +189,18 @@ const Filters = () => {
         </select>
       </div>
       <div className={style.lang}>
-      <label>Language: </label>
-      <select onChange={(event)=>handleLangChange(event)}>
-        <option value="en">English</option>
-        <option value="fr">French</option>
-        <option value="es">Spanish</option>
-        
-      </select>
+        <label>Language: </label>
+        <select
+          id="selectLanguage"
+          onChange={(event) => handleLangChange(event)}
+        >
+          <option value="lang">
+            Language
+          </option>
+          <option value="en">English</option>
+          <option value="fr">French</option>
+          <option value="es">Spanish</option>
+        </select>
       </div>
     </div>
   );
