@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getByName } from '../../Redux/actions/actions';
 
 const SearchBar = () => {
 
   const [inputSearch, setInputSearch] = useState("");
   const dispatch = useDispatch();
-  
+  const stateFilterParams = useSelector((state)=> state.filterParameters)
 
   const handleInput = (e) =>{
     setInputSearch(e.target.value);
@@ -14,17 +14,20 @@ const SearchBar = () => {
 
   const handleSearch= (e) => {
     e.preventDefault()
-    dispatch(getByName(inputSearch))
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[0] = inputSearch;
+    copyFilterParameters[3] = "search";
+    dispatch(getByName(copyFilterParameters))
   };
 
 
   return (
     <div className='search_div'>
-      <label name="search">Búsqueda
+      <label name="search">Search by title: 
         <input className="search_input" name='search' value={inputSearch} 
-        onChange={handleInput} placeholder='Nombre de la película'/>
+        onChange={handleInput} />
       </label>
-      <button onClick={handleSearch}>Buscar</button>
+      <button onClick={handleSearch}>Search</button>
     </div>
   )
 };

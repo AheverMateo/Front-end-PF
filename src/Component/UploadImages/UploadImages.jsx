@@ -1,5 +1,4 @@
 import React, {  useState } from 'react';
-import ImagesGallery from '../ImagesGallery/ImagesGallery';
 import styles from './UploadImages.module.css'
 
 const MyWidget = () => {
@@ -51,7 +50,7 @@ const MyWidget = () => {
         <form>
 
           <button type="button" className={styles.leftButton} onClick={openWidgetCover}>
-            Upload Image Cover
+            Upload Image to Home
           </button>
 
           <button type="button" className={styles.leftButton} onClick={openWidget}>

@@ -6,13 +6,30 @@ import profileIcon from "../../assets/round_person_outline_white_24dp.png";
 import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
-import { useDispatch } from "react-redux";
-import { getMoviesByGenre } from "../../Redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  filterParameters,
+  setCurrentPage,
+} from "../../Redux/actions/actions";
 
 const SideBar = () => {
   const dispatch = useDispatch();
+  const stateFilterParams = useSelector((state)=> state.filterParameters)
+
   const handleCategoryClick = (event) => {
-    dispatch(getMoviesByGenre(event.target.id));
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[0] = event.target.id;
+    copyFilterParameters[3] = null;
+    dispatch(setCurrentPage(1));
+    dispatch(filterParameters(copyFilterParameters));
+  };
+
+  const handleHomeClick = () => {
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[0] = "Home";
+    copyFilterParameters[3] = null;
+    dispatch(filterParameters(copyFilterParameters));
+    dispatch(setCurrentPage(1));
   };
   const genres = [
     "Action",
@@ -40,7 +57,7 @@ const SideBar = () => {
         <h3>Menu</h3>
         <Link to="/Home">
           <img src={homeIcon} />
-          <div>Home</div>
+          <div onClick={() => handleHomeClick()}>Home</div>
         </Link>
         <Link >
           <img src={favoriteIcon} />
@@ -52,22 +69,24 @@ const SideBar = () => {
         </Link>
 
         <h3>Genre</h3>
-        {
-          genres.map((genre) => {
-            <Link to="/Home">
-              <div onClick={(event) => handleCategoryClick(event)} id={genre}>
-                {genre}
-              </div>
-            </Link>
-          })
-        }
+        {genres.map((genre, index) => (
+          <Link to="/Home" key={index}>
+            <div
+              key={index}
+              onClick={(event) => handleCategoryClick(event)}
+              id={genre}
+            >
+              {genre}
+            </div>
+          </Link>
+        ))}
 
         <h3>General</h3>
         <Link >
           <img src={profileIcon} />
           <div>Perfil</div>
         </Link>
-        <Link >
+        <Link to="/">
           <img src={logOutIcon} />
           <div>Logout</div>
         </Link>

@@ -20,7 +20,7 @@ export default function ImagesGallery() {
 
   return (
     <div>
-        ImagesGallery
+        
         <div ref={containerRef} style={{width: '1200px', margin: 'auto'}}>
         
         </div>
