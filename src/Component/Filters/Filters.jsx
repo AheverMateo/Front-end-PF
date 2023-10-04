@@ -37,6 +37,9 @@ const Filters = () => {
     const copyFilterParameters = stateFilterParams;
     copyFilterParameters[1] = null;
     copyFilterParameters[2] = null;
+    if(copyFilterParameters[3] === "search"){
+      copyFilterParameters[0] = "Home"
+    }
     dispatch(filterParameters(copyFilterParameters));
     const selectLanguage = document.getElementById("selectLanguage");
     if (selectLanguage) {
