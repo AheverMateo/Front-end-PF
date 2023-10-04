@@ -51,11 +51,11 @@ const Filters = () => {
     }
   };
   return (
-    <div>
-      <h3>Filter by:</h3>
-      <button onClick={handleReset}>Reset filters</button>
+    <div className={style.filters}>
+      <h4>Filter by:</h4>
+      
       <div className={style.year}>
-        <label>Year: </label>
+        
         <select
           id="selectYear"
           name="year"
@@ -192,7 +192,7 @@ const Filters = () => {
         </select>
       </div>
       <div className={style.lang}>
-        <label>Language: </label>
+       
         <select
           id="selectLanguage"
           onChange={(event) => handleLangChange(event)}
@@ -205,6 +205,7 @@ const Filters = () => {
           <option value="es">Spanish</option>
         </select>
       </div>
+      <button onClick={handleReset}>Reset filters</button>
     </div>
   );
 };

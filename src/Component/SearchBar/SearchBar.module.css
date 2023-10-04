@@ -1,10 +1,23 @@
 .search_div{
-    width: auto;
-    height: auto;
-    background-color: rgb(24, 48, 102);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
 }
 .search_input{
-    width: 150px;
-    margin: 2%;
-    border-radius: 15xp;
+    width: 200px;
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    border: 0;
+}
+
+.search_div button {
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    width: 10rem;
+    align-self: center;
+    font-weight: 600;
+    border: 1px;
+    background-color: #00B9AE;
+    cursor: pointer;
 }

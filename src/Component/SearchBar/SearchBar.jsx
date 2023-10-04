@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux"
 import { getByName } from '../../Redux/actions/actions';
+import style from './SearchBar.module.css';
 
 const SearchBar = () => {
 
@@ -22,11 +23,10 @@ const SearchBar = () => {
 
 
   return (
-    <div className='search_div'>
-      <label name="search">Search by title: 
-        <input className="search_input" name='search' value={inputSearch} 
+    <div className={style.search_div}>
+      <h4>Search by title: </h4>
+      <input className={style.search_input} name='search' value={inputSearch} 
         onChange={handleInput} />
-      </label>
       <button onClick={handleSearch}>Search</button>
     </div>
   )
