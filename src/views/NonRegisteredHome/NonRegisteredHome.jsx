@@ -4,11 +4,12 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import megalodon from '../../assets/megalodon2.jpg';
 import style  from './NonRegisteredHome.module.css'
 import LogInMenu from '../../Component/LogInMenu/LogInMenu';
+import ImagesGallery from '../../Component/ImagesGallery/ImagesGallery';
 const NonRegisteredHome = () =>  {
     return (
       <div className={style.main}>
         <LogInMenu />
-        <CarouselProvider
+        {/* <CarouselProvider
         naturalSlideWidth={70}
         naturalSlideHeight={20}
         totalSlides={3}
@@ -25,7 +26,8 @@ const NonRegisteredHome = () =>  {
         </Slider>
         <ButtonBack>Back</ButtonBack>
         <ButtonNext>Next</ButtonNext>
-      </CarouselProvider>
+      </CarouselProvider> */}
+      <ImagesGallery/>
       </div>
     )
 }

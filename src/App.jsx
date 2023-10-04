@@ -9,6 +9,9 @@ import Detail from './Component/Detail/Detail';
 import NotFound from "./Component/NotFound/NotFound";
 import Cart from './Component/Cart/Cart';
 import PostMovie from "./Component/PostMovie/PostMovie"
+import UploadImages from './Component/UploadImages/UploadImages';
+
+
 function App() {
  
   return (
@@ -20,8 +23,9 @@ function App() {
         <Route exact path='/Home' element={<Home/>}/>
         <Route path='/Cart' element={<Cart/>}/>
         <Route path='/Detail/:id' element={<Detail />} />
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="*" element={<NotFound/>}/> 
         <Route path='/PostMovie' element={<PostMovie/>}/>  
+        <Route path='/uploadImages' element={<UploadImages/>} />
       </Routes>
     </div>
   )
