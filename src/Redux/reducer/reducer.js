@@ -7,7 +7,7 @@ const initialState = {
   Allmovies: [],
   movieDetail: [],
   filteredMovies: [],
-    movies_name: [],
+  movies_name: [],
 
 };
 

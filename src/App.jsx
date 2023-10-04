@@ -8,6 +8,7 @@ import Login from './Component/Login/Login'
 import Home from './Component/Home/Home';
 import Detail from './Component/Detail/Detail';
 import NotFound from "./Component/NotFound/NotFound"
+import Perfil from './Component/Perfil/Perfil';
 function App() {
 
 
@@ -20,6 +21,7 @@ function App() {
         <Route exact path='/Home' element={<Home/>}/>
         <Route path='/Detail/:id' element={<Detail />} />
         <Route path="*" element={<NotFound/>}/> 
+        <Route path='/Perfil' element={<Perfil/>}/>
       </Routes>
     </div>
   )

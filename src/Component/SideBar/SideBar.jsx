@@ -61,7 +61,7 @@ const SideBar = () => {
         ))}
 
         <h3>General</h3>
-        <Link to="">
+        <Link to="/Perfil">
           <img src={profileIcon} />
           <div>Perfil</div>
         </Link>
