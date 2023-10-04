@@ -9,8 +9,10 @@ const Home = () => {
     <div className={style.home}>
       <SideBar />
       <div className={style.center}>
+        <div className={style.header}>
         <SearchBar />
         <Filters />
+        </div>
         <ListCards />
       </div>
     </div>
