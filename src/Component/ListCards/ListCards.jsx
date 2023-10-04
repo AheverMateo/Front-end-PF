@@ -16,6 +16,8 @@ const ListCards = ({ id }) => {
   const currentPage = useSelector((state) => state.currentPage);
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
   const filteredMovies = useSelector((state) => state.filteredMovies);
+  const filterParameters = useSelector((state)=> state.filterParameters);
+
   let moviesToDisplay;
   if (filteredMovies === "No movies found") {
     Swal.fire({
@@ -33,6 +35,7 @@ const ListCards = ({ id }) => {
   if (moviesToDisplay.length > 0) {
     return (
       <div>
+        {filterParameters[3] !== "search"? <h2>{filterParameters[0]}</h2> : <h2>Results for: {filterParameters[0]}</h2>}
         <h2></h2>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>
