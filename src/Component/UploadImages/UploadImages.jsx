@@ -1,52 +1,78 @@
-import React from 'react'
-import { useState } from 'react'
-import axios from 'axios';
+import React, {  useState } from 'react';
+import styles from './UploadImages.module.css'
 
-export default function UploadImages() {
+const MyWidget = () => {
 
-    const [url_imagen, seturl_imagen] = useState("");
+  const cloudName = 'dy8pp1s5f'; 
+  const uploadPreset = 'imagenes_admins'; 
 
-  const changeUploadImage = async (event)=>{
-    const file = event.target.files[0];
-    console.log(file)
+  const [imageUrl, setimageUrl] = useState(null);
+  const [imageAlt, setimageAlt] = useState(null);
 
-    // create set
-    const data = new FormData();
-    
-    // Methods of the set
-    data.append("file", file);
-    data.append("upload_preset", "imagenes_admins")
 
-    // Upload a image to cloudinary
-    const response = await axios.post("https://api.cloudinary.com/v1_1/dy8pp1s5f/image/upload", data)
-
-    console.log(response.data)
-    seturl_imagen(response.data.secure_url)
-  }
-
-  // Delete image state
-  const functionDeleteImage = ()=>{
-    seturl_imagen("");
+  const openWidgetCover = () => {
+    const widget = window.cloudinary.createUploadWidget(
+      {
+        cloudName: cloudName, 
+        uploadPreset: uploadPreset,
+        tags: ["gallery-images"],
+      },
+      (error, result) => {
+        if (result.event === "success") {
+          setimageUrl(result.info.secure_url);
+          setimageAlt(`Una imagen de ${result.info.original_filename}`);
+        }
+      }
+    );
+    widget.open();
   };
 
-  
-  return (
-    <div>
-    UploadImages     
-    
-    <h1>Seleccionar una imagen</h1>
-    
-      <input type="file" accept='image/*' onChange={changeUploadImage} />
-      
+  const openWidget = () => {
+    const widget = window.cloudinary.createUploadWidget(
       {
-      url_imagen &&  
-      (<div>
-        <img src={url_imagen} alt="" />
-        <button onClick={()=> functionDeleteImage()}>Eliminar Imagen</button>
-      </div>)
+        cloudName: cloudName, 
+        uploadPreset: uploadPreset,
+      },
+      (error, result) => {
+        if (result.event === "success") {
+          setimageUrl(result.info.secure_url);
+          setimageAlt(`Una imagen de ${result.info.original_filename}`);
+        }
       }
+    );
+    widget.open();
+  };
+
+  console.log(imageUrl)
+
+  return (
+    <div >
+        <form>
+
+          <button type="button" className={styles.leftButton} onClick={openWidgetCover}>
+            Upload Image to Home
+          </button>
+
+          <button type="button" className={styles.leftButton} onClick={openWidget}>
+            Upload Image
+          </button>
+        
+        </form>
+
+
+        <p>Aquí se mostrará la imagen resultante</p>
+        {imageUrl && (
+          <img src={imageUrl} alt={imageAlt} className="displayed-image" />
+        )}
 
 
     </div>
-  )
-}
+  );
+};
+
+export default MyWidget;
+
+
+
+
+

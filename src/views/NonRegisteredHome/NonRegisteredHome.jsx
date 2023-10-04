@@ -4,15 +4,16 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import megalodon from '../../assets/megalodon2.jpg';
 import style  from './NonRegisteredHome.module.css'
 import LogInMenu from '../../Component/LogInMenu/LogInMenu';
+import ImagesGallery from '../../Component/ImagesGallery/ImagesGallery';
 const NonRegisteredHome = () =>  {
     return (
-        <div className={style.main}>
+      <div className={style.main}>
         <LogInMenu />
-        <CarouselProvider
+        {/* <CarouselProvider
         naturalSlideWidth={70}
         naturalSlideHeight={20}
         totalSlides={3}
-      >
+        >
         <Slider className={style.homeSlider} isPlaying={true} interval={5000}>
           <Slide index={0}>
             <img className={style.img} src="https://images.thedirect.com/media/article_full/mario-movie-poster.jpg" alt="Super Mario"/>
@@ -25,7 +26,8 @@ const NonRegisteredHome = () =>  {
         </Slider>
         <ButtonBack>Back</ButtonBack>
         <ButtonNext>Next</ButtonNext>
-      </CarouselProvider>
+      </CarouselProvider> */}
+      <ImagesGallery/>
       </div>
     )
 }

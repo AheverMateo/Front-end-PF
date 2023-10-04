@@ -1,5 +1,6 @@
-import LogInMenu from "../LogInMenu/LogInMenu";
-import style from "./Register.module.css";
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
+import LogInMenu from '../LogInMenu/LogInMenu';
+import style from './Register.module.css';
 import { Formik } from "formik";
 import { useState } from "react";
 
@@ -11,6 +12,9 @@ const Register = () => {
       <div className={style.main}>
         <h2>Register Now!</h2>
         <p>Please fill in the blanks to start enjoying your favorite movies!</p>
+
+        
+
         <Formik
           initialValues={{ name: "", email: "", password: "" }}
           validate={(values) => {
@@ -101,7 +105,11 @@ const Register = () => {
             </form>
           )}
         </Formik>
-      </div>
+
+        <GoogleAuth/>
+
+        </div>
+
     </>
   );
 };

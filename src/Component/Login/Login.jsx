@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import Style from "./Login.module.css";
-import Validation from "../Validation/Validation";
-import LogInMenu from "../LogInMenu/LogInMenu";
-import { Link } from "react-router-dom/dist";
-import { Formik } from "formik";
-//import GoogleLogin from 'react-google-login'
-//import { gapi } from 'gapi-script' // Help to connect API Google
+import React, { useState } from 'react'
+import Style from "./Login.module.css"
+import Validation from '../Validation/Validation'
+import LogInMenu from '../LogInMenu/LogInMenu'
+import { Link } from 'react-router-dom/dist'
+import { Formik } from 'formik';
+import GoogleAuth from '../GoogleAuth/GoogleAuth'
+
 
 const Login = () => {
   const [login, setLogin] = useState({
@@ -33,30 +33,7 @@ const Login = () => {
     );
   };
 
-  // login Google
-  const clientID =
-    "285030629309-sqqpv5i7tj1vubo8hmb1ld63ki9ec08h.apps.googleusercontent.com";
 
-  const [userGoogle, setUserGoogle] = useState({});
-
-  // Initializar services Google
-  //  useEffect(()=>{
-  //     const start = ()=>{
-  //         gapi.auth2.init({
-  //             clientId: clientID,
-  //         })
-  //     }
-  //     gapi.load("client:auth2", start)
-  //  }, [])
-
-  const onSuccess = (response) => {
-    setUserGoogle(response.profileObj);
-    console.log(response);
-  };
-
-  const onFailure = () => {
-    console.log("Something went wrong");
-  };
 
   return (
     <div className={Style.container}>
@@ -116,37 +93,18 @@ const Login = () => {
                 <label>{errors.email && touched.email && errors.email}</label>
               </div>
 
-              <div className={Style.campos}>
-                <input
-                  type="password"
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  placeholder="Password"
-                />
-              </div>
+        </form>
+         )}
+      
 
-              <div>
-                <button type="submit" disabled={isSubmitting}>
-                  Log in
-                </button>
-              </div>
-            </form>
-          )}
-        </Formik>
-        <p>
-          New to NonFlix? <Link to="/Register">Register Now!</Link>
-        </p>
+         </Formik>
+      <GoogleAuth/> 
+        <p>New to NonFlix? <Link to="/Register">Register Now!</Link></p>
+        </div>
+
+
       </div>
-      {/* <div>
-                <GoogleLogin
-                    clientId={clientID}
-                    onSuccess={onSuccess}
-                    onFailure={onFailure}
-                    cookiePolicy={"single_host_policy"}
-                />
-            </div> */}
-    </div>
+    
   );
 };
 

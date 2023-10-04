@@ -56,16 +56,21 @@ const rootReducer = (state = initialState, action) => {
         filteredMovies: action.payload,
       };
     }
-    case ADD_TO_CART:
+    case ADD_TO_CART:{
+
+      const repeated = [...state.Cart].find(movie => movie.id === action.payload.id)
       return {
         ...state,
-        Cart: [],
-      };
-    case REMOVE_FROM_CART:
+        Cart: repeated ?  [...state.Cart] : [...state.Cart, action.payload]
+      }
+    }
+    case REMOVE_FROM_CART: {
+      const deleteCart = [...state.Cart].filter(movie => movie.id !== action.payload)
       return {
         ...state,
-        Cart: [],
-      };
+        Cart: deleteCart
+      }
+    }   
     default:
       return {
         ...state,
