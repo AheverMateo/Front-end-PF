@@ -4,13 +4,15 @@ import { useParams } from "react-router-dom";
 import SideBar from "../SideBar/SideBar";
 import style from "./Detail.module.css";
 import { getDetailMovie } from "../../Redux/actions/actions";
+import { addToCart } from "../../Redux/actions/actions";
 
 const Detail = () => {
   const [movie, setMovie] = useState({});
  
   const [addedToCart, setAddedToCart] = useState(false);
-  const addToCart = () => {
+  const handleAddCart = () => {
     setAddedToCart(true);
+    dispatch(addToCart(selectedMovie))
     //agregar a carrito de compras
   };
 
@@ -25,7 +27,6 @@ const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const selectedMovie = useSelector((state) => state.movieDetail);
-
   useEffect(() => {
     dispatch(getDetailMovie(id));
   }, [id]);
@@ -47,7 +48,7 @@ const Detail = () => {
           {/* <p>Rating: 7/10</p> */}
           <p>{selectedMovie.description}</p>
           <p>Price: </p><p>$5.00 USD</p>
-          <button onClick={addToCart} type="submit">Add to cart</button>
+          <button onClick={handleAddCart} type="submit">Add to cart</button>
           <p>{addedToCart ? "Movie has been added to your cart" : ""}</p>
         </div>
 

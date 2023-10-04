@@ -6,7 +6,7 @@ const LogInMenu = ()=> {
     return (
         <div className={style.header}>
         <div className={style.logo}>
-            <img src={logo} alt="NonFlix" />
+            <Link to="/"><img src={logo} alt="NonFlix" /></Link>
         </div>
         <div className={style.options}>
             <ul>
