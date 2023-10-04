@@ -5,6 +5,8 @@ import {
   SET_CURRENT_PAGE,
   GET_NAME,
   FILTER,
+  ADD_TO_CART,
+  REMOVE_FROM_CART
 } from "./actionsTypes";
 
 export const getMovies = () => {
@@ -116,3 +118,16 @@ export const setCurrentPage = (currentPage) => {
     payload: currentPage,
   };
 };
+export const addToCart = (movie) => {
+    
+  return {
+      type: ADD_TO_CART,
+      payload: movie
+  }
+}
+export const removeFromCart = (id) => {
+  return {
+      type:REMOVE_FROM_CART,
+      payload:id
+  }
+}

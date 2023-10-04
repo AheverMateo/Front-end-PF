@@ -1,37 +1,45 @@
+.global-container{
+    background-color: rgb(20, 44, 88);
+    height: 97vh;
+}
 .first-container{
     display: flex;
     flex-direction: row;
-    background-color: rgb(20, 44, 88);
     color: aliceblue;
     height: 75vh;
-    width: 100vw;
+    width: 99vw;
 }
 .h1{
     text-align: center;
-    background-color: rgb(30, 52, 100);
+    background-color: rgb(20, 44, 88);
+    margin-top: 0%;
 }
 .first-form-div{
     width: 30vw;
 }
 .second-form-div{
-    width: 50vw;
+    width: 35vw;
+}
+.third-form-div{
+    width: 30vw;
 }
 .image-shown{
-    max-width: 300px;
-    max-height: 400px;
+    max-width: 90%;
+    max-height: 300px;
     margin-left: 5%;
 }
 .ok-val{
-    background-color: rgb(33, 119, 76);
+    background-color: rgb(67, 92, 138);
     margin-left: 45%;
     color: aliceblue;
     width: 100px;
     height: 50px;
     border-radius: 15px;
+    margin-bottom: 0.5%;
 }
 .not-ok{
     text-align: center;
-    color: red;
+    color: rgb(161, 37, 37);
 }
 .input-divs{
     margin-left: 5%;
@@ -40,17 +48,17 @@
     flex-direction: column;
 }
 .description{
-    height: 150px;
-    width: 250px;
+    height: 130px;
+    width: 100%;
 }
 .wrong{
     background-color: rgb(207, 123, 123);
 }
-.checkboxes{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 .checkbox-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-left: 5%;
+}
+.generos-margin{
     margin-left: 5%;
 }

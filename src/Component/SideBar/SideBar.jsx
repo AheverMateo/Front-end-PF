@@ -59,11 +59,11 @@ const SideBar = () => {
           <img src={homeIcon} />
           <div onClick={() => handleHomeClick()}>Home</div>
         </Link>
-        <Link to="">
+        <Link >
           <img src={favoriteIcon} />
           <div>Favorites</div>
         </Link>
-        <Link to="">
+        <Link to="/Cart">
           <img src={shoppingCartIcon} />
           <div>Cart</div>
         </Link>
@@ -82,7 +82,7 @@ const SideBar = () => {
         ))}
 
         <h3>General</h3>
-        <Link to="">
+        <Link >
           <img src={profileIcon} />
           <div>Perfil</div>
         </Link>

@@ -1,5 +1,9 @@
 import {
   GET_MOVIES,
+  GET_DETAIL, GET_NAME,
+  GET_MOVIES_BY_GENRE,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
   GET_DETAIL,
   GET_NAME,
   SET_CURRENT_PAGE,
@@ -8,6 +12,7 @@ import {
 } from "../actions/actionsTypes";
 const initialState = {
   Allmovies: [],
+  Cart : [],
   movieDetail: [],
   byGenre: [],
   genreFilter: [],
