@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   GET_MOVIES,
   GET_DETAIL,
@@ -8,6 +9,7 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART
 } from "./actionsTypes";
+import Swal from 'sweetalert2';
 
 export const getMovies = () => {
   return async (dispatch) => {
@@ -105,9 +107,19 @@ export const filterParameters = (parameters) => {
           type: FILTER,
           payload: "No movies found",
         });
+        Swal.fire({
+          title: 'Oops!',
+          text: "No movies found",
+          icon: 'error',
+        })
       }
     } catch (error) {
       const errorMsg = error.response.data.message;
+      Swal.fire({
+        title: 'Oops!',
+        text: "No movies found",
+        icon: 'error',
+      })
       return errorMsg;
     }
   };

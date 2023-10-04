@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 import { getMovies } from "../../Redux/actions/actions";
 import style from "./ListCards.module.css";
 import Pagination from "../Pagination/Pagination";
+import Swal from 'sweetalert2';
 
 const ListCards = ({ id }) => {
   const dispatch = useDispatch();
@@ -17,7 +18,11 @@ const ListCards = ({ id }) => {
   const filteredMovies = useSelector((state) => state.filteredMovies);
   let moviesToDisplay;
   if (filteredMovies === "No movies found") {
-    console.log(filteredMovies);
+    Swal.fire({
+      title: 'Oops!',
+      text: filteredMovies,
+      icon: 'error',
+    })
     moviesToDisplay = movies;
   } else {
     moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;

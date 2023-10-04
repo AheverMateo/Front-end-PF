@@ -3,11 +3,10 @@ import './App.css'
 import  NonRegisteredHome  from "./views/NonRegisteredHome/NonRegisteredHome";
 import Register from './Component/Register/Register';
 import {Routes, Route} from "react-router-dom"
-import Login from './Component/Login/Login'
-//import NotFound from './Component/NotFound/NotFound'
+import Login from './Component/Login/Login';
 import Home from './Component/Home/Home';
 import Detail from './Component/Detail/Detail';
-import NotFound from "./Component/NotFound/NotFound"
+import NotFound from "./Component/NotFound/NotFound";
 import Cart from './Component/Cart/Cart';
 import PostMovie from "./Component/PostMovie/PostMovie"
 function App() {
