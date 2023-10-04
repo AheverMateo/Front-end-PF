@@ -1,0 +1,8 @@
+.divMoviesCart {
+   display: flex;
+   align-items: center;
+
+}
+.divMoviesCart img {
+    height: 100px;
+}

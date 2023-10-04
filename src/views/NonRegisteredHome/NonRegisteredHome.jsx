@@ -6,13 +6,13 @@ import style  from './NonRegisteredHome.module.css'
 import LogInMenu from '../../Component/LogInMenu/LogInMenu';
 const NonRegisteredHome = () =>  {
     return (
-        <div className={style.main}>
+      <div className={style.main}>
         <LogInMenu />
         <CarouselProvider
         naturalSlideWidth={70}
         naturalSlideHeight={20}
         totalSlides={3}
-      >
+        >
         <Slider className={style.homeSlider} isPlaying={true} interval={5000}>
           <Slide index={0}>
             <img className={style.img} src="https://images.thedirect.com/media/article_full/mario-movie-poster.jpg" alt="Super Mario"/>
