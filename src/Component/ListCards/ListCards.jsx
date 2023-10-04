@@ -1,72 +1,57 @@
-import React from 'react'
-import { useDispatch, useSelector} from 'react-redux'
-import { useState, useEffect } from 'react';
-import Card from '../Card/Card';
-import { getMovies } from '../../Redux/actions/actions';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import Card from "../Card/Card";
+import { getMovies } from "../../Redux/actions/actions";
 import style from "./ListCards.module.css";
+import Pagination from "../Pagination/Pagination";
 
-const ListCards = () => {
+const ListCards = ({ id }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getMovies());
   }, []);
   const movies = useSelector((state) => state.Allmovies);
+  const currentPage = useSelector((state) => state.currentPage);
+  const itemsPerPage = useSelector((state) => state.itemsPerPage);
   const filteredMovies = useSelector((state) => state.filteredMovies);
+  let moviesToDisplay;
+  if (filteredMovies === "No movies found") {
+    console.log(filteredMovies);
+    moviesToDisplay = movies;
+  } else {
+    moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
+  }
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 12;
-  const maxPage = Math.ceil(movies.length / pageSize);
-  const startIdx = currentPage * pageSize;
-  const endIdx = startIdx + pageSize;
+  const paginationSize = Math.ceil(moviesToDisplay.length / 12);
 
-  let moviesToShow = [];
-  filteredMovies.length
-    ? (moviesToShow = filteredMovies)
-    : (moviesToShow = movies);
-
-  const MovieRender = moviesToShow.slice(startIdx, endIdx);
-
-  const goToPage = (page) => {
-    if (page >= 1 && page <= maxPage) {
-      setCurrentPage(page);
-    }
-  };
-  
-
-  if (moviesToShow.length > 0) {
+  if (moviesToDisplay.length > 0) {
     return (
       <div>
+        <h2></h2>
+        <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>
-          {MovieRender.map((props) => {
-            return (
-              <Card
-                key={props.id}
-                id={props.id}
-                title={props.title}
-                duration={props.duration}
-                image={props.image}
-                year={props.year}
-                lenguage={props.lenguage}
-                torrent={props.torrent}
-              />
-            );
+          {moviesToDisplay.map((props, itemIndex) => {
+            const lastIndex = itemsPerPage * currentPage - 1;
+            const firstIndex = lastIndex - 11;
+
+            if (itemIndex >= firstIndex && itemIndex <= lastIndex) {
+              return (
+                <Card
+                  key={props.id}
+                  id={props.id}
+                  title={props.title}
+                  duration={props.duration}
+                  image={props.image}
+                  year={props.year}
+                  lenguage={props.lenguage}
+                  torrent={props.torrent}
+                />
+              );
+            }
           })}
         </div>
-        <div>
-          <button
-            onClick={() => goToPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            Anterior
-          </button>
-          <span>Page {currentPage}</span>
-          <button
-            onClick={() => goToPage(currentPage + 1)}
-            disabled={currentPage === maxPage}
-          >
-            Siguiente
-          </button>
-        </div>
+        <Pagination paginationSize={paginationSize} />
       </div>
     );
   } else {

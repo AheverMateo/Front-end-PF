@@ -1,17 +1,24 @@
 import {
   GET_MOVIES,
-  GET_DETAIL, GET_NAME,
-  GET_MOVIES_BY_GENRE,
   ADD_TO_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  GET_DETAIL,
+  GET_NAME,
+  SET_CURRENT_PAGE,
+  SET_FILTER_PARAMETERS,
+  FILTER,
 } from "../actions/actionsTypes";
 const initialState = {
   Allmovies: [],
-  Cart : [],
+  Cart: [],
   movieDetail: [],
+  byGenre: [],
+  genreFilter: [],
+  currentPage: 1,
+  itemsPerPage: 12,
+  homeFilters: [],
+  filterParameters: ["Home", null, null],
   filteredMovies: [],
-    movies_name: [],
-
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -26,27 +33,39 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         movieDetail: action.payload,
       };
-    case GET_MOVIES_BY_GENRE:
+
+    case SET_CURRENT_PAGE:
       return {
         ...state,
-        filteredMovies: action.payload,
+        currentPage: action.payload,
       };
     case GET_NAME:
       return {
         ...state,
-        movies_name: action.payload
-      }
+        filteredMovies: action.payload,
+      };
+    case SET_FILTER_PARAMETERS:
+      return {
+        ...state,
+        filterParameters: action.payload,
+      };
+
+    case FILTER: {
+      return {
+        ...state,
+        filteredMovies: action.payload,
+      };
+    }
     case ADD_TO_CART:
       return {
         ...state,
         Cart: [],
-      }
+      };
     case REMOVE_FROM_CART:
       return {
         ...state,
-        Cart:[]
-      }
-
+        Cart: [],
+      };
     default:
       return {
         ...state,
