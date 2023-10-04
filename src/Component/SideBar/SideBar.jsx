@@ -7,21 +7,23 @@ import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  filterParameters,
-  setCurrentPage,
-} from "../../Redux/actions/actions";
+import { filterParameters, setCurrentPage } from "../../Redux/actions/actions";
+import { useState } from "react";
 
 const SideBar = () => {
   const dispatch = useDispatch();
-  const stateFilterParams = useSelector((state)=> state.filterParameters)
+  const stateFilterParams = useSelector((state) => state.filterParameters);
+
+  const [selectedGenre, setSelectedGenre] = useState("Homegi");
 
   const handleCategoryClick = (event) => {
     const copyFilterParameters = stateFilterParams;
     copyFilterParameters[0] = event.target.id;
+    setSelectedGenre(event.target.id);
     copyFilterParameters[3] = null;
     dispatch(setCurrentPage(1));
     dispatch(filterParameters(copyFilterParameters));
+    
   };
 
   const handleHomeClick = () => {
@@ -30,6 +32,7 @@ const SideBar = () => {
     copyFilterParameters[3] = null;
     dispatch(filterParameters(copyFilterParameters));
     dispatch(setCurrentPage(1));
+    setSelectedGenre('Home');
   };
   const genres = [
     "Action",
@@ -55,11 +58,11 @@ const SideBar = () => {
       </div>
       <div className={style.menu}>
         <h3>Menu</h3>
-        <Link to="/Home">
+        <Link to="/Home" id="Home" >
           <img src={homeIcon} />
-          <div onClick={() => handleHomeClick()}>Home</div>
+          <div onClick={() => handleHomeClick()} className={selectedGenre ==="Home" ? style.selected : style.none}>Home</div>
         </Link>
-        <Link >
+        <Link>
           <img src={favoriteIcon} />
           <div>Favorites</div>
         </Link>
@@ -69,20 +72,22 @@ const SideBar = () => {
         </Link>
 
         <h3>Genre</h3>
-        {genres.map((genre, index) => (
-          <Link to="/Home" key={index}>
-            <div
-              key={index}
-              onClick={(event) => handleCategoryClick(event)}
-              id={genre}
-            >
-              {genre}
-            </div>
-          </Link>
-        ))}
-
+       
+          {genres.map((genre, index) => (
+            <Link to="/Home" key={index}>
+              <div
+              className={selectedGenre === genre ? style.selected : style.none}
+                key={index}
+                onClick={(event) => handleCategoryClick(event)}
+                id={genre}
+              >
+                {genre}
+              </div>
+            </Link>
+          ))}
+        
         <h3>General</h3>
-        <Link >
+        <Link>
           <img src={profileIcon} />
           <div>Perfil</div>
         </Link>

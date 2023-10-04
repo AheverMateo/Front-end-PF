@@ -38,7 +38,7 @@
     align-items: center;
     justify-content: center;
 }
-.actual {
+.main .menu .selected {
     color:#00B9AE;
 }
 

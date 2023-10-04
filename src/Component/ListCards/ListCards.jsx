@@ -5,6 +5,7 @@ import Card from "../Card/Card";
 import { getMovies } from "../../Redux/actions/actions";
 import style from "./ListCards.module.css";
 import Pagination from "../Pagination/Pagination";
+import Swal from 'sweetalert2';
 
 const ListCards = ({ id }) => {
   const dispatch = useDispatch();
@@ -15,9 +16,15 @@ const ListCards = ({ id }) => {
   const currentPage = useSelector((state) => state.currentPage);
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
   const filteredMovies = useSelector((state) => state.filteredMovies);
+  const filterParameters = useSelector((state)=> state.filterParameters);
+
   let moviesToDisplay;
   if (filteredMovies === "No movies found") {
-    console.log(filteredMovies);
+    Swal.fire({
+      title: 'Oops!',
+      text: filteredMovies,
+      icon: 'error',
+    })
     moviesToDisplay = movies;
   } else {
     moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
@@ -28,6 +35,7 @@ const ListCards = ({ id }) => {
   if (moviesToDisplay.length > 0) {
     return (
       <div>
+        {filterParameters[3] !== "search"? <h2>{filterParameters[0]}</h2> : <h2>Results for: {filterParameters[0]}</h2>}
         <h2></h2>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>
