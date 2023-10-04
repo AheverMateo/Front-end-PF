@@ -1,3 +1,4 @@
+import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import LogInMenu from '../LogInMenu/LogInMenu';
 import style from './Register.module.css';
 
@@ -18,6 +19,9 @@ return (
             <input placeholder='Password'></input>
             <button>Register</button>
         </form>
+        
+
+        <GoogleAuth/>
     </div>
     </>
 )

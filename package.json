@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sweetalert2/theme-borderless": "^5.0.15",
+    "@sweetalert2/theme-dark": "^5.0.15",
     "axios": "^1.5.0",
     "cloudinary": "^1.41.0",
     "cloudinary-core": "^2.13.0",
@@ -25,7 +27,8 @@
     "react-router-dom": "^6.16.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
-    "sort-by": "^1.2.0"
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.7.31"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

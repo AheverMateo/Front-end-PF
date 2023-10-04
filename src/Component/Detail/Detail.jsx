@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import {useSelector, useDispatch} from "react-redux";
 import { useParams } from "react-router-dom";
-import SideBar from "../SideBar/SideBar";
+
 import style from "./Detail.module.css";
 import { getDetailMovie } from "../../Redux/actions/actions";
 
@@ -32,7 +32,7 @@ const Detail = () => {
 
   return (
     <div className={style.main}>
-      <SideBar />
+      
       <div className={style.detail}>
         <div className={style.poster}>
           <img src={selectedMovie.image}></img>
