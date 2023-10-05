@@ -7,9 +7,12 @@ const Cart = () => {
     const stateCart = useSelector((state) => state.Cart )
     
     return (
+        <div className={style.main}>
+        <SideBar />
         <div className={style.divCart}>
-            <SideBar />
-            <div>
+            <h2>Your cart</h2>
+            <div className={style.container}>
+            <div className={style.movies}>
 
                 {
                     stateCart.map( movie => {
@@ -30,14 +33,15 @@ const Cart = () => {
                 !stateCart.length > 0 
                     ? <h3>Empty car</h3>
 
-                    :   <div>
-                            <h3>Resumen de compra</h3>
-                            <h4>Movies({stateCart.length})</h4>
-                            <h4>Total $45323</h4>
-                            <button>Continuar Compra</button>
+                    :   <div className={style.summary}>
+                            <h3>Summary</h3>
+                            <h4>You have <label>{stateCart.length} </label>movies in your cart</h4>
+                            <h4>Total: <label>{stateCart.length * 5} USD</label></h4>
+                            <button>Proceed to checkout</button>
                         </div>
             }
-        
+        </div>
+        </div>
         </div>
     )
 }
