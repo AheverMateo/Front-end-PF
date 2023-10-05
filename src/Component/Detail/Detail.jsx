@@ -44,10 +44,10 @@ const Detail = () => {
 
         <div className={style.description}>
           <h2 className={style.title}>{selectedMovie.title}</h2>
-          <h3>Duration: {selectedMovie.duration} min</h3>
+          <h3>Duration: <label>{selectedMovie.duration} min</label></h3>
           {/* <p>Rating: 7/10</p> */}
           <p>{selectedMovie.description}</p>
-          <p>Price: </p><p>$5.00 USD</p>
+          <p className={style.price}>Price: <label>$5.00 USD</label></p>
           <button onClick={handleAddCart} type="submit">Add to cart</button>
           <p>{addedToCart ? "Movie has been added to your cart" : ""}</p>
         </div>
