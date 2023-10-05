@@ -3,11 +3,14 @@
     flex-direction: row;
 }
 .detail {
-    display: flex;
-    margin: 2rem;
+  display: flex;
+  margin: 0 2rem;
+  background-color: #21242D;
+  padding: 3rem;
+  border-radius: 1rem;
 }
 .detail img {
-    width: 100%;
+    
     border-radius: 10px;
 }
 .detail .description {
@@ -50,4 +53,26 @@
   #showDescription:target ~ div a[href="#hidediv1"],
   #showReviews:target ~ div a[href="#hidediv2"] {
     display: inline-block;
+  }
+  .poster {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .description p {
+    margin-right: 5rem;
+    text-align: justify;
+  }
+  .description .price {
+    color:#00B9AE;
+    font-weight: 600;
+  }
+  .description h2, .description h3 {
+    color:#00B9AE
+  }
+
+  .description .price label, .description h3 label {
+    color: #f3f3f3;
+    font-weight: 200;
+    margin-left: 1rem;
   }
