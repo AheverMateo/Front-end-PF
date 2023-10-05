@@ -14,11 +14,13 @@ const MoviesCart = ({title, image, id}) => {
             <Link to ={`/Detail/${id}`}>
                 <img src={image} alt="image" />
             </Link>
-            <Link to ={`/Detail/${id}`}>
+            <div>
+            <Link to ={`/Detail/${id}`} className={style.title}>
                 <h3>{title}</h3>
             </Link>
-            <p>precio</p>
+            <p>Price: 5.00 USD</p>
             <button onClick={handleDelete}>Delete</button>
+            </div>
         </div>
     )
 }
