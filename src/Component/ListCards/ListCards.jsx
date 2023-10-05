@@ -17,7 +17,7 @@ const ListCards = ({ id }) => {
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
   const filteredMovies = useSelector((state) => state.filteredMovies);
   const filterParameters = useSelector((state)=> state.filterParameters);
-
+  
   let moviesToDisplay;
   if (filteredMovies === "No movies found") {
     Swal.fire({
