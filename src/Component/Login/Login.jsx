@@ -90,9 +90,17 @@ const Login = () => {
                   value={values.email}
                   placeholder="E-mail"
                 />
-                <label>{errors.email && touched.email && errors.email}</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.password}
+                  placeholder="Password"
+                />
+                <label>{errors.password && touched.password && errors.password}</label>
               </div>
-
+            <button>Log In</button>
         </form>
          )}
       

@@ -12,11 +12,8 @@ const initialState = {
   Allmovies: [],
   Cart: [],
   movieDetail: [],
-  byGenre: [],
-  genreFilter: [],
   currentPage: 1,
   itemsPerPage: 12,
-  homeFilters: [],
   filterParameters: ["Home", null, null],
   filteredMovies: [],
 };
