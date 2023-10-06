@@ -1,23 +1,28 @@
-import axios from "axios";
-import React, { useState } from 'react'
-import Style from "./Login.module.css"
-import Validation from '../Validation/Validation'
-import LogInMenu from '../LogInMenu/LogInMenu'
-import { Link } from 'react-router-dom/dist'
-import { Formik } from 'formik';
-import GoogleAuth from '../GoogleAuth/GoogleAuth'
-
+import React, { useState } from "react";
+import Style from "./Login.module.css";
+import Validation from "../Validation/Validation";
+import LogInMenu from "../LogInMenu/LogInMenu";
+import { Link } from "react-router-dom/dist";
+import { Formik } from "formik";
+import GoogleAuth from "../GoogleAuth/GoogleAuth";
+import { login as loginAction } from "../../Redux/actions/actions";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
   const [login, setLogin] = useState({
-    name: "",
+    email: "",
     password: "",
   });
 
   const [error, setError] = useState({
-    name: "",
+    email: "",
     password: "",
   });
+  const loginUser = (values) => {
+    dispatch(loginAction(values));
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,8 +38,6 @@ const Login = () => {
     );
   };
 
-
-
   return (
     <div className={Style.container}>
       <LogInMenu />
@@ -45,7 +48,7 @@ const Login = () => {
           initialValues={{ email: "", password: "" }}
           validate={(values) => {
             const errors = {};
-            
+
             if (!values.email) {
               errors.email = "Required";
             } else if (
@@ -53,22 +56,10 @@ const Login = () => {
             ) {
               errors.email = "Invalid email address";
             }
-            
+
             return errors;
           }}
-          onSubmit={async (values) => {
-            try {
-              const response = await axios.get(`http://localhost:3001/Nonflix/login?email=${values.email}&password=${values.password}`) 
-              //console.log(endpoint);
-              //console.log(response);
-              if(response.status === 200) {
-                window.location.href = "/Home"
-              }
-              
-          } catch (error) {
-              console.log(error);
-          }
-          }}
+          onSubmit={loginUser}
         >
           {({
             values,
@@ -98,21 +89,20 @@ const Login = () => {
                   value={values.password}
                   placeholder="Password"
                 />
-                <label>{errors.password && touched.password && errors.password}</label>
+                <label>
+                  {errors.password && touched.password && errors.password}
+                </label>
               </div>
-            <button>Log In</button>
-        </form>
-         )}
-      
-
-         </Formik>
-      <GoogleAuth/> 
-        <p>New to NonFlix? <Link to="/Register">Register Now!</Link></p>
-        </div>
-
-
+              <button type="submit">Log In</button>
+            </form>
+          )}
+        </Formik>
+        <GoogleAuth />
+        <p>
+          New to NonFlix? <Link to="/Register">Register Now!</Link>
+        </p>
       </div>
-    
+    </div>
   );
 };
 

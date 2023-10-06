@@ -7,7 +7,8 @@ import {
   GET_NAME,
   FILTER,
   ADD_TO_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  USER_DATA
 } from "./actionsTypes";
 import Swal from 'sweetalert2';
 
@@ -142,4 +143,22 @@ export const removeFromCart = (id) => {
       type:REMOVE_FROM_CART,
       payload:id
   }
+}
+export const login = ({email, password})=>{
+  return async (dispatch) => {
+    try {
+      const user = await axios.post(
+        `http://localhost:3001/Nonflix/login/login`,
+        {
+          email,
+          password
+        }
+      );
+      const userData = user.data;
+      dispatch({
+        type: USER_DATA,
+        payload: userData,
+      });
+    } catch (error) {console.log(error.message)}
+  };
 }
