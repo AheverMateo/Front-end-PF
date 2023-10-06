@@ -7,7 +7,8 @@ import {
   GET_NAME,
   FILTER,
   ADD_TO_CART,
-  REMOVE_FROM_CART
+  REMOVE_FROM_CART,
+  RESET_CART
 } from "./actionsTypes";
 import Swal from 'sweetalert2';
 
@@ -141,5 +142,10 @@ export const removeFromCart = (id) => {
   return {
       type:REMOVE_FROM_CART,
       payload:id
+  }
+}
+export const resetCart = () => {
+  return {
+    type: RESET_CART
   }
 }
