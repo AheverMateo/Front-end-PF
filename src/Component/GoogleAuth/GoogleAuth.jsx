@@ -24,8 +24,7 @@ export default function GoogleAuth() {
 
     const onSuccess = (credentialResponse)=>{
       const credentialResponseDecoded = jwt_decode(credentialResponse.credential)
-            console.log(credentialResponse);
-            console.log(credentialResponseDecoded);
+
         setUserGoogle({
           ...userGoogle, email: credentialResponseDecoded.email, password: credentialResponseDecoded.jti, name: credentialResponseDecoded.name
         });
@@ -34,7 +33,7 @@ export default function GoogleAuth() {
     useEffect(() => {
         if (userGoogle.email) {
             if(location.pathname === '/Login'){
-                axios.get(`http://localhost:3001/Nonflix/login?email=${userGoogle.email}`)
+                axios.get(`http://localhost:3001/Nonflix/login?email=${userGoogle.email}&password=${userGoogle.password}`)
                     .then(response=>{
                         setIsRegistered(true);
                     })
