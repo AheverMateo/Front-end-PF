@@ -1,3 +1,4 @@
+import { CLEAR_USER_DATA } from '../actions/actionsTypes';
 import {
   GET_MOVIES,
   ADD_TO_CART,
@@ -62,6 +63,14 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: action.payload,
       };
+    }
+    case CLEAR_USER_DATA: {
+      return{
+        ...state,
+        user: {},
+        filteredMovies: [],
+        filterParameters: ['Home', null, null]
+      }
     }
     case ADD_TO_CART:{
       action.payload.price = 5000

@@ -7,14 +7,14 @@ import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 import { useDispatch, useSelector } from "react-redux";
-import { filterParameters, setCurrentPage } from "../../Redux/actions/actions";
+import { filterParameters, setCurrentPage, clearUserData } from "../../Redux/actions/actions";
 import { useState } from "react";
 
 const SideBar = () => {
   const dispatch = useDispatch();
   const stateFilterParams = useSelector((state) => state.filterParameters);
 
-  const [selectedGenre, setSelectedGenre] = useState("Homegi");
+  const [selectedGenre, setSelectedGenre] = useState("Home");
 
   const handleCategoryClick = (event) => {
     const copyFilterParameters = stateFilterParams;
@@ -34,6 +34,9 @@ const SideBar = () => {
     dispatch(setCurrentPage(1));
     setSelectedGenre('Home');
   };
+  const handleLogOut = () => {
+    dispatch(clearUserData());
+  }
   const genres = [
     "Action",
     "Adventure",
@@ -93,7 +96,7 @@ const SideBar = () => {
         </Link>
         <Link to="/">
           <img src={logOutIcon} />
-          <div>Logout</div>
+          <div onClick={()=>handleLogOut()}>Logout</div>
         </Link>
       </div>
     </div>

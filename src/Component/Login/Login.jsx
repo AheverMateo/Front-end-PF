@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Style from "./Login.module.css";
 import Validation from "../Validation/Validation";
 import LogInMenu from "../LogInMenu/LogInMenu";
-import { Link } from "react-router-dom/dist";
+import { Link, useNavigate } from "react-router-dom/dist";
 import { Formik } from "formik";
 import GoogleAuth from "../GoogleAuth/GoogleAuth";
 import { login as loginAction } from "../../Redux/actions/actions";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [login, setLogin] = useState({
@@ -21,7 +22,11 @@ const Login = () => {
     password: "",
   });
   const loginUser = (values) => {
-    dispatch(loginAction(values));
+    dispatch(loginAction(values)).then((response) => {
+      if (response !== "" && response !== undefined) {
+        navigate("/Home");
+      }
+    });
   };
 
   const handleChange = (event) => {

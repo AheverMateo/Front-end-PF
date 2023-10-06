@@ -9,9 +9,10 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   USER_DATA,
-  RESET_CART
+  RESET_CART,
+  CLEAR_USER_DATA,
 } from "./actionsTypes";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 export const getMovies = () => {
   return async (dispatch) => {
@@ -75,7 +76,9 @@ export const getDetailMovie = (id) => {
         type: GET_DETAIL,
         payload: dataDetail,
       });
-    } catch (error) {console.log(error.message)}
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
@@ -110,18 +113,18 @@ export const filterParameters = (parameters) => {
           payload: "No movies found",
         });
         Swal.fire({
-          title: 'Oops!',
+          title: "Oops!",
           text: "No movies found",
-          icon: 'error',
-        })
+          icon: "error",
+        });
       }
     } catch (error) {
       const errorMsg = error.response.data.message;
       Swal.fire({
-        title: 'Oops!',
+        title: "Oops!",
         text: "No movies found",
-        icon: 'error',
-      })
+        icon: "error",
+      });
       return errorMsg;
     }
   };
@@ -133,39 +136,52 @@ export const setCurrentPage = (currentPage) => {
   };
 };
 export const addToCart = (movie) => {
-    
   return {
-      type: ADD_TO_CART,
-      payload: movie
-  }
-}
+    type: ADD_TO_CART,
+    payload: movie,
+  };
+};
 export const removeFromCart = (id) => {
   return {
-      type:REMOVE_FROM_CART,
-      payload:id
-  }
-}
+    type: REMOVE_FROM_CART,
+    payload: id,
+  };
+};
 export const resetCart = () => {
   return {
-    type: RESET_CART
-  }
-}
+    type: RESET_CART,
+  };
+};
 
-export const login = ({email, password})=>{
+export const login = ({ email, password }) => {
+  console.log(password)
   return async (dispatch) => {
     try {
       const user = await axios.post(
         `http://localhost:3001/Nonflix/login/login`,
         {
           email,
-          password
+          password,
         }
       );
+      
       const userData = user.data;
-      dispatch({
+      return dispatch({
         type: USER_DATA,
         payload: userData,
       });
-    } catch (error) {console.log(error.message)}
+    } catch (error) {
+      const errorMsg = error.response.data.error? error.response.data.error : error.response.data;
+      Swal.fire({
+        title: "Oops!",
+        text: errorMsg,
+        icon: "error",
+      });
+    }
   };
-}
+};
+export const clearUserData = () => {
+  return {
+    type: CLEAR_USER_DATA,
+  };
+};
