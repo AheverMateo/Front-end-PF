@@ -77,7 +77,7 @@ const Filters = () => {
           <option value="year">Year</option>
 
           {yearsToDisplay.map((year) => (
-            <option value={year}>{year}</option>
+            <option key={year} value={year}>{year}</option>
           ))}
         </select>
       </div>
