@@ -7,8 +7,10 @@ import {
   SET_CURRENT_PAGE,
   SET_FILTER_PARAMETERS,
   FILTER,
+  RESET_CART,
   USER_DATA
-} from "../actions/actionsTypes";
+} from '../actions/actionsTypes';
+
 const initialState = {
   Allmovies: [],
   Cart: [],
@@ -62,7 +64,7 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case ADD_TO_CART:{
-
+      action.payload.price = 5000
       const repeated = [...state.Cart].find(movie => movie.id === action.payload.id)
       return {
         ...state,
@@ -75,7 +77,12 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         Cart: deleteCart
       }
-    }   
+    }
+    case RESET_CART :
+      return {
+        ...state,
+        Cart: []
+      }   
     default:
       return {
         ...state,
