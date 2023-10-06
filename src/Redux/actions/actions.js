@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
 export const getMovies = () => {
   return async (dispatch) => {
     try {
-      const movie = await axios.get("http://localhost:3001/Nonflix/movies");
+      const movie = await axios.get("/Nonflix/movies");
       const dataMovie = movie.data;
       dispatch({
         type: GET_MOVIES,
@@ -35,7 +35,7 @@ export const getByName = (parameters) => {
 
   return async (dispatch) => {
     try {
-      let url = `http://localhost:3001/Nonflix/movies/name?name=${name}`;
+      let url = `/Nonflix/movies/name?name=${name}`;
 
       if (year !== undefined && year !== null) {
         url += `&year=${year}`;
@@ -69,7 +69,7 @@ export const getDetailMovie = (id) => {
   return async (dispatch) => {
     try {
       const detail = await axios.get(
-        `http://localhost:3001/Nonflix/movies/${id}`
+        `/Nonflix/movies/${id}`
       );
       const dataDetail = detail.data;
       dispatch({
@@ -89,7 +89,7 @@ export const filterParameters = (parameters) => {
 
   return async (dispatch) => {
     try {
-      let url = `http://localhost:3001/Nonflix/movies/filters?origin=${origin}`;
+      let url = `/Nonflix/movies/filters?origin=${origin}`;
 
       if (year !== undefined && year !== null) {
         url += `&year=${year}`;
@@ -158,7 +158,7 @@ export const login = ({ email, password }) => {
   return async (dispatch) => {
     try {
       const user = await axios.post(
-        `http://localhost:3001/Nonflix/login/login`,
+        `/Nonflix/login/login`,
         {
           email,
           password,
