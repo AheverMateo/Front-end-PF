@@ -3,7 +3,7 @@ import style from "./MoviesCart.module.css"
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../../Redux/actions/actions";
 
-const MoviesCart = ({title, image, id}) => {
+const MoviesCart = ({title, image, id, price}) => {
     const dispatch = useDispatch()
     const handleDelete = () => {
         dispatch(removeFromCart(id))
@@ -18,7 +18,8 @@ const MoviesCart = ({title, image, id}) => {
             <Link to ={`/Detail/${id}`} className={style.title}>
                 <h3>{title}</h3>
             </Link>
-            <p>Price: 5.00 USD</p>
+
+            <p>Price: {price}</p>
             <button onClick={handleDelete}>Delete</button>
             </div>
         </div>
