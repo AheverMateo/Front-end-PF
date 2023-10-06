@@ -8,7 +8,9 @@ import {
   SET_FILTER_PARAMETERS,
   FILTER,
   RESET_CART,
-} from "../actions/actionsTypes";
+  USER_DATA
+} from '../actions/actionsTypes';
+
 const initialState = {
   Allmovies: [],
   Cart: [],
@@ -17,6 +19,7 @@ const initialState = {
   itemsPerPage: 12,
   filterParameters: ["Home", null, null],
   filteredMovies: [],
+  user: {},
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -52,6 +55,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filteredMovies: action.payload,
+      };
+    }
+    case USER_DATA: {
+      return {
+        ...state,
+        user: action.payload,
       };
     }
     case ADD_TO_CART:{
