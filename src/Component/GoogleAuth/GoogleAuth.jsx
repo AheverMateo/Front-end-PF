@@ -3,7 +3,7 @@ import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
-import { login as loginAction } from "../../Redux/actions/actions";
+import { login as loginAction, registerUser } from "../../Redux/actions/actions";
 import { useDispatch } from "react-redux";
 
 export default function GoogleAuth() {
@@ -38,30 +38,27 @@ export default function GoogleAuth() {
          dispatch(loginAction(userGoogle)).then((response) => {
           setIsRegistered(true);
         }).catch((error)=> console.log(error))
-        // axios
-        //   .post(
-        //     `http://localhost:3001/Nonflix/login?email=${userGoogle.email}&password=${userGoogle.password}`
-        //   )
-        //   .then((response) => {
-        //     setIsRegistered(true);
-        //   })
-        //   .catch((error) => {
-        //     alert("Unregistered user");
-        //   });
+        
       }
 
       if (location.pathname === "/Register") {
-        axios
-          .post("http://localhost:3001/Nonflix/login", userGoogle)
-          .then((response) => {
-            alert("Successfully registered user");
+        dispatch(registerUser(userGoogle)).then((response) => {
+          if (response !== "" && response !== undefined) {
             setIsRegistered(true);
-          })
-          .catch((error) => {
-            alert("Error: Existing user");
-          });
-      }
-    }
+            navigate("/Home");
+          }
+       });
+    //     axios
+    //       .post("http://localhost:3001/Nonflix/login", userGoogle)
+    //       .then((response) => {
+    //         alert("Successfully registered user");
+    //         setIsRegistered(true);
+    //       })
+    //       .catch((error) => {
+    //         alert("Error: Existing user");
+    //       });
+       }
+     }
   }, [userGoogle]);
 
   useEffect(() => {

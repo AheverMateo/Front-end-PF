@@ -68,9 +68,7 @@ export const getByName = (parameters) => {
 export const getDetailMovie = (id) => {
   return async (dispatch) => {
     try {
-      const detail = await axios.get(
-        `/Nonflix/movies/${id}`
-      );
+      const detail = await axios.get(`/Nonflix/movies/${id}`);
       const dataDetail = detail.data;
       dispatch({
         type: GET_DETAIL,
@@ -153,25 +151,51 @@ export const resetCart = () => {
   };
 };
 
-export const login = ({ email, password }) => {
-  console.log(password)
+export const registerUser = (values) => {
   return async (dispatch) => {
     try {
-      const user = await axios.post(
-        `/Nonflix/login/login`,
-        {
-          email,
-          password,
-        }
+      const response = await axios.post(
+        "http://localhost:3001/Nonflix/login",
+        values
       );
-      
+      if (response.status !== 200) {
+        throw new Error("Something went wrong!");
+      } else {
+        const userData = response.data;
+        return dispatch({
+          type: USER_DATA,
+          payload: userData,
+        });
+      }
+    } catch (error) {
+      //const errorMsg = error.response.data.error? error.response.data.error : error.response.data;
+      console.log(error);
+      Swal.fire({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+      });
+    }
+  };
+};
+
+export const login = ({ email, password }) => {
+  return async (dispatch) => {
+    try {
+      const user = await axios.post(`/Nonflix/login/login`, {
+        email,
+        password,
+      });
+
       const userData = user.data;
       return dispatch({
         type: USER_DATA,
         payload: userData,
       });
     } catch (error) {
-      const errorMsg = error.response.data.error? error.response.data.error : error.response.data;
+      const errorMsg = error.response.data.error
+        ? error.response.data.error
+        : error.response.data;
       Swal.fire({
         title: "Oops!",
         text: errorMsg,
