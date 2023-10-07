@@ -65,7 +65,7 @@ const SideBar = () => {
           <img src={homeIcon} />
           <div onClick={() => handleHomeClick()} className={selectedGenre ==="Home" ? style.selected : style.none}>Home</div>
         </Link>
-        <Link>
+        <Link to= "/Favorites">
           <img src={favoriteIcon} />
           <div>Favorites</div>
         </Link>
