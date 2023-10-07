@@ -1,4 +1,4 @@
-import { CLEAR_USER_DATA } from '../actions/actionsTypes';
+import { CLEAR_USER_DATA, GET_FAVS, REMOVE_FAV } from '../actions/actionsTypes';
 import {
   GET_MOVIES,
   ADD_TO_CART,
@@ -65,19 +65,19 @@ const rootReducer = (state = initialState, action) => {
       };
     }
     case CLEAR_USER_DATA: {
-      return{
+      return {
         ...state,
         user: {},
         filteredMovies: [],
         filterParameters: ['Home', null, null]
       }
     }
-    case ADD_TO_CART:{
+    case ADD_TO_CART: {
       action.payload.price = 5000
       const repeated = [...state.Cart].find(movie => movie.id === action.payload.id)
       return {
         ...state,
-        Cart: repeated ?  [...state.Cart] : [...state.Cart, action.payload]
+        Cart: repeated ? [...state.Cart] : [...state.Cart, action.payload]
       }
     }
     case REMOVE_FROM_CART: {
@@ -87,11 +87,21 @@ const rootReducer = (state = initialState, action) => {
         Cart: deleteCart
       }
     }
-    case RESET_CART :
+    case RESET_CART:
       return {
         ...state,
         Cart: []
-      }   
+      }
+    case GET_FAVS:
+      return {
+        ...state,
+        FavoriteMovies: action.payload,
+      }
+    case REMOVE_FAV:
+      return {
+        ...state,
+        FavoriteMovies: action.payload
+      }
     default:
       return {
         ...state,

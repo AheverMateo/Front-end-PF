@@ -1,0 +1,10 @@
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 5rem;
+    margin: 22px 50px;
+}
+.home {
+    display: flex;
+    flex-direction: row;
+}
