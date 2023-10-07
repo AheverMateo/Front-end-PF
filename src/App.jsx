@@ -10,10 +10,17 @@ import NotFound from "./Component/NotFound/NotFound";
 import Cart from './Component/Cart/Cart';
 import PostMovie from "./Component/PostMovie/PostMovie"
 import UploadImages from './Component/UploadImages/UploadImages';
+import {Cloudinary} from "@cloudinary/url-gen";
 
 
 function App() {
- 
+   // Create a Cloudinary instance and set your cloud name.
+  //  const cld = new Cloudinary({
+  //   cloud: {
+  //     cloudName: 'dy8pp1s5f'
+  //   }
+  // });
+  
   return (
     <div>
       <Routes>

@@ -1,7 +1,7 @@
 import React, {  useState } from 'react';
 import styles from './UploadImages.module.css'
 
-const MyWidget = () => {
+const UploadImages = () => {
 
   const cloudName = 'dy8pp1s5f'; 
   const uploadPreset = 'imagenes_admins'; 
@@ -45,6 +45,8 @@ const MyWidget = () => {
 
   console.log(imageUrl)
 
+
+
   return (
     <div >
         <form>
@@ -65,12 +67,13 @@ const MyWidget = () => {
           <img src={imageUrl} alt={imageAlt} className="displayed-image" />
         )}
 
+        <p>Hola</p>
 
     </div>
   );
 };
 
-export default MyWidget;
+export default UploadImages;
 
 
 
