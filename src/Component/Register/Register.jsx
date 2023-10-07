@@ -1,11 +1,24 @@
+import { useNavigate } from 'react-router';
+import { registerUser } from '../../Redux/actions/actions';
 import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import LogInMenu from '../LogInMenu/LogInMenu';
 import style from './Register.module.css';
 import { Formik } from "formik";
 import { useState } from "react";
+import { useDispatch } from 'react-redux';
 
 const Register = () => {
     const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const handleRegister = (values) => {
+      dispatch(registerUser(values)).then((response) => {
+        if (response !== "" && response !== undefined) {
+          navigate("/Home");
+        }
+     });
+    };
   return (
     <>
       <LogInMenu />
@@ -35,29 +48,9 @@ const Register = () => {
               }
             return errors;
           }}
-          onSubmit={async (values) => {
-            //const newUser = {...values};
+          onSubmit={handleRegister}
            
-            try {
-                const response = await fetch("http://localhost:3001/Nonflix/login", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(values),
-                });
-        
-                if (!response.ok) {
-                  throw new Error("Error al enviar los datos");
-                }
-                const data = await response.status;
-                if(data === 200) {
-                    window.location.href = "/Home"
-                }
-              } catch (error) {
-                window.alert(error);
-              }
-          }}
+            
         >
           {({
             values,
