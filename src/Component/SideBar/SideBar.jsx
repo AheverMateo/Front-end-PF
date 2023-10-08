@@ -56,9 +56,11 @@ const SideBar = () => {
   ];
   return (
     <div className={style.main}>
+      <Link to="/Home">
       <div className={style.logo}>
         <img className="sidebar_image" src={logo} />
       </div>
+      </Link>
       <div className={style.menu}>
         <h3>Menu</h3>
         <Link to="/Home" id="Home" >

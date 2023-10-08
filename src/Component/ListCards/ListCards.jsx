@@ -19,7 +19,7 @@ const ListCards = ({ id }) => {
   const filterParameters = useSelector((state)=> state.filterParameters);
   
   let moviesToDisplay;
-  if (filteredMovies === "No movies found") {
+  if (filteredMovies === "No movies found" || filteredMovies === "Name is required") {
     Swal.fire({
       title: 'Oops!',
       text: filteredMovies,
@@ -35,7 +35,7 @@ const ListCards = ({ id }) => {
   if (moviesToDisplay.length > 0) {
     return (
       <div>
-        {filterParameters[3] !== "search"? <h2>{filterParameters[0]}</h2> : <h2>Results for: {filterParameters[0]}</h2>}
+        {filterParameters[3] !== "search"? <h2 style={{ textAlign: 'center' }}>{filterParameters[0]}</h2> : <h2 style={{ textAlign: 'center' }}>Results for: {filterParameters[0]}</h2>}
         <h2></h2>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>

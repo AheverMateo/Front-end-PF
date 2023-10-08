@@ -157,7 +157,7 @@ export const registerUser = (values) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/Nonflix/login",
+        "/Nonflix/login",
         values
       );
       if (response.status !== 200) {
@@ -213,19 +213,19 @@ export const clearUserData = () => {
 };
 export const addFav = (movieId, userId) => {
   return async () => {
-     await axios.post(`http://localhost:3001/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
+     await axios.post(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
   }
 }
 export const getFavs = (userId) => {
   return async (dispatch) => {
-    const {data} = await axios.get(`http://localhost:3001/Nonflix/movies/fav?userId=${userId}`)
+    const {data} = await axios.get(`/Nonflix/movies/fav?userId=${userId}`)
 
     dispatch({type:GET_FAVS, payload: data})
   }
 }
 export const removeFav = (movieId, userId) => {
   return async (dispatch) => {
-    const {data} = await axios.delete(`http://localhost:3001/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
+    const {data} = await axios.delete(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
 
     dispatch({type:REMOVE_FAV, payload:data})
   }
