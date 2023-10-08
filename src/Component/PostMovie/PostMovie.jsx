@@ -54,7 +54,8 @@ const PostMovie = () => {
   const handleSubmit = async () => {
     try {
       setMovie({ ...movie, year: Number(movie.year) });
-      await axios.post(`http://localhost:3001/movie`, movie);
+      console.log(movie.genre);
+      await axios.post(`http://localhost:3001/Nonflix/movies/`, movie);
       Swal.fire({
         icon: "success",
         title: "Success!",
@@ -65,7 +66,7 @@ const PostMovie = () => {
         icon: "error",
         title: "Oops...",
         text: "The movie was not created",
-        footer: error.message,
+        footer: error.response.data,
       });
     }
   };
