@@ -19,7 +19,7 @@ const ListCards = ({ id }) => {
   const filterParameters = useSelector((state)=> state.filterParameters);
   
   let moviesToDisplay;
-  if (filteredMovies === "No movies found") {
+  if (filteredMovies === "No movies found" || filteredMovies === "Name is required") {
     Swal.fire({
       title: 'Oops!',
       text: filteredMovies,

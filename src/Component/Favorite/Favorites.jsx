@@ -36,7 +36,7 @@ const Favorites = () => {
   if (FavoriteMovies.length > 0) {
     return (
         <div>
-          <h1>Your Favorites</h1>
+          <h1 style={{ textAlign: 'center' }}>Your Favorites</h1>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>
           {moviesToDisplay.map((props, itemIndex) => {
@@ -64,8 +64,8 @@ const Favorites = () => {
     );
   } else {
     return (
-      <div className={style.loading}>
-        <h2>Don't have Favorites</h2>
+      <div style={{ alignContent: 'center' }}>
+        <h1 style={{ textAlign: 'center' }}>Don't have Favorites</h1>
       </div>
     );
   }
