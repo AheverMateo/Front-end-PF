@@ -204,6 +204,52 @@ export const login = ({ email, password }) => {
     }
   };
 };
+export const updateUser = ( {id, name, password, token} ) => {
+let reqBody;
+if(name !== ""  && password !== "") reqBody = {id, name, password};
+if(name === "" && password !== "" ) reqBody = {id, password};
+if(password === "" && name !== "") reqBody = {id, name};
+  return async (dispatch) => {
+    try {
+      const user = await axios.put(
+        "/Nonflix/login/update",
+        
+          reqBody
+        ,
+        { 
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const userData = {
+        id: user.data.id,
+        name: user.data.name,
+        email: user.data.email,
+        token: token,
+      };
+      Swal.fire({
+        title: "Great!",
+        text: "Your data has been successfully updated!",
+        icon: "success",
+      });
+      return dispatch({
+        type: USER_DATA,
+        payload: userData,
+      });
+
+    } catch (error) {
+      console.log(error);
+      
+      Swal.fire({
+        title: "Oops!",
+        text: error.response.data.error,
+        icon: "error",
+      });
+    }
+  };
+};
 export const clearUserData = () => {
   return {
     type: CLEAR_USER_DATA,
