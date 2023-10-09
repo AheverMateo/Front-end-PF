@@ -37,3 +37,12 @@ form button {
     background-color: #00B9AE;
     cursor: pointer;
 }
+
+.profileImage{
+    margin-top: 15px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+}

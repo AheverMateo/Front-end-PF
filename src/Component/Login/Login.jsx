@@ -43,6 +43,9 @@ const Login = () => {
     );
   };
 
+
+
+
   return (
     <div className={Style.container}>
       <LogInMenu />
@@ -98,6 +101,7 @@ const Login = () => {
                   {errors.password && touched.password && errors.password}
                 </label>
               </div>
+
               <button type="submit">Log In</button>
             </form>
           )}

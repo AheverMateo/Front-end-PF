@@ -9,13 +9,13 @@ import Detail from './Component/Detail/Detail';
 import NotFound from "./Component/NotFound/NotFound";
 import Cart from './Component/Cart/Cart';
 import PostMovie from "./Component/PostMovie/PostMovie"
-import UploadImages from './Component/UploadImages/UploadImages';
 import Favs from './Component/Favorite/Favs';
 import Profile from './Component/Profile/Profile';
+import UploadImagesTohome from './Component/UploadImages/uploadImagesTohome';
 
 
 function App() {
- 
+  
   return (
     <div>
       <Routes>
@@ -27,7 +27,7 @@ function App() {
         <Route path='/Detail/:id' element={<Detail />} />
         <Route path="*" element={<NotFound/>}/> 
         <Route path='/PostMovie' element={<PostMovie/>}/>  
-        <Route path='/uploadImages' element={<UploadImages/>} />
+        <Route path='/uploadImages' element={<UploadImagesTohome/>} />
         <Route path='/Favorites' element={<Favs />}/>
         <Route path='/profile' element={<Profile />} />
       </Routes>
