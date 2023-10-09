@@ -11,6 +11,7 @@ const PostMovie = () => {
   const [movie, setMovie] = useState({
     title: "",
     duration: "",
+    trailer: "",
     year: "",
     description: "",
     torrent: null,
@@ -22,6 +23,7 @@ const PostMovie = () => {
   const [error, setError] = useState({
     title: "",
     duration: "",
+    trailer: "",
     year: "",
     description: "",
     language: "",
@@ -100,23 +102,53 @@ const PostMovie = () => {
   }, [genres]);
 
 
+  const [activeButton, setActiveButton] = useState("image-button");
+
   // cloudinary upload widget
   const cloudinaryRef = useRef();
   const widgetRef = useRef()
   
-  useEffect(()=>{
-      cloudinaryRef.current = window.cloudinary
-      widgetRef.current = cloudinaryRef.current.createUploadWidget({
-          cloudName: 'dy8pp1s5f',
-          uploadPreset: 'imagenes_admins'
-      }, function(error, result){
-        if (!error && result && result.event === 'success') {
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dy8pp1s5f",
+        uploadPreset: "imagenes_admins",
+      },
+      function (error, result) {
+        if (!error && result && result.event === "success") {
           const imageUrl = result.info.url;
-          setMovie({ ...movie, image: imageUrl }); 
+          if (activeButton === "image-button") {
+            setMovie((prevMovie) => ({
+              ...prevMovie,
+              image: imageUrl,
+            }));
+          } else if (activeButton === "trailer-button") {
+            setMovie((prevMovie) => ({
+              ...prevMovie,
+              trailer: imageUrl,
+            }));
+          }
         }
-      })
-  }, [])
+      }
+    );
+  }, [activeButton]);
 
+  const handleImageUpload = () => {
+    setActiveButton("trailer-button");
+    widgetRef.current.open();
+    // console.log(activeButton)
+  };
+
+  const handleTrailerUpload = () => {
+    setActiveButton("image-button");
+    widgetRef.current.open();
+    // console.log(activeButton)
+  };
+
+
+
+  
   return (
     <div className="global-container">
       <div className="h1">
@@ -190,8 +222,25 @@ const PostMovie = () => {
           <div className="input-divs">
             <p className="not-ok">{error.image}</p>
 
-            <button className="uploadButton " onClick={()=> widgetRef.current.open()}>
-                  Upload
+            <button className="uploadButton " onClick={handleImageUpload}>
+                  Upload Image
+            </button>
+          </div>
+          <div className="input-divs">
+            <label>Trailer URL</label>
+            <input
+              className={error.trailer !== "" ? "wrong" : ""}
+              name="trailer"
+              value={movie.trailer}
+              onChange={handleChange}
+              type="text"
+            ></input>
+          </div>
+          <div className="input-divs">
+            <p className="not-ok">{error.trailer}</p>
+
+            <button className="uploadButton " onClick={handleTrailerUpload}>
+                  Upload Movie
             </button>
           </div>
 
