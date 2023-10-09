@@ -11,6 +11,7 @@ import Cart from './Component/Cart/Cart';
 import PostMovie from "./Component/PostMovie/PostMovie"
 import UploadImages from './Component/UploadImages/UploadImages';
 import Favs from './Component/Favorite/Favs';
+import Profile from './Component/Profile/Profile';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='/PostMovie' element={<PostMovie/>}/>  
         <Route path='/uploadImages' element={<UploadImages/>} />
         <Route path='/Favorites' element={<Favs />}/>
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </div>
   )

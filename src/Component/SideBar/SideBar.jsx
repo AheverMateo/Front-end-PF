@@ -92,9 +92,9 @@ const SideBar = () => {
           ))}
         
         <h3>General</h3>
-        <Link>
+        <Link to="/Profile">
           <img src={profileIcon} />
-          <div>Perfil</div>
+          <div>Profile</div>
         </Link>
         <Link to="/">
           <img src={logOutIcon} />
