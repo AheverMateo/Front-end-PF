@@ -40,7 +40,7 @@ const UploadImages = () => {
           </button>
 
 
-        <p>Aquí se mostrará la imagen resultante</p>
+        <p>your image:</p>
         {imageUrl && (
           <img src={imageUrl} alt={imageAlt} className={styles.displayedImage} />
         )}

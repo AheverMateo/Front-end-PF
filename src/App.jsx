@@ -10,8 +10,8 @@ import NotFound from "./Component/NotFound/NotFound";
 import Cart from './Component/Cart/Cart';
 import PostMovie from "./Component/PostMovie/PostMovie"
 import Favs from './Component/Favorite/Favs';
+import Profile from './Component/Profile/Profile';
 import UploadImagesTohome from './Component/UploadImages/uploadImagesTohome';
-
 
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
         <Route path='/PostMovie' element={<PostMovie/>}/>  
         <Route path='/uploadImages' element={<UploadImagesTohome/>} />
         <Route path='/Favorites' element={<Favs />}/>
+        <Route path='/profile' element={<Profile />} />
       </Routes>
     </div>
   )

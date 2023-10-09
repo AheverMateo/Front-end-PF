@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+}
+.profile {
+    background-color: #21242D;
+    margin-left: 1rem;
+    width: 33rem;
+    padding: 3rem;
+}
+.profile img {
+    width: 10rem;
+    border-radius: 10px;
+}
+.profile label {
+    color: #00B9AE;
+}
+.profile form {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
