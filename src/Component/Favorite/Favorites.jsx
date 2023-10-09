@@ -22,7 +22,7 @@ const Favorites = () => {
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
   let moviesToDisplay;
 
-  console.log(FavoriteMovies);
+  
   if (FavoriteMovies.length > 0) {
     // console.log(filteredMovies);
     moviesToDisplay = FavoriteMovies;

@@ -54,7 +54,6 @@ const PostMovie = () => {
   const handleSubmit = async () => {
     try {
       setMovie({ ...movie, year: Number(movie.year) });
-      console.log(movie.genre);
       await axios.post(`/Nonflix/movies/`, movie);
       Swal.fire({
         icon: "success",
