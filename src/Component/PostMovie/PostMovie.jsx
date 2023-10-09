@@ -4,6 +4,8 @@ import axios from "axios";
 import "./PostMovie.css";
 import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark/dark.css";
+import logo from "../../assets/NONFLIX-LOGO.png";
+import { Link } from "react-router-dom";
 
 //http://localhost:3001/Nonflix/movies/genres
 
@@ -152,7 +154,9 @@ const PostMovie = () => {
   return (
     <div className="global-container">
       <div className="h1">
+        <Link to="/Home"><img className="post-logo" src={logo}/></Link>
         <h1 className="h1">Add new movie to catalog</h1>
+        <Link to="/Dashboard"><button className="dashboardButton">Back to dashboard</button></Link>
       </div>
       <div className="first-container">
         <div className="first-form-div">
@@ -203,6 +207,13 @@ const PostMovie = () => {
               value={movie.description}
               onChange={handleChange}
             ></textarea>
+          </div><br></br>
+          <div className="input-divs">
+            <label>Torrent</label>
+            <input name="torrent" onChange={handleFile} type="file"></input>
+          </div>
+          <div className="input-divs">
+            <p className="not-ok">{error.torrent}</p>
           </div>
           <div className="input-divs">
             <p className="not-ok">{error.description}</p>
@@ -220,11 +231,12 @@ const PostMovie = () => {
             ></input>
           </div>
           <div className="input-divs">
-            <p className="not-ok">{error.image}</p>
+            <p className="not-ok spacing">{error.image}</p>
 
             <button className="uploadButton " onClick={handleImageUpload}>
                   Upload Image
             </button>
+            <img className="image-shown" src={movie.image ? movie.image : ""}></img>
           </div>
           <div className="input-divs">
             <label>Trailer URL</label>
@@ -237,31 +249,27 @@ const PostMovie = () => {
             ></input>
           </div>
           <div className="input-divs">
-            <p className="not-ok">{error.trailer}</p>
+            <p className="not-ok spacing">{error.trailer}</p>
 
             <button className="uploadButton " onClick={handleTrailerUpload}>
-                  Upload Movie
+                  Upload Trailer
             </button>
-          </div>
-
-          <div className="input-divs">
-            <label>Torrent</label>
-            <input name="torrent" onChange={handleFile} type="file"></input>
-          </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.torrent}</p>
           </div>
         </div>
         <div className="third-form-div">
           <div className="input-divs">
             <label>Language</label>
-            <input
+            <select
               className={error.language !== "" ? "wrong" : ""}
               name="language"
               value={movie.language}
               onChange={handleChange}
-              type="text"
-            ></input>
+              >
+              <option value="">Select a Language!</option>
+              <option value="Spanish">Spanish</option>
+              <option value="English">English</option>
+              <option value="French">French</option>
+            </select>
           </div>
           <div className="input-divs">
             <p className="not-ok">{error.language}</p>

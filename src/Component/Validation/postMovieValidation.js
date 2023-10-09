@@ -37,7 +37,8 @@ export const postMovieValidation = (inputName, inputValue) => {
     if(inputName="trailer"){
         if(inputValue==="")return "";
         const trailerRegex = /^https?:\/\/[^\s/$.?#].[^\s]*\.mp4$/;
-        if(!trailerRegex.test(inputValue)) return "Ingrese un URL de video válido"
+        const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([A-Za-z0-9_-]+)/;
+        if(!trailerRegex.test(inputValue) && !youtubeRegex.test(inputValue)) return "Ingrese un URL de video válido"
         else return "";
     }
     return "";
