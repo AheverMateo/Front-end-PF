@@ -1,42 +1,42 @@
+
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import Card from "../Card/Card";
-import { getMovies } from "../../Redux/actions/actions";
-import style from "./ListCards.module.css";
+import { getFavs, getMovies } from "../../Redux/actions/actions";
+import style from "./Favorites.module.css";
 import Pagination from "../Pagination/Pagination";
-import Swal from 'sweetalert2';
+import SideBar from "../SideBar/SideBar";
 
-const ListCards = ({ id }) => {
+const Favorites = () => {
+
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user)
+
   useEffect(() => {
-    dispatch(getMovies());
+    dispatch(getFavs(user.id));
   }, []);
-  const movies = useSelector((state) => state.Allmovies);
+
+  const FavoriteMovies = useSelector((state) => state.FavoriteMovies);
   const currentPage = useSelector((state) => state.currentPage);
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
-  const filteredMovies = useSelector((state) => state.filteredMovies);
-  const filterParameters = useSelector((state)=> state.filterParameters);
-  
   let moviesToDisplay;
-  if (filteredMovies === "No movies found" || filteredMovies === "Name is required") {
-    Swal.fire({
-      title: 'Oops!',
-      text: filteredMovies,
-      icon: 'error',
-    })
-    moviesToDisplay = movies;
+
+  
+  if (FavoriteMovies.length > 0) {
+    // console.log(filteredMovies);
+    moviesToDisplay = FavoriteMovies;
   } else {
-    moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
+    moviesToDisplay = "Add Movies to Favorite"
   }
+ 
 
   const paginationSize = Math.ceil(moviesToDisplay.length / 12);
 
-  if (moviesToDisplay.length > 0) {
+  if (FavoriteMovies.length > 0) {
     return (
-      <div>
-        {filterParameters[3] !== "search"? <h2 style={{ textAlign: 'center' }}>{filterParameters[0]}</h2> : <h2 style={{ textAlign: 'center' }}>Results for: {filterParameters[0]}</h2>}
-        <h2></h2>
+        <div>
+          <h1 style={{ textAlign: 'center' }}>Your Favorites</h1>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>
           {moviesToDisplay.map((props, itemIndex) => {
@@ -64,11 +64,11 @@ const ListCards = ({ id }) => {
     );
   } else {
     return (
-      <div className={style.loading}>
-        <h2>Loading...</h2>
+      <div style={{ alignContent: 'center' }}>
+        <h1 style={{ textAlign: 'center' }}>Don't have Favorites</h1>
       </div>
     );
   }
 };
 
-export default ListCards;
+export default Favorites;

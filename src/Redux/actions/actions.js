@@ -11,6 +11,8 @@ import {
   USER_DATA,
   RESET_CART,
   CLEAR_USER_DATA,
+  GET_FAVS,
+  REMOVE_FAV,
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -155,7 +157,7 @@ export const registerUser = (values) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/Nonflix/login",
+        "/Nonflix/login",
         values
       );
       if (response.status !== 200) {
@@ -255,3 +257,22 @@ export const clearUserData = () => {
     type: CLEAR_USER_DATA,
   };
 };
+export const addFav = (movieId, userId) => {
+  return async () => {
+     await axios.post(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
+  }
+}
+export const getFavs = (userId) => {
+  return async (dispatch) => {
+    const {data} = await axios.get(`/Nonflix/movies/fav?userId=${userId}`)
+
+    dispatch({type:GET_FAVS, payload: data})
+  }
+}
+export const removeFav = (movieId, userId) => {
+  return async (dispatch) => {
+    const {data} = await axios.delete(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
+
+    dispatch({type:REMOVE_FAV, payload:data})
+  }
+}

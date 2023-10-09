@@ -56,16 +56,18 @@ const SideBar = () => {
   ];
   return (
     <div className={style.main}>
+      <Link to="/Home">
       <div className={style.logo}>
         <img className="sidebar_image" src={logo} />
       </div>
+      </Link>
       <div className={style.menu}>
         <h3>Menu</h3>
         <Link to="/Home" id="Home" >
           <img src={homeIcon} />
           <div onClick={() => handleHomeClick()} className={selectedGenre ==="Home" ? style.selected : style.none}>Home</div>
         </Link>
-        <Link>
+        <Link to= "/Favorites">
           <img src={favoriteIcon} />
           <div>Favorites</div>
         </Link>

@@ -54,7 +54,7 @@ const PostMovie = () => {
   const handleSubmit = async () => {
     try {
       setMovie({ ...movie, year: Number(movie.year) });
-      await axios.post(`http://localhost:3001/movie`, movie);
+      await axios.post(`/Nonflix/movies/`, movie);
       Swal.fire({
         icon: "success",
         title: "Success!",
@@ -65,7 +65,7 @@ const PostMovie = () => {
         icon: "error",
         title: "Oops...",
         text: "The movie was not created",
-        footer: error.message,
+        footer: error.response.data,
       });
     }
   };
@@ -84,7 +84,7 @@ const PostMovie = () => {
   useEffect( () => {
     const genres = async () => {
       return await axios
-        .get("http://localhost:3001/Nonflix/movies/genres")
+        .get("/Nonflix/movies/genres")
         .then((response) => {
           const res = response.data.map((genre) => genre.id);
           setGenres(res)
@@ -209,7 +209,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Aventura</label>
+              <label> Adventure</label>
               <input
                 name="genre"
                 value="Adventure"
@@ -218,7 +218,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Animación</label>
+              <label> Animation</label>
               <input
                 name="genre"
                 value="Animation"
@@ -227,7 +227,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Biografía</label>
+              <label> Biography</label>
               <input
                 name="genre"
                 value="Biografia"
@@ -236,7 +236,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Comedia</label>
+              <label> Comedy</label>
               <input
                 name="genre"
                 value="comedy"
@@ -245,7 +245,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Documental</label>
+              <label> Documentary</label>
               <input
                 name="genre"
                 value="documentary"
@@ -263,7 +263,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Familia</label>
+              <label> Family</label>
               <input
                 name="genre"
                 value="family"
@@ -272,7 +272,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Fantasía</label>
+              <label> Fantasy</label>
               <input
                 name="genre"
                 value="fantasy"
@@ -290,7 +290,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Historia</label>
+              <label> History</label>
               <input
                 name="genre"
                 value="history"
@@ -317,7 +317,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Misterio</label>
+              <label> Mistery</label>
               <input
                 name="genre"
                 value="mistery"
@@ -353,7 +353,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Deportes</label>
+              <label> Sports</label>
               <input
                 name="genre"
                 value="sports"
@@ -362,7 +362,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Suspenso</label>
+              <label> Suspense</label>
               <input
                 name="genre"
                 value="suspense"
@@ -371,7 +371,7 @@ const PostMovie = () => {
               ></input>
             </div>
             <div>
-              <label> Guerra</label>
+              <label> Warlike</label>
               <input
                 name="genre"
                 value="warlike"
@@ -401,10 +401,10 @@ const PostMovie = () => {
         (errorMsg) => errorMsg === "" && movie.genre.length > 0
       ) ? (
         <button className="ok-val" onClick={handleSubmit}>
-          Subir Película
+          Upload Movie
         </button>
       ) : (
-        <p className="not-ok">Complete todos los campos correctamente</p>
+        <p className="not-ok">Complete all fields correctly</p>
       )}
     </div>
   );
