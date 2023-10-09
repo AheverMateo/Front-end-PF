@@ -73,7 +73,7 @@ const rootReducer = (state = initialState, action) => {
       }
     }
     case ADD_TO_CART: {
-      action.payload.price = 5000
+      action.payload.price = 5.00
       const repeated = [...state.Cart].find(movie => movie.id === action.payload.id)
       return {
         ...state,

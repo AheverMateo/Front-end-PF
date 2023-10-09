@@ -10,7 +10,7 @@ const Card = ({ id, image, year, title }) => {
   const dispatch = useDispatch();
   const FavoriteMovies = useSelector((state) => state.FavoriteMovies)
   const user = useSelector((state) => state.user)
-  console.log(user)
+ 
 
   const handleFavorite = () => {
     isFav

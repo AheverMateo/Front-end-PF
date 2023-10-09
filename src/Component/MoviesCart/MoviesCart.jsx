@@ -19,7 +19,7 @@ const MoviesCart = ({title, image, id, price}) => {
                 <h3>{title}</h3>
             </Link>
 
-            <p>Price: {price}</p>
+            <p>Price: ${price.toFixed(2)} USD</p>
             <button onClick={handleDelete}>Delete</button>
             </div>
         </div>
