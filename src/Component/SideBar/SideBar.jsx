@@ -48,7 +48,6 @@ const SideBar = () => {
     "Family",
     "Fantasy",
     "Horror",
-    "Mistery",
     "Romance",
     "Sci-Fi",
     "Sport",

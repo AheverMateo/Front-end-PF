@@ -20,7 +20,7 @@ const NotFound = () => {
             <h1>Oops! Page not found</h1>
             <h2>404 Error</h2>
             <h2></h2>
-            <button onClick={goHome}>Volver a Home</button>
+            <button onClick={goHome}>Back to Home</button>
         </div>
         </div>
     )
