@@ -31,7 +31,7 @@ export default function GoogleAuth() {
       name: credentialResponseDecoded.name,
       image: credentialResponseDecoded.picture
     });
-    console.log(credentialResponseDecoded)
+    // console.log(credentialResponseDecoded)
 
   };
 
