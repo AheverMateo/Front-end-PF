@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { postMovieValidation } from "../Validation/postMovieValidation";
 import axios from "axios";
 import "./PostMovie.css";
@@ -100,6 +100,24 @@ const PostMovie = () => {
     console.log('genres', genres)
   }, [genres]);
 
+
+  // cloudinary upload widget
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef()
+  
+  useEffect(()=>{
+      cloudinaryRef.current = window.cloudinary
+      widgetRef.current = cloudinaryRef.current.createUploadWidget({
+          cloudName: 'dy8pp1s5f',
+          uploadPreset: 'imagenes_admins'
+      }, function(error, result){
+        if (!error && result && result.event === 'success') {
+          const imageUrl = result.info.url;
+          setMovie({ ...movie, image: imageUrl }); 
+        }
+      })
+  }, [])
+
   return (
     <div className="global-container">
       <div className="h1">
@@ -172,10 +190,12 @@ const PostMovie = () => {
           </div>
           <div className="input-divs">
             <p className="not-ok">{error.image}</p>
+
+            <button className="uploadButton " onClick={()=> widgetRef.current.open()}>
+                  Upload
+            </button>
           </div>
-          <div>
-            <img className="image-shown" src={movie.image} alt=""></img>
-          </div>
+
           <div className="input-divs">
             <label>Torrent</label>
             <input name="torrent" onChange={handleFile} type="file"></input>

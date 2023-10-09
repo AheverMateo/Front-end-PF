@@ -4,7 +4,7 @@ import GoogleAuth from '../GoogleAuth/GoogleAuth';
 import LogInMenu from '../LogInMenu/LogInMenu';
 import style from './Register.module.css';
 import { Formik } from "formik";
-import { useState } from "react";
+import { useState} from "react";
 import { useDispatch } from 'react-redux';
 
 const Register = () => {
@@ -19,14 +19,15 @@ const Register = () => {
         }
      });
     };
+
+
+
   return (
     <>
       <LogInMenu />
       <div className={style.main}>
         <h2>Register Now!</h2>
         <p>Please fill in the blanks to start enjoying your favorite movies!</p>
-
-        
 
         <Formik
           initialValues={{ name: "", email: "", password: "" }}
@@ -46,6 +47,7 @@ const Register = () => {
             if(values.password.length < 6){
                 errors.password = "Password must be at least 6 characters"
               }
+
             return errors;
           }}
           onSubmit={handleRegister}
@@ -94,7 +96,16 @@ const Register = () => {
               <label>
                 {errors.password && touched.password && errors.password}
               </label>
-              <button type="submit">Register</button>
+
+
+                <button
+                type="submit"
+               
+              >
+                Register
+              </button>
+
+              
             </form>
           )}
         </Formik>

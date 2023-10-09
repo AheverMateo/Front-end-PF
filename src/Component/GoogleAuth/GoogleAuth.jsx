@@ -18,6 +18,7 @@ export default function GoogleAuth() {
     password: "",
     name: "",
     provider: "Google",
+    image: ""
   });
 
   const onSuccess = (credentialResponse) => {
@@ -28,7 +29,10 @@ export default function GoogleAuth() {
       email: credentialResponseDecoded.email,
       password: credentialResponseDecoded.jti,
       name: credentialResponseDecoded.name,
+      image: credentialResponseDecoded.picture
     });
+    console.log(credentialResponseDecoded)
+
   };
 
   useEffect(() => {
