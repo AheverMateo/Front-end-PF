@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../SideBar/SideBar";
 import style from "./Profile.module.css";
@@ -10,6 +10,7 @@ const Profile = () => {
   const userFirstName = userData.name.split(" ");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [profileImage, setProfileImage] = useState("");
   const [errors, setErrors] = useState({ name: "", password: "" });
 
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Profile = () => {
     }
   };
 
+  console.log(userData)
   
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -33,6 +35,7 @@ const Profile = () => {
       id: userData.id,
       name: userName,
       password: password,
+      image: profileImage,
       token: userData.token,
     };
  
@@ -40,6 +43,28 @@ const Profile = () => {
       dispatch(updateUser(userUpdate));
    
   };
+
+ // cloudinary upload widget
+ const cloudinaryRef = useRef();
+ const widgetRef = useRef()
+ 
+ useEffect(() => {
+   cloudinaryRef.current = window.cloudinary;
+   widgetRef.current = cloudinaryRef.current.createUploadWidget(
+     {
+       cloudName: "dy8pp1s5f",
+       uploadPreset: "imagenes_admins",
+     },
+     function (error, result) {
+       if (!error && result && result.event === "success") {
+         const imageUrl = result.info.url;
+         setProfileImage(imageUrl)
+       }
+     }
+   );
+ }, []);
+
+
   return (
     <div className={style.main}>
       <SideBar />
@@ -48,7 +73,10 @@ const Profile = () => {
           Hi <label>{userFirstName[0]}</label>! Welcome to your profile!
         </h2>
         <form onSubmit={handleSubmit}>
-          <img src="https://s3.amazonaws.com/37assets/svn/765-default-avatar.png" />
+          <img src={profileImage === "" ? userData.image : profileImage} />
+          <button type="button" className="uploadButton " onClick={()=> widgetRef.current.open()}>
+                  Upload Image
+          </button>
           <div>
             <label>Name: </label>
             <input
