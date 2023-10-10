@@ -149,7 +149,6 @@ const PostMovie = () => {
   };
 
 
-
   
   return (
     <div className="global-container">
