@@ -147,8 +147,6 @@ const PostMovie = () => {
     widgetRef.current.open();
     // console.log(activeButton)
   };
-
-
   
   return (
     <div className="global-container">
