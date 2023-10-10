@@ -206,11 +206,15 @@ export const login = ({ email, password }) => {
     }
   };
 };
-export const updateUser = ( {id, name, password, token} ) => {
+export const updateUser = ( {id, name, password, token, image} ) => {
 let reqBody;
-if(name !== ""  && password !== "") reqBody = {id, name, password};
+if(name !== ""  && password !== "" && image !== "") reqBody = {id, name, password, image};
+if(name !== ""  && password !== "" && image === "") reqBody = {id, name, password};
+if(name !== ""  && password === "" && image !== "") reqBody = {id, name, image};
+if(name === ""  && password !== "" && image !== "") reqBody = {id, password, image};
 if(name === "" && password !== "" ) reqBody = {id, password};
 if(password === "" && name !== "") reqBody = {id, name};
+if(name === "" && password === "" && image !== "") reqBody = {id, image};
   return async (dispatch) => {
     try {
       const user = await axios.put(
