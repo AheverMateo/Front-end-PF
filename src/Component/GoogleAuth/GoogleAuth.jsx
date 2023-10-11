@@ -40,14 +40,16 @@ export default function GoogleAuth() {
       if (location.pathname === "/Login") {
         
          dispatch(loginAction(userGoogle)).then((response) => {
-          setIsRegistered(true);
+          if(response.data !== "The user is not registered"){
+            setIsRegistered(true);
+            }
         }).catch((error)=> console.log(error))
         
       }
 
       if (location.pathname === "/Register") {
         dispatch(registerUser(userGoogle)).then((response) => {
-          if (response !== "" && response !== undefined) {
+          if (response !== "" && response !== undefined && response !== "Existing user") {
             setIsRegistered(true);
             navigate("/Home");
           }
