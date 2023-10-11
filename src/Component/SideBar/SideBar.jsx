@@ -77,7 +77,7 @@ const SideBar = () => {
         </Link>
 
         <h3>Genre</h3>
-       
+      
           {genres.map((genre, index) => (
             <Link to="/Home" key={index}>
               <div
