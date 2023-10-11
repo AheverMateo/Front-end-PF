@@ -1,6 +1,6 @@
 .global-container{
-    background-color: rgb(20, 44, 88);
-    height: 97vh;
+    background-color: #21242D;
+    height: 99.9vh;
 }
 .first-container{
     display: flex;
@@ -10,9 +10,11 @@
     width: 99vw;
 }
 .h1{
+    display: flex;
+    flex-direction: row;
     text-align: center;
-    background-color: rgb(20, 44, 88);
-    margin-top: 0%;
+    background-color: #21242D;
+    justify-content: space-between;
 }
 .first-form-div{
     width: 30vw;
@@ -24,22 +26,31 @@
     width: 30vw;
 }
 .image-shown{
-    max-width: 90%;
-    max-height: 300px;
+    max-width: 70%;
+    max-height: 200px;
+    width: auto;
+    height: auto;
     margin-left: 5%;
+    margin-bottom: 2%;
 }
 .ok-val{
-    background-color: rgb(67, 92, 138);
+    font-size: 14px; 
+    padding: 6px 12px; 
+    margin-bottom: 20px;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: 1px;
+    height: 60px;
+    background-color: #00B9AE;
+    cursor: pointer;
     margin-left: 45%;
-    color: aliceblue;
-    width: 100px;
-    height: 50px;
-    border-radius: 15px;
     margin-bottom: 0.5%;
+    margin-top: -1%;
 }
 .not-ok{
     text-align: center;
     color: rgb(161, 37, 37);
+    margin-top: 1%;
 }
 .input-divs{
     margin-left: 5%;
@@ -68,4 +79,27 @@
     padding: 6px 12px; 
     margin-top: -19px;
     margin-bottom: 20px;
-  }
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: 1px;
+    background-color: #00B9AE;
+    cursor: pointer;
+}
+.spacing{
+    margin-bottom: 5%;
+}
+.post-logo{
+    width: 70px;
+    height: 70px;
+}
+.dashboardButton{
+    font-size: 14px; 
+    padding: 6px 12px; 
+    border-radius: 0.5rem;
+    font-weight: 600;
+    border: 1px;
+    height: 55px;
+    background-color: #00B9AE;
+    cursor: pointer;
+    margin-top: 1%;
+}
