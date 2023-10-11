@@ -13,7 +13,7 @@ import { useState } from "react";
 const SideBar = () => {
   const dispatch = useDispatch();
   const stateFilterParams = useSelector((state) => state.filterParameters);
-
+  const Cart = useSelector((state) => state.Cart);
   const [selectedGenre, setSelectedGenre] = useState("Home");
 
   const handleCategoryClick = (event) => {
@@ -73,6 +73,7 @@ const SideBar = () => {
         <Link to="/Cart">
           <img src={shoppingCartIcon} />
           <div>Cart</div>
+          {Cart.length?<div className = {style.circle}>{Cart.length}</div>:<div></div>}
         </Link>
 
         <h3>Genre</h3>
