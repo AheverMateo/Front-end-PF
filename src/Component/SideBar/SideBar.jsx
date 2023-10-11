@@ -7,7 +7,7 @@ import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 import { useDispatch, useSelector } from "react-redux";
-import { filterParameters, setCurrentPage, clearUserData } from "../../Redux/actions/actions";
+import { filterParameters, setCurrentPage, clearUserData, getGenres } from "../../Redux/actions/actions";
 import { useState } from "react";
 
 const SideBar = () => {
@@ -37,6 +37,9 @@ const SideBar = () => {
   const handleLogOut = () => {
     dispatch(clearUserData());
   }
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
   const genres = useSelector((state)=>state.genres);
   return (
     <div className={style.main}>
