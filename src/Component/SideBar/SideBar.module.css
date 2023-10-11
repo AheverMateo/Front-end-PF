@@ -41,4 +41,17 @@
 .main .menu .selected {
     color:#00B9AE;
 }
+.circle {
+    width: 20px;
+    height: 20px;
+    background-color:#01a499;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    color: rgb(251, 255, 7);
+    font-weight:bolder; 
+  }
+  
 
