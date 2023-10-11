@@ -22,8 +22,6 @@ const Profile = () => {
       setErrors({ ...errors, name: "Your name cannot be empty" });
     }
   };
-
-  console.log(userData)
   
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);

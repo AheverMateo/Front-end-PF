@@ -37,22 +37,7 @@ const SideBar = () => {
   const handleLogOut = () => {
     dispatch(clearUserData());
   }
-  const genres = [
-    "Action",
-    "Adventure",
-    "Biography",
-    "Comedy",
-    "Crime",
-    "Documentary",
-    "Drama",
-    "Family",
-    "Fantasy",
-    "Horror",
-    "Romance",
-    "Sci-Fi",
-    "Sport",
-    "Thriller",
-  ];
+  const genres = useSelector((state)=>state.genres);
   return (
     <div className={style.main}>
       <Link to="/Home">
