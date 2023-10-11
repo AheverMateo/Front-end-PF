@@ -5,17 +5,17 @@ const Validation = (error) => {
     
 
     if (!regexName.test(error.name)) {
-        newError.name = "enter a valid name"
+        newError.name = "Enter a valid name"
     }
     if (error.password) {
         if (error.password.length < 8) {
-            newError.password = "Más de 8 caracteres";
+            newError.password = "Use at least 8 characters";
         }
         if (!/[!@#$%^&*]/.test(error.password)) {
             if (newError.password) {
-                newError.password += ", Falta un carácter especial";
+                newError.password += ", You are missing a special character";
             } else {
-                newError.password = "Falta un carácter especial";
+                newError.password = "You are missing a special character";
             }
         }
         if (!/[a-z]/.test(error.password)) {
@@ -27,9 +27,9 @@ const Validation = (error) => {
         }
         if (!/\d/.test(error.password)) {
             if (newError.password) {
-                newError.password += ", Falta al menos un número";
+                newError.password += ", use at least one number";
             } else {
-                newError.password = "Falta al menos un número";
+                newError.password = "Use at least one number";
             }
         }
     }
