@@ -9,13 +9,18 @@ import { useDispatch } from 'react-redux';
 
 const Register = () => {
     const [successMessage, setSuccessMessage] = useState("");
+    const [welcomeMsg, setWelcomeMsg] = useState(false)
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleRegister = (values) => {
       dispatch(registerUser(values)).then((response) => {
         if (response !== "" && response !== undefined) {
-          navigate("/Home");
+          setSuccessMessage("¡Registro exitoso! Bienvenido.")
+          setWelcomeMsg(true)
+          setTimeout(() => {
+            navigate("/Home");
+          }, 3000)
         }
      });
     };
@@ -105,6 +110,11 @@ const Register = () => {
                 Register
               </button>
 
+              {welcomeMsg && (
+                <div>
+                  <p>{successMessage}</p>
+                </div>
+              )}
               
             </form>
           )}
