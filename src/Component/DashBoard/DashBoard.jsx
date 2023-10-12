@@ -2,8 +2,16 @@ import "./DashBoard.css";
 import SideBar from "../SideBar/SideBar"
 import { Card, TabGroup, TabList, Tab, TabPanels, TabPanel, Button, Title, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Text } from "@tremor/react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovies } from "../../Redux/actions/actions";
+import { useEffect } from "react";
+
 const DashBoard = () => {
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getMovies());
+    }, []);
 
     const movies = useSelector((state) => state.Allmovies);
 
