@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.dashboard{
+    text-align: center;
+    width: 82%;
+    color:#01a499;
+    font-size: x-large;
+    margin-top: 0%;
+}
