@@ -12,24 +12,33 @@ import PostMovie from "./Component/PostMovie/PostMovie"
 import Favs from './Component/Favorite/Favs';
 import Profile from './Component/Profile/Profile';
 import UploadImagesTohome from './Component/UploadImages/uploadImagesTohome';
-
+import ProtectedRoute from './Component/utils/ProtectedRoute';
+import { useSelector } from 'react-redux';import DashBoard from "./Component/DashBoard/DashBoard";
 
 function App() {
   
+  const user = useSelector((state) => state.user); 
+
   return (
     <div>
       <Routes>
         <Route exact path='/Login' element={<Login/>}/>
         <Route exact path='/Register' element={<Register/>}/>
         <Route exact path='/' element={<NonRegisteredHome/>}/>
-        <Route exact path='/Home' element={<Home/>}/>
-        <Route path='/Cart' element={<Cart/>}/>
-        <Route path='/Detail/:id' element={<Detail />} />
-        <Route path="*" element={<NotFound/>}/> 
-        <Route path='/PostMovie' element={<PostMovie/>}/>  
-        <Route path='/uploadImages' element={<UploadImagesTohome/>} />
-        <Route path='/Favorites' element={<Favs />}/>
-        <Route path='/profile' element={<Profile />} />
+        
+                      // Private Routes
+        <Route element={<ProtectedRoute canActivate={user.token}/>}>
+          <Route exact path='/Home' element={<Home/>}/>
+          <Route path='/Cart' element={<Cart/>}/>
+          <Route path='/Detail/:id' element={<Detail />} />
+          <Route path="*" element={<NotFound/>}/> 
+          <Route path='/PostMovie' element={<PostMovie/>}/>  
+          <Route path='/uploadImages' element={<UploadImagesTohome/>} />
+          <Route path='/Favorites' element={<Favs />}/>
+          <Route path='/profile' element={<Profile />} />
+        <Route path='/dashboard' element={<DashBoard></DashBoard>} />
+        </Route>
+        
       </Routes>
     </div>
   )
