@@ -1,9 +1,10 @@
 import SideBar from "../SideBar/SideBar";
 import style from "./Cart.module.css"
 
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import MoviesCart from "../MoviesCart/MoviesCart";
-import { resetCart } from "../../Redux/actions/actions";
+
+
 
 
 import axios from "axios"
@@ -11,7 +12,7 @@ import axios from "axios"
 
 
 const Cart = () => {
-    const dispatch = useDispatch()
+    
    
     const stateCart = useSelector((state) => state.Cart )
     const total = stateCart.reduce((acc, movie) => acc +  movie.price ,0)
@@ -21,9 +22,7 @@ const Cart = () => {
        
         try {
             const { data } = await axios.post('/Nonflix/shopping/create-order',{movies:stateCart})
-    
             location.href = data.body.init_point
-            dispatch(resetCart())
         } catch (error) {
             console.log(error.message)
         }
