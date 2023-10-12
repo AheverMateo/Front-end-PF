@@ -9,7 +9,9 @@ import {
   SET_FILTER_PARAMETERS,
   FILTER,
   RESET_CART,
-  USER_DATA
+  USER_DATA,
+  GET_GENRES,
+  CLEAN_DETAIL
 } from '../actions/actionsTypes';
 
 const initialState = {
@@ -21,6 +23,7 @@ const initialState = {
   filterParameters: ["Home", null, null],
   filteredMovies: [],
   user: {},
+  genres: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -35,12 +38,21 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         movieDetail: action.payload,
       };
-
+      case GET_GENRES:
+      return {
+        ...state,
+        genres: action.payload,
+      };
     case SET_CURRENT_PAGE:
       return {
         ...state,
         currentPage: action.payload,
       };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        movieDetail: {}
+      }
     case GET_NAME:
       return {
         ...state,

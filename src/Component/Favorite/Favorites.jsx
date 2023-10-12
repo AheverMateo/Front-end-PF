@@ -27,7 +27,7 @@ const Favorites = () => {
     // console.log(filteredMovies);
     moviesToDisplay = FavoriteMovies;
   } else {
-    moviesToDisplay = "Add Movies to Favorite"
+    moviesToDisplay = "Add Movies to your Favorites"
   }
  
 
@@ -65,7 +65,7 @@ const Favorites = () => {
   } else {
     return (
       <div style={{ alignContent: 'center' }}>
-        <h1 style={{ textAlign: 'center' }}>Don't have Favorites</h1>
+        <h1 style={{ textAlign: 'center' }}>Don't have Favorites yet</h1>
       </div>
     );
   }
