@@ -9,7 +9,7 @@ const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["user"]                                                                                       
+    blacklist: ['Allmovies', 'movieDetail', 'genres', 'itemsPerPage', 'currentPage']                                                                                   
 }
 
  const persistedReducer = persistReducer(persistConfig, rootReducer )
