@@ -3,6 +3,7 @@ import style from "./Card.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, addToCart, removeFav, removeFromCart } from "../../Redux/actions/actions";
+import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 
 const Card = ({ id, image, year, title, duration,lenguage, torrent}) => {
   const [isFav, setIsFav] = useState(false);
@@ -52,10 +53,10 @@ const Card = ({ id, image, year, title, duration,lenguage, torrent}) => {
           )}
             {addedToCart
               ? <button onClick= {handleAddCart} className={style.cardBackButtonCart}>
-                -🛒
+                -<img src={shoppingCartIcon} />
               </button>
               : <button onClick= {handleAddCart} className={style.cardBackButtonCart}>
-                +🛒
+                +<img src={shoppingCartIcon} />
               </button>}
           <h2>{title}</h2>
           <p>{year}</p>

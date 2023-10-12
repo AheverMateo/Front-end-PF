@@ -3,13 +3,14 @@
     align-items: center;
     gap: 1rem;
     justify-content: center;
+    margin-top: 1rem;
 }
 .filters button {
     border-radius: 0.5rem;
     height: 2.5rem;
     width: 6rem;
     align-self: center;
-    font-weight: 600;
+    font-weight: 500;
     border: 1px;
     background-color: #00B9AE;
     cursor: pointer;
@@ -19,4 +20,7 @@
     border: 0;
     border-radius: 5px;
     height: 2rem;
+}
+.filters select, .filters select option {
+    color: black;
 }

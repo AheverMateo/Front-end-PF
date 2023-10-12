@@ -131,6 +131,7 @@ export const filterParameters = (parameters) => {
           payload: "No movies found",
         });
         Swal.fire({
+          position: 'top',
           text: "No movies found",
           showConfirmButton: false,
           timer: 1000,
@@ -139,6 +140,7 @@ export const filterParameters = (parameters) => {
     } catch (error) {
       const errorMsg = error.response.data.message;
       Swal.fire({
+        position: 'top',
         showConfirmButton: false,
         timer: 1000,
         text: "No movies found",
