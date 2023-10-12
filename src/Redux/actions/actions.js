@@ -14,7 +14,8 @@ import {
   GET_FAVS,
   REMOVE_FAV,
   GET_GENRES,
-  CLEAN_DETAIL
+  CLEAN_DETAIL,
+  CLEAN_FAVS
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -222,23 +223,23 @@ export const login = ({ email, password }) => {
     }
   };
 };
-export const updateUser = ( {id, name, password, token, image} ) => {
-let reqBody;
-if(name !== ""  && password !== "" && image !== "") reqBody = {id, name, password, image};
-if(name !== ""  && password !== "" && image === "") reqBody = {id, name, password};
-if(name !== ""  && password === "" && image !== "") reqBody = {id, name, image};
-if(name === ""  && password !== "" && image !== "") reqBody = {id, password, image};
-if(name === "" && password !== "" ) reqBody = {id, password};
-if(password === "" && name !== "") reqBody = {id, name};
-if(name === "" && password === "" && image !== "") reqBody = {id, image};
+export const updateUser = ({ id, name, password, token, image }) => {
+  let reqBody;
+  if (name !== "" && password !== "" && image !== "") reqBody = { id, name, password, image };
+  if (name !== "" && password !== "" && image === "") reqBody = { id, name, password };
+  if (name !== "" && password === "" && image !== "") reqBody = { id, name, image };
+  if (name === "" && password !== "" && image !== "") reqBody = { id, password, image };
+  if (name === "" && password !== "") reqBody = { id, password };
+  if (password === "" && name !== "") reqBody = { id, name };
+  if (name === "" && password === "" && image !== "") reqBody = { id, image };
   return async (dispatch) => {
     try {
       const user = await axios.put(
         "/Nonflix/login/update",
-        
-          reqBody
+
+        reqBody
         ,
-        { 
+        {
           headers: {
             authorization: `Bearer ${token}`,
           },
@@ -263,7 +264,7 @@ if(name === "" && password === "" && image !== "") reqBody = {id, image};
 
     } catch (error) {
       console.log(error);
-      
+
       Swal.fire({
         title: "Oops!",
         text: error.response.data.error,
@@ -279,24 +280,29 @@ export const clearUserData = () => {
 };
 export const addFav = (movieId, userId) => {
   return async () => {
-     await axios.post(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
+    await axios.post(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
   }
 }
 export const getFavs = (userId) => {
   return async (dispatch) => {
-    const {data} = await axios.get(`/Nonflix/movies/fav?userId=${userId}`)
+    const { data } = await axios.get(`/Nonflix/movies/fav?userId=${userId}`)
 
-    dispatch({type:GET_FAVS, payload: data})
+    dispatch({ type: GET_FAVS, payload: data })
   }
 }
 export const removeFav = (movieId, userId) => {
   return async (dispatch) => {
-    const {data} = await axios.delete(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
+    const { data } = await axios.delete(`/Nonflix/movies/fav?movieId=${movieId}&userId=${userId}`)
 
-    dispatch({type:REMOVE_FAV, payload:data})
+    dispatch({ type: REMOVE_FAV, payload: data })
   }
 }
 
 export const cleanDetail = () => {
-  return {type: CLEAN_DETAIL}
+  return { type: CLEAN_DETAIL }
+}
+export const cleanFavs = () => {
+  return (dispatch) => {
+    dispatch({ type: CLEAN_FAVS })
+  }
 }

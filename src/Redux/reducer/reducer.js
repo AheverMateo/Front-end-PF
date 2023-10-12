@@ -11,7 +11,8 @@ import {
   RESET_CART,
   USER_DATA,
   GET_GENRES,
-  CLEAN_DETAIL
+  CLEAN_DETAIL,
+  CLEAN_FAVS
 } from '../actions/actionsTypes';
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   filterParameters: ["Home", null, null],
   filteredMovies: [],
   user: {},
-  genres: []
+  genres: [],
+  FavoriteMovies: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -38,7 +40,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         movieDetail: action.payload,
       };
-      case GET_GENRES:
+    case GET_GENRES:
       return {
         ...state,
         genres: action.payload,
@@ -113,6 +115,10 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         FavoriteMovies: action.payload
+      }
+    case CLEAN_FAVS:
+      return {
+        ...state, FavoriteMovies: []
       }
     default:
       return {

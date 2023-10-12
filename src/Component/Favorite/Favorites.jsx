@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import Card from "../Card/Card";
-import { getFavs, getMovies } from "../../Redux/actions/actions";
+import { cleanFavs, getFavs, getMovies } from "../../Redux/actions/actions";
 import style from "./Favorites.module.css";
 import Pagination from "../Pagination/Pagination";
 import SideBar from "../SideBar/SideBar";
@@ -11,12 +11,14 @@ import SideBar from "../SideBar/SideBar";
 const Favorites = () => {
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user)
-
+  
+  
   useEffect(() => {
     dispatch(getFavs(user.id));
+    return dispatch(cleanFavs())
   }, []);
-
+  
+  const user = useSelector((state) => state.user);
   const FavoriteMovies = useSelector((state) => state.FavoriteMovies);
   const currentPage = useSelector((state) => state.currentPage);
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
@@ -27,13 +29,13 @@ const Favorites = () => {
     // console.log(filteredMovies);
     moviesToDisplay = FavoriteMovies;
   } else {
-    moviesToDisplay = "Add Movies to your Favorites"
+    moviesToDisplay = "Add Movies to Favorite"
   }
  
 
   const paginationSize = Math.ceil(moviesToDisplay.length / 12);
 
-  if (FavoriteMovies.length > 0) {
+  if (FavoriteMovies.length > 0 && typeof moviesToDisplay !== "string") {
     return (
         <div>
           <h1 style={{ textAlign: 'center' }}>Your Favorites</h1>
@@ -65,7 +67,7 @@ const Favorites = () => {
   } else {
     return (
       <div style={{ alignContent: 'center' }}>
-        <h1 style={{ textAlign: 'center' }}>Don't have Favorites yet</h1>
+        <h1 style={{ textAlign: 'center' }}>Don't have Favorites</h1>
       </div>
     );
   }
