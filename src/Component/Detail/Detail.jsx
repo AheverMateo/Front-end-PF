@@ -1,33 +1,41 @@
 import { useState, useEffect } from "react";
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import SideBar from "../SideBar/SideBar";
 import style from "./Detail.module.css";
-import { getDetailMovie } from "../../Redux/actions/actions";
+import { cleanDetail, getDetailMovie } from "../../Redux/actions/actions";
 import { addToCart } from "../../Redux/actions/actions";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 const Detail = () => {
   const [movie, setMovie] = useState({});
+  const { id } = useParams();
+  const user = useSelector((state) => state.user);
+  const userId = user.id;
+  const movieId = id;
+
 
   const [reviews, setReviews] = useState([
-    {title: "Great Movie",
-    description:<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In velit, voluptate ullam modi tempora libero magnam culpa. Incidunt harum hic reiciendis. Possimus, enim fugiat iusto architecto dolores ratione cumque nemo.</p>,
-    rating: 9
+    {
+      title: "Great Movie",
+      description: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In velit, voluptate ullam modi tempora libero magnam culpa. Incidunt harum hic reiciendis. Possimus, enim fugiat iusto architecto dolores ratione cumque nemo.</p>,
+      rating: 9
     },
-    {title: "Bad Movie",
-    description: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque inventore dolorum, adipisci quasi ipsa natus laudantium itaque non incidunt. Accusantium consequatur optio animi quos quaerat placeat nostrum esse deserunt enim.</p>,
-    rating: 3
+    {
+      title: "Bad Movie",
+      description: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque inventore dolorum, adipisci quasi ipsa natus laudantium itaque non incidunt. Accusantium consequatur optio animi quos quaerat placeat nostrum esse deserunt enim.</p>,
+      rating: 3
     }
   ]);
 
   const [newReview, setNewReview] = useState({
     title: "",
     description: "",
-    rating: ""
+    rating: 0
   });
- 
+  console.log(newReview);
+
   const [addedToCart, setAddedToCart] = useState(false);
   const handleAddCart = () => {
     setAddedToCart(true);
@@ -40,11 +48,11 @@ const Detail = () => {
   };
 
   const handleChange = (e) => {
-    setMovie({...movie, [e.target.name]: e.target.value});
+    setNewReview({ ...newReview, [e.target.name]: e.target.value });
   };
 
-  const addReview = async() => {
-    if(Object.values(newReview).some((value)=>value==="")){
+  const addReview = async () => {
+    if (Object.values(newReview).some((value) => value === "" || value === 0)) {
       return Swal.fire({
         icon: "warning",
         title: "You haven't completed all fields",
@@ -52,7 +60,9 @@ const Detail = () => {
       })
     }
     try {
-      await axios.post("", newReview)
+      const { data } = await axios.post("/Nonflix/movies/review", { ...newReview, movieId, userId })
+
+      setReviews([...reviews, { title: data.title, description: data.description, rating: data.rating }])
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -62,45 +72,47 @@ const Detail = () => {
     }
   };
 
-  const { id } = useParams();
   const dispatch = useDispatch();
   const selectedMovie = useSelector((state) => state.movieDetail);
   useEffect(() => {
     dispatch(getDetailMovie(id));
+    return () => {
+      dispatch(cleanDetail())
+    }
   }, [id]);
 
   return (
     <div className={style.main}>
       <SideBar />
       <div>
-      <div className={style.detail}>
-        <div className={style.poster}>
-          <img src={selectedMovie.image}></img>
-          {/* acá podría haber un render condicional, si ya esta en favorites: opción para sacarlo,
+        <div className={style.detail}>
+          <div className={style.poster}>
+            <img src={selectedMovie.image}></img>
+            {/* acá podría haber un render condicional, si ya esta en favorites: opción para sacarlo,
                     si no esta opción para agregarlo */}
-          {/* <button onClick={favoriteHandler}>Add to favorites</button> */}
-        </div>
+            {/* <button onClick={favoriteHandler}>Add to favorites</button> */}
+          </div>
 
-        <div className={style.description}>
-          <h2 className={style.title}>{selectedMovie.title}</h2>
-          <h3>Duration: <label>{selectedMovie.duration} min</label></h3>
-          {/* <p>Rating: 7/10</p> */}
-          <p>{selectedMovie.description}</p>
-          <p className={style.price}>Price: <label>$5.00 USD</label></p>
-          <button onClick={handleAddCart} type="submit">Add to cart</button>
-          <p>{addedToCart ? "Movie has been added to your cart" : ""}</p>
+          <div className={style.description}>
+            <h2 className={style.title}>{selectedMovie.title}</h2>
+            <h3>Duration: <label>{selectedMovie.duration} min</label></h3>
+            {/* <p>Rating: 7/10</p> */}
+            <p>{selectedMovie.description}</p>
+            <p className={style.price}>Price: <label>$5.00 USD</label></p>
+            <button onClick={handleAddCart} type="submit">Add to cart</button>
+            <p>{addedToCart ? "Movie has been added to your cart" : ""}</p>
+          </div>
         </div>
-      </div>
-      <div className={style.review}>
-          {reviews?<div><h2>Reviews</h2>
-            {reviews.map((review)=>(
+        <div className={style.review}>
+          {reviews ? <div><h2>Reviews</h2>
+            {reviews.map((review) => (
               <div>
                 <h3>{review.title}</h3>
                 <p>Rating: {review.rating}/10</p>
                 <p>{review.description}</p>
               </div>
             ))}
-          </div>:""}
+          </div> : ""}
           <br></br>
           <h2 name="review">Share your Review and Rating of this Movie</h2>
           <label name="title">Title of your Review</label><br></br>
