@@ -12,7 +12,7 @@ import PostMovie from "./Component/PostMovie/PostMovie"
 import Favs from './Component/Favorite/Favs';
 import Profile from './Component/Profile/Profile';
 import UploadImagesTohome from './Component/UploadImages/uploadImagesTohome';
-
+import DashBoard from "./Component/DashBoard/DashBoard";
 
 function App() {
   
@@ -30,6 +30,7 @@ function App() {
         <Route path='/uploadImages' element={<UploadImagesTohome/>} />
         <Route path='/Favorites' element={<Favs />}/>
         <Route path='/profile' element={<Profile />} />
+        <Route path='/dashboard' element={<DashBoard></DashBoard>} />
       </Routes>
     </div>
   )
