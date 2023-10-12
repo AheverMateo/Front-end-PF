@@ -7,13 +7,13 @@ import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 import { useDispatch, useSelector } from "react-redux";
-import { filterParameters, setCurrentPage, clearUserData } from "../../Redux/actions/actions";
-import { useState } from "react";
+import { filterParameters, setCurrentPage, clearUserData, getGenres } from "../../Redux/actions/actions";
+import { useEffect, useState } from "react";
 
 const SideBar = () => {
   const dispatch = useDispatch();
   const stateFilterParams = useSelector((state) => state.filterParameters);
-
+  const Cart = useSelector((state) => state.Cart);
   const [selectedGenre, setSelectedGenre] = useState("Home");
 
   const handleCategoryClick = (event) => {
@@ -37,22 +37,11 @@ const SideBar = () => {
   const handleLogOut = () => {
     dispatch(clearUserData());
   }
-  const genres = [
-    "Action",
-    "Adventure",
-    "Biography",
-    "Comedy",
-    "Crime",
-    "Documentary",
-    "Drama",
-    "Family",
-    "Fantasy",
-    "Horror",
-    "Romance",
-    "Sci-Fi",
-    "Sport",
-    "Thriller",
-  ];
+  
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
+  const genres = useSelector((state)=>state.genres);
   return (
     <div className={style.main}>
       <Link to="/Home">
@@ -73,10 +62,11 @@ const SideBar = () => {
         <Link to="/Cart">
           <img src={shoppingCartIcon} />
           <div>Cart</div>
+          {Cart.length?<div className = {style.circle}>{Cart.length}</div>:<div></div>}
         </Link>
 
         <h3>Genre</h3>
-       
+      
           {genres.map((genre, index) => (
             <Link to="/Home" key={index}>
               <div

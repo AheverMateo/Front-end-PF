@@ -13,6 +13,8 @@ import {
   CLEAR_USER_DATA,
   GET_FAVS,
   REMOVE_FAV,
+  GET_GENRES,
+  CLEAN_DETAIL
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -24,6 +26,20 @@ export const getMovies = () => {
       dispatch({
         type: GET_MOVIES,
         payload: dataMovie,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
+export const getGenres = () => {
+  return async (dispatch) => {
+    try {
+      const allGenres = await axios.get("/Nonflix/movies/genres");
+      const genres = allGenres.data.map(genre => genre.id);
+      dispatch({
+        type: GET_GENRES,
+        payload: genres,
       });
     } catch (error) {
       console.log(error.response);
@@ -279,4 +295,8 @@ export const removeFav = (movieId, userId) => {
 
     dispatch({type:REMOVE_FAV, payload:data})
   }
+}
+
+export const cleanDetail = () => {
+  return {type: CLEAN_DETAIL}
 }

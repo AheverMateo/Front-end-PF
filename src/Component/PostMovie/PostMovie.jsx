@@ -4,10 +4,15 @@ import axios from "axios";
 import "./PostMovie.css";
 import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark/dark.css";
+import logo from "../../assets/NONFLIX-LOGO.png";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getGenres } from "../../Redux/actions/actions";
 
 //http://localhost:3001/Nonflix/movies/genres
 
 const PostMovie = () => {
+  const dispatch = useDispatch();
   const [movie, setMovie] = useState({
     title: "",
     duration: "",
@@ -20,6 +25,11 @@ const PostMovie = () => {
     genre: [],
   });
 
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
+  const genres = useSelector((state) => state.genres);
+
   const [error, setError] = useState({
     title: "",
     duration: "",
@@ -30,8 +40,6 @@ const PostMovie = () => {
     image: "",
     torrent: "",
   });
-
-  const [genres, setGenres] = useState([]);
 
   const handleChange = (e) => {
     setMovie({ ...movie, [e.target.name]: e.target.value });
@@ -46,7 +54,7 @@ const PostMovie = () => {
       e.target.files[e.target.files.length - 1].name.split(".").pop() !==
       "torrent"
     ) {
-      setError({ ...error, torrent: "Debe ser un archivo torrent" });
+      setError({ ...error, torrent: "You must upload a torrent file" });
       return;
     }
     setError({ ...error, torrent: "" });
@@ -83,31 +91,13 @@ const PostMovie = () => {
     }
   };
 
-  useEffect( () => {
-    const genres = async () => {
-      return await axios
-        .get("/Nonflix/movies/genres")
-        .then((response) => {
-          const res = response.data.map((genre) => genre.id);
-          setGenres(res)
-        });
-    };
-
-    genres();
-    
-  }, []);
-
-  useEffect(() => {
-    console.log('genres', genres)
-  }, [genres]);
-
-
+  
   const [activeButton, setActiveButton] = useState("image-button");
 
   // cloudinary upload widget
   const cloudinaryRef = useRef();
-  const widgetRef = useRef()
-  
+  const widgetRef = useRef();
+
   useEffect(() => {
     cloudinaryRef.current = window.cloudinary;
     widgetRef.current = cloudinaryRef.current.createUploadWidget(
@@ -152,7 +142,9 @@ const PostMovie = () => {
   return (
     <div className="global-container">
       <div className="h1">
+        <Link to="/Home"><img className="post-logo" src={logo}/></Link>
         <h1 className="h1">Add new movie to catalog</h1>
+        <Link to="/Dashboard"><button className="dashboardButton">Back to dashboard</button></Link>
       </div>
       <div className="first-container">
         <div className="first-form-div">
@@ -183,7 +175,7 @@ const PostMovie = () => {
             <p className="not-ok">{error.year}</p>
           </div>
           <div className="input-divs">
-            <label>Duration</label>
+            <label>Duration (mins)</label>
             <input
               className={error.duration !== "" ? "wrong" : ""}
               name="duration"
@@ -203,6 +195,13 @@ const PostMovie = () => {
               value={movie.description}
               onChange={handleChange}
             ></textarea>
+          </div><br></br>
+          <div className="input-divs">
+            <label>Torrent</label>
+            <input name="torrent" onChange={handleFile} type="file"></input>
+          </div>
+          <div className="input-divs">
+            <p className="not-ok">{error.torrent}</p>
           </div>
           <div className="input-divs">
             <p className="not-ok">{error.description}</p>
@@ -220,11 +219,12 @@ const PostMovie = () => {
             ></input>
           </div>
           <div className="input-divs">
-            <p className="not-ok">{error.image}</p>
+            <p className="not-ok spacing">{error.image}</p>
 
             <button className="uploadButton " onClick={handleImageUpload}>
-                  Upload Image
+              Upload Image
             </button>
+            <img className="image-shown" src={movie.image ? movie.image : ""}></img>
           </div>
           <div className="input-divs">
             <label>Trailer URL</label>
@@ -237,226 +237,49 @@ const PostMovie = () => {
             ></input>
           </div>
           <div className="input-divs">
-            <p className="not-ok">{error.trailer}</p>
+            <p className="not-ok spacing">{error.trailer}</p>
 
             <button className="uploadButton " onClick={handleTrailerUpload}>
-                  Upload Movie
+                  Upload Trailer
             </button>
-          </div>
-
-          <div className="input-divs">
-            <label>Torrent</label>
-            <input name="torrent" onChange={handleFile} type="file"></input>
-          </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.torrent}</p>
           </div>
         </div>
         <div className="third-form-div">
           <div className="input-divs">
             <label>Language</label>
-            <input
+            <select
               className={error.language !== "" ? "wrong" : ""}
               name="language"
               value={movie.language}
               onChange={handleChange}
-              type="text"
-            ></input>
+              >
+              <option value="">Select a Language!</option>
+              <option value="Spanish">Spanish</option>
+              <option value="English">English</option>
+              <option value="French">French</option>
+            </select>
           </div>
           <div className="input-divs">
             <p className="not-ok">{error.language}</p>
           </div>
           <p className="generos-margin">Genres</p>
           <div className="checkbox-container">
-            <div>
-              <label>Action</label>
-              <input
-                name="genre"
-                value="Accion"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Adventure</label>
-              <input
-                name="genre"
-                value="Adventure"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Animation</label>
-              <input
-                name="genre"
-                value="Animation"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Biography</label>
-              <input
-                name="genre"
-                value="Biografia"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Comedy</label>
-              <input
-                name="genre"
-                value="comedy"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Documentary</label>
-              <input
-                name="genre"
-                value="documentary"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Drama</label>
-              <input
-                name="genre"
-                value="drama"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Family</label>
-              <input
-                name="genre"
-                value="family"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Fantasy</label>
-              <input
-                name="genre"
-                value="fantasy"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Film Noir</label>
-              <input
-                name="genre"
-                value="FilmNoir"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> History</label>
-              <input
-                name="genre"
-                value="history"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Terror</label>
-              <input
-                name="genre"
-                value="terror"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Musical</label>
-              <input
-                name="genre"
-                value="musical"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Mistery</label>
-              <input
-                name="genre"
-                value="mistery"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Romance</label>
-              <input
-                name="genre"
-                value="romance"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Sci Fi</label>
-              <input
-                name="genre"
-                value="scienceFiction"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Shorts</label>
-              <input
-                name="genre"
-                value="shorts"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Sports</label>
-              <input
-                name="genre"
-                value="sports"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Suspense</label>
-              <input
-                name="genre"
-                value="suspense"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Warlike</label>
-              <input
-                name="genre"
-                value="warlike"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
-            <div>
-              <label> Western</label>
-              <input
-                name="genre"
-                value="west"
-                onChange={handleGenre}
-                type="checkbox"
-              ></input>
-            </div>
+            {genres.map((genre, index) => {
+              return (
+                <div>
+                  
+                  <input
+                    key={index}
+                    name="genre"
+                    value={genre}
+                    onChange={handleGenre}
+                    type="checkbox"
+                  />
+                  <label>{genre}</label>
+                </div>
+              );
+              
+            })}
           </div>
           <div className="input-divs">
             <p className="not-ok">
