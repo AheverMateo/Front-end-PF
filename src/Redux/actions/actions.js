@@ -13,7 +13,8 @@ import {
   CLEAR_USER_DATA,
   GET_FAVS,
   REMOVE_FAV,
-  GET_GENRES
+  GET_GENRES,
+  CLEAN_DETAIL
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -294,4 +295,8 @@ export const removeFav = (movieId, userId) => {
 
     dispatch({type:REMOVE_FAV, payload:data})
   }
+}
+
+export const cleanDetail = () => {
+  return {type: CLEAN_DETAIL}
 }

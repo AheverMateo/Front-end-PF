@@ -10,7 +10,8 @@ import {
   FILTER,
   RESET_CART,
   USER_DATA,
-  GET_GENRES
+  GET_GENRES,
+  CLEAN_DETAIL
 } from '../actions/actionsTypes';
 
 const initialState = {
@@ -47,6 +48,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         currentPage: action.payload,
       };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        movieDetail: {}
+      }
     case GET_NAME:
       return {
         ...state,

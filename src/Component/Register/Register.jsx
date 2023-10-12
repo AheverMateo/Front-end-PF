@@ -6,6 +6,7 @@ import style from './Register.module.css';
 import { Formik } from "formik";
 import { useState} from "react";
 import { useDispatch } from 'react-redux';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [successMessage, setSuccessMessage] = useState("");
@@ -16,13 +17,16 @@ const Register = () => {
     const handleRegister = (values) => {
       dispatch(registerUser(values)).then((response) => {
         if (response !== "" && response !== undefined) {
-          setSuccessMessage("¡Registro exitoso! Bienvenido.")
-          setWelcomeMsg(true)
-          setTimeout(() => {
+          Swal.fire({
+            icon: 'success',
+            title: '¡Successful registration! Welcome.',
+            showConfirmButton: false,
+            timer: 3000
+          }).then(() => {
             navigate("/Home");
-          }, 3000)
+          });
         }
-     });
+      });
     };
 
 
