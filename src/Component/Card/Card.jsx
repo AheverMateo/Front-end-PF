@@ -2,15 +2,25 @@ import React, { useEffect, useState } from "react";
 import style from "./Card.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addFav, removeFav } from "../../Redux/actions/actions";
+import { addFav, addToCart, removeFav, removeFromCart } from "../../Redux/actions/actions";
 
-const Card = ({ id, image, year, title }) => {
+const Card = ({ id, image, year, title, duration,lenguage, torrent}) => {
   const [isFav, setIsFav] = useState(false);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   const dispatch = useDispatch();
   const FavoriteMovies = useSelector((state) => state.FavoriteMovies)
   const user = useSelector((state) => state.user)
- 
+
+  const handleAddCart = () => {
+    if (!addedToCart){
+    setAddedToCart(true)
+    dispatch(addToCart({ id, image, year, title, duration,lenguage, torrent}))
+    }else {
+      setAddedToCart(false)
+      dispatch(removeFromCart(id))
+    }
+  };
 
   const handleFavorite = () => {
     isFav
@@ -20,34 +30,44 @@ const Card = ({ id, image, year, title }) => {
   };
 
   useEffect(() => {
-    if(FavoriteMovies) {
-    FavoriteMovies.forEach((fav) => {
-       if (fav.id === id) {
-        setIsFav(true);
-       }
-    })};
- }, [FavoriteMovies]);
+    if (FavoriteMovies) {
+      FavoriteMovies.forEach((fav) => {
+        if (fav.id === id) {
+          setIsFav(true);
+        }
+      })
+    };
+  }, [FavoriteMovies]);
   return (
-      <div className={style.flipCard}>
-        <div className={style.flipCardInner}>
-          <div className={style.cardFront}>
-            <img src={image} alt={title} />
-          </div>
-          <div className={style.cardBack}>
+    <div className={style.flipCard}>
+      <div className={style.flipCardInner}>
+        <div className={style.cardFront}>
+          <img src={image} alt={title} />
+        </div>
+        <div className={style.cardBack}>
           {isFav ? (
-            <button onClick={handleFavorite}>💖</button>
+            <button className = {style.cardBackButtonFav} onClick={handleFavorite}>💖</button>
           ) : (
-            <button onClick={handleFavorite}>🖤</button>
+            <button className = {style.cardBackButtonFav} onClick={handleFavorite}>🖤</button>
           )}
-            <h2>{title}</h2>
-            <p>{year}</p>
-            <Link to={`/Detail/${id}`}>
-            <button type="submit">View more</button>
-            </Link>
-          </div>
+            {addedToCart
+              ? <button onClick= {handleAddCart} className={style.cardBackButtonCart}>
+                -🛒
+              </button>
+              : <button onClick= {handleAddCart} className={style.cardBackButtonCart}>
+                +🛒
+              </button>}
+          <h2>{title}</h2>
+          <p>{year}</p>
+          <div className= {style.divButtons}>
+          <Link to={`/Detail/${id}`}>
+            <button className = {style.cardBackButtonSeeMore}type="submit">View more</button>
+          </Link>
+              </div>
         </div>
       </div>
-    
+    </div>
+
   );
 };
 
