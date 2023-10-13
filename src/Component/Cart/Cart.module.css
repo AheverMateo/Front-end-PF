@@ -34,3 +34,7 @@
 .summary h3, .summary label {
     color:#00B9AE;
 }
+
+.backButtonContainer {
+    justify-content: flex-start; /* Alinear en el lado izquierdo */
+  }
