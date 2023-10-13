@@ -41,7 +41,7 @@ body {
   color: #f3f3f3;
   margin: 0;
   padding: 0;
-
+ overflow: auto !important;
 }
 .swal2-html-container {
     color: #00B9AE !important;
