@@ -5,7 +5,7 @@ import Card from "../Card/Card";
 import { getMovies } from "../../Redux/actions/actions";
 import style from "./ListCards.module.css";
 import Pagination from "../Pagination/Pagination";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const ListCards = ({ id }) => {
   const dispatch = useDispatch();
@@ -16,15 +16,19 @@ const ListCards = ({ id }) => {
   const currentPage = useSelector((state) => state.currentPage);
   const itemsPerPage = useSelector((state) => state.itemsPerPage);
   const filteredMovies = useSelector((state) => state.filteredMovies);
-  const filterParameters = useSelector((state)=> state.filterParameters);
-  
+  const filterParameters = useSelector((state) => state.filterParameters);
+
   let moviesToDisplay;
-  if (filteredMovies === "No movies found" || filteredMovies === "Name is required") {
+  if (
+    filteredMovies === "No movies found" ||
+    filteredMovies === "Name is required"
+  ) {
     Swal.fire({
-      title: 'Oops!',
+      position: "top",
+      showConfirmButton: false,
+      timer: 1000,
       text: filteredMovies,
-      icon: 'error',
-    })
+    });
     moviesToDisplay = movies;
   } else {
     moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
@@ -35,7 +39,13 @@ const ListCards = ({ id }) => {
   if (moviesToDisplay.length > 0) {
     return (
       <div>
-        {filterParameters[3] !== "search"? <h2 style={{ textAlign: 'center' }}>{filterParameters[0]}</h2> : <h2 style={{ textAlign: 'center' }}>Results for: {filterParameters[0]}</h2>}
+        {filterParameters[3] !== "search" ? (
+          <h2 style={{ textAlign: "center" }}>{filterParameters[0]}</h2>
+        ) : (
+          <h2 style={{ textAlign: "center" }}>
+            Results for: {filterParameters[0]}
+          </h2>
+        )}
         <h2></h2>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>

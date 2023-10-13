@@ -1,5 +1,5 @@
 import "./DashBoard.css";
-import SideBar from "../SideBar/SideBar"
+import AdminSideBar from "../AdminSideBar/AdminSideBar"
 import { Card, TabGroup, TabList, Tab, TabPanels, TabPanel, Button, Title, Table, TableHead, TableRow, TableHeaderCell, TableBody, TableCell, Text, TextInput, ProgressCircle } from "@tremor/react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const DashBoard = () => {
 
     return (
         <div className="flex flex-row">
-            <SideBar></SideBar>
+            <AdminSideBar></AdminSideBar>
             <div className="dashboard">
                 <Card className="w-11/12 ml-8 bg-gray-800">
                     <Title className="text-center text-xl text-teal-400">Admin Dashboard</Title>
@@ -45,7 +45,7 @@ const DashBoard = () => {
                         </TabList>
                         <TabPanels>
                             <TabPanel><br></br>
-                            <Link to="/PostMovie"><Button className="w-40">Post a New Movie</Button></Link><br></br><br></br>
+                            <Link to="/PostMovie"><Button className="w-40">Create a New Movie</Button></Link><br></br><br></br>
                                 <Card>
                                     <Title>List of Movies</Title><br></br>
                                     <TextInput className="w-60" onChange={handleChange} placeholder="Search a Movie..."></TextInput><br></br>

@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from "react";
 import { postMovieValidation } from "../Validation/postMovieValidation";
 import axios from "axios";
-import "./PostMovie.css";
+import style from "./PostMovie.module.css";
 import Swal from "sweetalert2";
 import "@sweetalert2/theme-dark/dark.css";
 import logo from "../../assets/NONFLIX-LOGO.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenres } from "../../Redux/actions/actions";
+import AdminSideBar from "../AdminSideBar/AdminSideBar";
 
 //http://localhost:3001/Nonflix/movies/genres
 
@@ -74,7 +75,7 @@ const PostMovie = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "The movie was not created",
+        text: "We cannot create this new movie. Check for errors please.",
         footer: error.response.data,
       });
     }
@@ -140,15 +141,17 @@ const PostMovie = () => {
 
   
   return (
-    <div className="global-container">
-      <div className="h1">
-        <Link to="/Home"><img className="post-logo" src={logo}/></Link>
-        <h1 className="h1">Add new movie to catalog</h1>
-        <Link to="/Dashboard"><button className="dashboardButton">Back to dashboard</button></Link>
+    <div className={style.globalContainer}>
+      <AdminSideBar />
+      <div className={style.createMovieContainer}>
+      <div className={style.h1}>
+        
+        <h1 className={style.h1}>Add new movie to catalog</h1>
+        {/* <Link to="/Dashboard"><button className={style.dashboardButton}>Back to dashboard</button></Link> */}
       </div>
-      <div className="first-container">
-        <div className="first-form-div">
-          <div className="input-divs">
+      <div className={style.firstContainer}>
+        <div className={style.firstFormDiv}>
+          <div className={style.inputDivs}>
             <label>Title</label>
             <input
               className={error.title !== "" ? "wrong" : ""}
@@ -158,10 +161,10 @@ const PostMovie = () => {
               type="text"
             ></input>
           </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.title}</p>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.title}</p>
           </div>
-          <div className="input-divs">
+          <div className={style.inputDivs}>
             <label>Year</label>
             <input
               className={error.year !== "" ? "wrong" : ""}
@@ -171,10 +174,10 @@ const PostMovie = () => {
               type="text"
             ></input>
           </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.year}</p>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.year}</p>
           </div>
-          <div className="input-divs">
+          <div className={style.inputDivs}>
             <label>Duration (mins)</label>
             <input
               className={error.duration !== "" ? "wrong" : ""}
@@ -184,31 +187,31 @@ const PostMovie = () => {
               type="text"
             ></input>
           </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.duration}</p>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.duration}</p>
           </div>
-          <div className="input-divs">
+          <div className={style.inputDivs}>
             <label>Description</label>
             <textarea
-              className="description"
+              className={style.description}
               name="description"
               value={movie.description}
               onChange={handleChange}
             ></textarea>
           </div><br></br>
-          <div className="input-divs">
+          <div className={style.inputDivs}>
             <label>Torrent</label>
-            <input name="torrent" onChange={handleFile} type="file"></input>
+            <input  className={style.torrentInput} name="torrent" onChange={handleFile} type="file"></input>
           </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.torrent}</p>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.torrent}</p>
           </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.description}</p>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.description}</p>
           </div>
         </div>
-        <div className="second-form-div">
-          <div className="input-divs">
+        <div className={style.secondFormDiv}>
+          <div className={style.inputDivs}>
             <label>Cover URL</label>
             <input
               className={error.image !== "" ? "wrong" : ""}
@@ -218,15 +221,15 @@ const PostMovie = () => {
               type="text"
             ></input>
           </div>
-          <div className="input-divs">
-            <p className="not-ok spacing">{error.image}</p>
+          <div className={style.inputDivs}>
+            <p className={`${style.notOk} ${style.spacing}}`}>{error.image}</p>
 
-            <button className="uploadButton " onClick={handleImageUpload}>
+            <button className={style.uploadButton} onClick={handleImageUpload}>
               Upload Image
             </button>
-            <img className="image-shown" src={movie.image ? movie.image : ""}></img>
+            <img className={style.imageShown} src={movie.image ? movie.image : ""}></img>
           </div>
-          <div className="input-divs">
+          <div className={style.inputDivs}>
             <label>Trailer URL</label>
             <input
               className={error.trailer !== "" ? "wrong" : ""}
@@ -236,16 +239,16 @@ const PostMovie = () => {
               type="text"
             ></input>
           </div>
-          <div className="input-divs">
-            <p className="not-ok spacing">{error.trailer}</p>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.trailer}</p>
 
-            <button className="uploadButton " onClick={handleTrailerUpload}>
+            <button className={style.uploadButton} onClick={handleTrailerUpload}>
                   Upload Trailer
             </button>
           </div>
         </div>
-        <div className="third-form-div">
-          <div className="input-divs">
+        <div className={style.thirdFormDiv}>
+          <div className={style.inputDivs}>
             <label>Language</label>
             <select
               className={error.language !== "" ? "wrong" : ""}
@@ -253,17 +256,17 @@ const PostMovie = () => {
               value={movie.language}
               onChange={handleChange}
               >
-              <option value="">Select a Language!</option>
-              <option value="Spanish">Spanish</option>
-              <option value="English">English</option>
-              <option value="French">French</option>
+              <option value="">Select a Language</option>
+              <option value="es">Spanish</option>
+              <option value="en">English</option>
+              <option value="fr">French</option>
             </select>
           </div>
-          <div className="input-divs">
-            <p className="not-ok">{error.language}</p>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.language}</p>
           </div>
-          <p className="generos-margin">Genres</p>
-          <div className="checkbox-container">
+          <p className={style.generosMargin}>Genres</p>
+          <div className={style.checkboxContainer}>
             {genres.map((genre, index) => {
               return (
                 <div>
@@ -281,9 +284,9 @@ const PostMovie = () => {
               
             })}
           </div>
-          <div className="input-divs">
-            <p className="not-ok">
-              {movie.genre.length === 0 ? "Agregue al menos un género" : ""}
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>
+              {movie.genre.length === 0 ? "Add at least one genre" : ""}
             </p>
           </div>
         </div>
@@ -292,12 +295,13 @@ const PostMovie = () => {
       Object.values(error).every(
         (errorMsg) => errorMsg === "" && movie.genre.length > 0
       ) ? (
-        <button className="ok-val" onClick={handleSubmit}>
+        <button className={style.okVal} onClick={handleSubmit}>
           Upload Movie
         </button>
       ) : (
-        <p className="not-ok">Complete all fields correctly</p>
+        <div className={style.notOk}>Complete all fields correctly</div>
       )}
+    </div>
     </div>
   );
 };

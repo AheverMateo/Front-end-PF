@@ -18,6 +18,22 @@ const Filters = () => {
     return movie.year;
   });
 
+  if(filteredMovies === "No movies found"){
+    const copyFilterParameters = stateFilterParams;
+    copyFilterParameters[1] = "";
+    copyFilterParameters[2] = "";
+    copyFilterParameters[3] = "";
+    
+    //copyFilterParameters[3] = "";
+      const yearSelector = document.getElementById("selectYear");
+      yearSelector.value = "year";
+      const langSelector = document.getElementById("selectLanguage");
+      langSelector.value = "lang";
+      const searchInput = document.getElementById("searchInput");
+      searchInput.value = ""
+    dispatch(filterParameters(copyFilterParameters))
+  }
+
   let yearsToDisplay = allYears.filter((item, index) => {
     return allYears.indexOf(item) === index;
   });

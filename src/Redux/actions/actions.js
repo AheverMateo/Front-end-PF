@@ -19,6 +19,7 @@ import {
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
+
 export const getMovies = () => {
   return async (dispatch) => {
     try {
@@ -130,17 +131,20 @@ export const filterParameters = (parameters) => {
           payload: "No movies found",
         });
         Swal.fire({
-          title: "Oops!",
+          position: 'top',
           text: "No movies found",
-          icon: "error",
+          showConfirmButton: false,
+          timer: 1000,
         });
       }
     } catch (error) {
       const errorMsg = error.response.data.message;
       Swal.fire({
-        title: "Oops!",
+        position: 'top',
+        showConfirmButton: false,
+        timer: 1000,
         text: "No movies found",
-        icon: "error",
+        
       });
       return errorMsg;
     }

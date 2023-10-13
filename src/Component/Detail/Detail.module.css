@@ -10,7 +10,7 @@
   border-radius: 1rem;
 }
 .detail img {
-    
+    max-width: 13rem;
     border-radius: 10px;
 }
 .detail .description {
@@ -121,4 +121,8 @@
   .review h2[name="review"]{
     text-align: center;
     color: #00B9AE;
+  }
+  .review input, .review select, .review textarea {
+    color: black;
+    border-radius: 5px;
   }
