@@ -16,8 +16,11 @@
     height: 2.5rem;
     width: 10rem;
     align-self: center;
-    font-weight: 600;
+    font-weight: 500;
     border: 1px;
     background-color: #00B9AE;
     cursor: pointer;
+}
+.search_div input {
+    color: black
 }

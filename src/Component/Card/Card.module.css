@@ -22,7 +22,11 @@
   .flipCard:hover .flipCardInner {
     transform: rotateY(180deg);
   }
-  
+  .cardBackButtonCart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   /* Position the front and back side */
   .cardFront, .cardBack {
     position: absolute;
