@@ -7,6 +7,7 @@ import { cleanDetail, getDetailMovie } from "../../Redux/actions/actions";
 import { addToCart } from "../../Redux/actions/actions";
 import axios from "axios";
 import Swal from "sweetalert2";
+import BackButton from "../BackButton/BackButton";
 
 const Detail = () => {
   const [movie, setMovie] = useState({});
@@ -85,6 +86,7 @@ const Detail = () => {
     <div className={style.main}>
       <SideBar />
       <div>
+        <BackButton/>
         <div className={style.detail}>
           <div className={style.poster}>
             <img src={selectedMovie.image}></img>
