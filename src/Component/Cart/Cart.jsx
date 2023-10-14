@@ -36,7 +36,7 @@ const Cart = () => {
             <SideBar />
             <div className={style.divCart}>
                 <div className={style.backButtonContainer}>
-                <BackButton/>
+                    <BackButton/>
                 </div>
                 <h2>Your cart</h2>
                 <div className={style.container}>
