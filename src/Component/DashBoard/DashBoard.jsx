@@ -38,11 +38,11 @@ const DashBoard = () => {
                 <Card className="w-11/12 ml-8 bg-gray-800">
                     <Title className="text-center text-xl text-teal-400">Admin Dashboard</Title>
                     <TabGroup>
-                        <TabList className="mt-8">
+                        {/* <TabList className="mt-8">
                             <Tab>Movies</Tab>
                             <Tab>Users</Tab>
                             <Tab>Sales</Tab>
-                        </TabList>
+                        </TabList> */}
                         <TabPanels>
                             <TabPanel><br></br>
                             <Link to="/PostMovie"><Button className="w-40">Create a New Movie</Button></Link><br></br><br></br>
@@ -56,7 +56,7 @@ const DashBoard = () => {
                                                 <TableHeaderCell>Duration</TableHeaderCell>
                                                 <TableHeaderCell>Year</TableHeaderCell>
                                                 <TableHeaderCell>Lang</TableHeaderCell>
-                                                <TableHeaderCell>Modify</TableHeaderCell>
+                                                <TableHeaderCell>Actions</TableHeaderCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
