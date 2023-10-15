@@ -9,6 +9,10 @@ import { useEffect, useState } from "react";
 const DashBoard = () => {
  
     const dispatch = useDispatch();
+    const moviesPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1)
+    const [searchTerm, setSearchTerm] = useState("");
+    const [isSearchActive, setIsSearchActive] = useState(false);
 
     useEffect(() => {
         dispatch(getMovies());
@@ -16,14 +20,33 @@ const DashBoard = () => {
 
     const movies = useSelector((state) => state.Allmovies);
 
-    useEffect(() => {
-        setDisplay(movies)
-    }, [movies]);
+    const [display, setDisplay] = useState([]);
     
-    const [display, setDisplay] = useState(movies);
+    useEffect(() => {
+        if (searchTerm) {
+            const filteredMovies = movies.filter((movie) =>
+                movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setDisplay(filteredMovies.slice(0, currentPage * moviesPerPage));
+        } else {
+            setDisplay(movies.slice(0, currentPage * moviesPerPage));
+        }
+    }, [movies, currentPage, searchTerm]);
 
     const handleChange = (e) => {
-        if(e.target.value !== "") setDisplay(movies.filter((movie)=> movie.title.toLowerCase().includes(`${e.target.value}`.toLowerCase())))
+        const newSearchTerm = e.target.value;
+        setSearchTerm(newSearchTerm);
+        if (newSearchTerm) {
+            setIsSearchActive(true);
+        } else {
+            setIsSearchActive(false);
+        }
+    };
+
+    const loadMore = () => {
+        if (!isSearchActive) {
+            setCurrentPage(currentPage + 1);
+        }
     };
 
     const harcodeUsers = [
@@ -73,7 +96,7 @@ const DashBoard = () => {
                                     </Table>
                                 </Card>
                                 <br></br>
-                                
+                                <button onClick={loadMore}>cargar mas</button>
                             </TabPanel>
                             <TabPanel>
                                 <Card>
