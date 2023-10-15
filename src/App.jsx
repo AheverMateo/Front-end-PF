@@ -1,8 +1,9 @@
 //import { useState } from 'react'
+import React, { useEffect } from 'react';
 import './App.css'
 import  NonRegisteredHome  from "./views/NonRegisteredHome/NonRegisteredHome";
 import Register from './Component/Register/Register';
-import {Routes, Route} from "react-router-dom"
+import {Routes, Route, useNavigate} from "react-router-dom"
 import Login from './Component/Login/Login';
 import Home from './Component/Home/Home';
 import Detail from './Component/Detail/Detail';
@@ -13,11 +14,22 @@ import Favs from './Component/Favorite/Favs';
 import Profile from './Component/Profile/Profile';
 import UploadImagesTohome from './Component/UploadImages/uploadImagesTohome';
 import ProtectedRoute from './Component/utils/ProtectedRoute';
-import { useSelector } from 'react-redux';import DashBoard from "./Component/DashBoard/DashBoard";
+import { useSelector } from 'react-redux';
+import DashBoard from "./Component/DashBoard/DashBoard";
 
 function App() {
   
   const user = useSelector((state) => state.user); 
+  
+  // Redirect to home
+  const navigate = useNavigate();
+  
+  // useEffect(() => {
+  //   console.log("Efecto ejecutado");
+  //   if (user.token) {
+  //     navigate('/Home');
+  //   }
+  // }, [user.token]);
 
   return (
     <div>
@@ -36,7 +48,7 @@ function App() {
           <Route path='/uploadImages' element={<UploadImagesTohome/>} />
           <Route path='/Favorites' element={<Favs />}/>
           <Route path='/profile' element={<Profile />} />
-        <Route path='/dashboard' element={<DashBoard></DashBoard>} />
+          <Route path='/dashboard' element={<DashBoard></DashBoard>} />
         </Route>
         
       </Routes>
