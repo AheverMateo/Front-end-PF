@@ -8,6 +8,7 @@ import Favorites from "./Favorites";
 import style from "./Favorites.module.css";
 import { useDispatch } from "react-redux";
 import { cleanFavs } from "../../Redux/actions/actions";
+import BackButton from "../BackButton/BackButton";
 
 const Favs = () => {
 
@@ -19,6 +20,7 @@ const Favs = () => {
     <div className={style.home}>
       <SideBar />
       <div className={style.center}>
+      <BackButton/>
         <Favorites />
       </div>
     </div>
