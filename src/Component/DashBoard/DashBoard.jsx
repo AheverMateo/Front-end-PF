@@ -9,8 +9,10 @@ import { useEffect, useState } from "react";
 const DashBoard = () => {
  
     const dispatch = useDispatch();
-    const movies = useSelector((state) => state.Allmovies);
-    const [display, setDisplay] = useState(movies);
+    const moviesPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(1)
+    const [searchTerm, setSearchTerm] = useState("");
+    const [isSearchActive, setIsSearchActive] = useState(false);
     const [totalSales, setTotalSales] = useState(50000);
     const [favorites, setFavorites] = useState([
         {movie: "Movie", additionsToFavorites: 5 },
@@ -27,12 +29,36 @@ const DashBoard = () => {
         dispatch(getMovies());
     }, []);
 
+    const movies = useSelector((state) => state.Allmovies);
+
+    const [display, setDisplay] = useState([]);
+    
     useEffect(() => {
-        setDisplay(movies)
-    }, [movies]);
+        if (searchTerm) {
+            const filteredMovies = movies.filter((movie) =>
+                movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setDisplay(filteredMovies.slice(0, currentPage * moviesPerPage));
+        } else {
+            setDisplay(movies.slice(0, currentPage * moviesPerPage));
+        }
+    }, [movies, currentPage, searchTerm]);
+
     
     const handleChange = (e) => {
-        if(e.target.value !== "") setDisplay(movies.filter((movie)=> movie.title.toLowerCase().includes(`${e.target.value}`.toLowerCase())))
+        const newSearchTerm = e.target.value;
+        setSearchTerm(newSearchTerm);
+        if (newSearchTerm) {
+            setIsSearchActive(true);
+        } else {
+            setIsSearchActive(false);
+        }
+    };
+
+    const loadMore = () => {
+        if (!isSearchActive) {
+            setCurrentPage(currentPage + 1);
+        }
     };
 
     const harcodeSalesByMovie = [
@@ -108,7 +134,7 @@ const DashBoard = () => {
                                     </Table>
                                 </Card>
                                 <br></br>
-                                
+                                <button onClick={loadMore}>cargar mas</button>
                             </TabPanel>
                             <TabPanel>
                                 <Card>
