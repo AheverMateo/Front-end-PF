@@ -13,7 +13,8 @@ import {
   GET_GENRES,
   CLEAN_DETAIL,
   CLEAN_FAVS,
-  DISABLE_ENABLE
+  DISABLE_ENABLE,
+  GET_PURCHASED_MOVIES
 } from '../actions/actionsTypes';
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
   user: {},
   genres: [],
   FavoriteMovies: [],
+  shoppingHistory: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -121,7 +123,8 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state, FavoriteMovies: []
       }
-    case DISABLE_ENABLE:
+    case DISABLE_ENABLE:{
+
       const movies = [...state.Allmovies]
       for (const movie of movies) {
         if (movie.id === action.payload) {
@@ -131,6 +134,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Allmovies: movies
+      }
+    }
+    case GET_PURCHASED_MOVIES:
+      return {
+        ...state,
+        shoppingHistory: action.payload
       }
     default:
       return {
