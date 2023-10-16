@@ -15,7 +15,8 @@ import {
   REMOVE_FAV,
   GET_GENRES,
   CLEAN_DETAIL,
-  CLEAN_FAVS
+  CLEAN_FAVS,
+  DISABLE_ENABLE
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -144,7 +145,7 @@ export const filterParameters = (parameters) => {
         showConfirmButton: false,
         timer: 1000,
         text: "No movies found",
-        
+
       });
       return errorMsg;
     }
@@ -308,5 +309,14 @@ export const cleanDetail = () => {
 export const cleanFavs = () => {
   return (dispatch) => {
     dispatch({ type: CLEAN_FAVS })
+  }
+}
+
+export const disableEnableMovies = (id, disabled) => {
+  disabled = !disabled
+  return async (dispatch) => {
+    await axios.put("/Nonflix/movies/update", { id, disabled })
+
+    dispatch({ type: DISABLE_ENABLE, payload: id })
   }
 }

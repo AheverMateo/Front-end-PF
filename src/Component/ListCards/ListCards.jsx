@@ -36,7 +36,20 @@ const ListCards = ({ id }) => {
 
   const paginationSize = Math.ceil(moviesToDisplay.length / 12);
 
-  if (moviesToDisplay.length > 0) {
+  let moviesToShow = moviesToDisplay.filter((movie) => movie.disabled === false)
+  if(moviesToDisplay.length > 0 && moviesToShow.length === 0){
+    Swal.fire({
+      position: "top",
+      showConfirmButton: false,
+      backdrop: false,
+      timer: 1000,
+      text: "No movies found",
+    });
+    moviesToDisplay = movies;
+    moviesToShow = moviesToDisplay.filter((movie) => movie.disabled === false);
+  }
+
+  if (moviesToShow.length > 0) {
     return (
       <div>
         {filterParameters[3] !== "search" ? (
@@ -49,7 +62,7 @@ const ListCards = ({ id }) => {
         <h2></h2>
         <Pagination paginationSize={paginationSize} />
         <div className={style.cards}>
-          {moviesToDisplay.map((props, itemIndex) => {
+          {moviesToShow.map((props, itemIndex) => {
             const lastIndex = itemsPerPage * currentPage - 1;
             const firstIndex = lastIndex - 11;
 
