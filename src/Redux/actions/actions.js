@@ -16,7 +16,8 @@ import {
   GET_GENRES,
   CLEAN_DETAIL,
   CLEAN_FAVS,
-  DISABLE_ENABLE
+  DISABLE_ENABLE,
+  GET_PURCHASED_MOVIES
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -320,3 +321,20 @@ export const disableEnableMovies = (id, disabled) => {
     dispatch({ type: DISABLE_ENABLE, payload: id })
   }
 }
+export const getPurchasedMovies = () => {
+  return async(dispatch) => {
+    try {
+      const { data } = await axios("http://localhost:3001/Nonflix/shopping/purchasedMovies")
+      
+      dispatch({
+        type: GET_PURCHASED_MOVIES,
+        payload: data
+      })
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+
+
+  }
+} 

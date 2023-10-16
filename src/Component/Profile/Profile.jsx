@@ -4,6 +4,9 @@ import SideBar from "../SideBar/SideBar";
 import style from "./Profile.module.css";
 import { updateUser } from "../../Redux/actions/actions";
 import Swal from "sweetalert2";
+import ShoppingHistory from "../ShoppingHistory/ShoppingHistory";
+
+
 
 const Profile = () => {
   const userData = useSelector((state) => state.user);
@@ -46,21 +49,21 @@ const Profile = () => {
  const cloudinaryRef = useRef();
  const widgetRef = useRef()
  
- useEffect(() => {
-   cloudinaryRef.current = window.cloudinary;
-   widgetRef.current = cloudinaryRef.current.createUploadWidget(
-     {
-       cloudName: "dy8pp1s5f",
-       uploadPreset: "imagenes_admins",
-     },
-     function (error, result) {
-       if (!error && result && result.event === "success") {
-         const imageUrl = result.info.url;
-         setProfileImage(imageUrl)
-       }
-     }
-   );
- }, []);
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {  
+        cloudName: "dy8pp1s5f",
+        uploadPreset: "imagenes_admins",
+      },
+      function (error, result) {
+        if (!error && result && result.event === "success") {
+          const imageUrl = result.info.url;
+          setProfileImage(imageUrl)
+        }
+      }
+    );
+  }, []);
 
 
   return (
@@ -96,7 +99,10 @@ const Profile = () => {
             <button type="submit">Update data</button>
           </div>
         </form>
+        <ShoppingHistory/>
       </div>
+      
+      
     </div>
   );
 };

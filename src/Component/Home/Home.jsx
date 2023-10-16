@@ -28,9 +28,9 @@ const Home = () => {
         isOpen: true
       })
       dispatch(resetCart())
-    } else if (status === "failure") {
+    } else if (status === "failure" || status === "null") {
       setNotification({
-        message : toast.success("Purchase error"),
+        message : toast.error("Purchase error"),
         isOpen: true
       })
     }
