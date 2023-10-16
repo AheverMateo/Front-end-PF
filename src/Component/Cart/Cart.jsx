@@ -1,6 +1,6 @@
 import SideBar from "../SideBar/SideBar";
 import style from "./Cart.module.css"
-
+import BackButton from "../BackButton/BackButton";
 import { useSelector } from "react-redux";
 import MoviesCart from "../MoviesCart/MoviesCart";
 
@@ -33,7 +33,10 @@ const Cart = () => {
         <div className={style.main}>
             <SideBar />
             <div className={style.divCart}>
-                <h2>Your cart</h2>
+                <div className={style.backButtonContainer}>
+                    <BackButton/> 
+                </div>
+                <h1>Your cart</h1>
                 <div className={style.container}>
                     <div className={style.movies}>
 
