@@ -8,7 +8,7 @@ import MoviesCart from "../MoviesCart/MoviesCart";
 
 
 import axios from "axios"
-
+import BackButton from "../BackButton/BackButton";
 
 
 const Cart = () => {
@@ -33,7 +33,10 @@ const Cart = () => {
         <div className={style.main}>
             <SideBar />
             <div className={style.divCart}>
-                <h2>Your cart</h2>
+                <div className={style.backButtonContainer}>
+                    <BackButton/>
+                </div>
+                <h1>Your cart</h1>
                 <div className={style.container}>
                     <div className={style.movies}>
 
