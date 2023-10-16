@@ -36,7 +36,7 @@ const Cart = () => {
                 <div className={style.backButtonContainer}>
                     <BackButton/>
                 </div>
-                <h1>Your cart</h1>
+                <h1>Your cart</h1> 
                 <div className={style.container}>
                     <div className={style.movies}>
 
