@@ -7,6 +7,17 @@
     width: 33rem;
     padding: 3rem;
 }
+.profile button {
+    border-radius: 0.5rem;
+    height: 2.5rem;
+    width: 10rem;
+    margin-top: 5px;
+    align-self: center;
+    font-weight: 600;
+    border: 1px;
+    background-color: #00B9AE;
+    cursor: pointer;
+}
 .profile img {
     width: 10rem;
     border-radius: 10px;
@@ -17,4 +28,12 @@
 .profile form {
     display: grid;
     grid-template-columns: 50% 50%;
+}
+.profile input {
+    border-radius: 5px;
+    height: 1.2rem;
+    width: 18rem;
+    border: 1px;
+    color: black;
+    padding-left: 5px;
 }

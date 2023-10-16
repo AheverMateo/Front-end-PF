@@ -49,7 +49,7 @@ const Login = () => {
   return (
     <div className={Style.container}>
       <LogInMenu />
-      <div className={Style.form}>
+      <div className={Style.formContainer}>
         <h2>Log In</h2>
         <p>Use your credentials to start enjoying!</p>
         <Formik
@@ -79,7 +79,7 @@ const Login = () => {
             isSubmitting,
             /* and other goodies */
           }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={Style.form}>
               <div className={Style.campos}>
                 <input
                   type="email"
