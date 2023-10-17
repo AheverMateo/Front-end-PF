@@ -50,7 +50,7 @@ const ShoppingHistory = () => {
                     </div>
                   );
                 })}
-                <h4>Total: {buys.total}</h4>
+                <h4>Total: {buys.total} ARS</h4>
               </div>
             </div>
           );
