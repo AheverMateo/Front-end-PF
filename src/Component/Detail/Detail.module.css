@@ -75,6 +75,10 @@
   .description h2, .description h3 {
     color:#00B9AE
   }
+  .description h2, .review h2 {
+    font-size: larger;
+    padding-bottom: 1rem;
+  }
 
   .description .price label, .description h3 label {
     color: #f3f3f3;

@@ -3,46 +3,52 @@ import { useDispatch, useSelector } from "react-redux";
 import SideBar from "../SideBar/SideBar";
 import style from "./Profile.module.css";
 import { updateUser } from "../../Redux/actions/actions";
-import Swal from "sweetalert2";
+import validations from "./validations";
 import ShoppingHistory from "../ShoppingHistory/ShoppingHistory";
-
-
 
 const Profile = () => {
   const userData = useSelector((state) => state.user);
   const userFirstName = userData.name.split(" ");
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
-  const [profileImage, setProfileImage] = useState("");
+  const [updatedData, setUpdatedData] = useState({ name: "", password: "" });
+  const [profileImage, setProfileImage] = useState(userData.image);
   const [errors, setErrors] = useState({ name: "", password: "" });
-
+  const [checkedFields, setCheckedFields] = useState({
+    checkboxName: false,
+    checkboxPassword: false,
+  });
   const dispatch = useDispatch();
 
-  // Función para manejar la actualización del nombre
-  const handleUserNameChange = (e) => {
-    setUserName(e.target.value);
-    if (!userName.length) {
-      setErrors({ ...errors, name: "Your name cannot be empty" });
+  //
+  const handleChange = (event) => {
+    const { name, type, checked, value } = event.target;
+
+    if (type === "checkbox") {
+      setCheckedFields({ ...checkedFields, [name]: checked });
+    } else {
+      setUpdatedData({ ...updatedData, [name]: value });
     }
-  };
-  
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const inputsValidated = validations(updatedData);
+    setErrors(inputsValidated);
+    if (
+      errors.name === "" &&
+      errors.password === ""
+    ) {
+      const button = document.querySelector("#submit");
+      button.disabled = false;
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const userUpdate = {
       id: userData.id,
-      name: userName,
-      password: password,
+      name: checkedFields.checkboxName ? updatedData.name : userData.name,
+      password: checkedFields.checkboxPassword ? updatedData.password: userData.password,
       image: profileImage,
       token: userData.token,
     };
- 
-   
-      dispatch(updateUser(userUpdate));
-   
+    dispatch(updateUser(userUpdate));
   };
 
  // cloudinary upload widget
@@ -71,32 +77,70 @@ const Profile = () => {
       <SideBar />
       <div className={style.profile}>
         <h2>
-          Hi <label>{userFirstName[0]}</label>! Welcome to your profile!
+          Hi <label className={style.name}>{userFirstName[0]}</label>, welcome
+          to your profile!
         </h2>
         <form onSubmit={handleSubmit}>
           <img src={profileImage === "" ? userData.image : profileImage} />
-          <button type="button" className="uploadButton " onClick={()=> widgetRef.current.open()}>
-                  Upload Image
+          <button
+            type="button"
+            className="uploadButton "
+            onClick={() => widgetRef.current.open()}
+          >
+            Update Image
           </button>
-          <div>
-            <label>Name: </label>
-            <input
-              name="name"
-              placeholder={userData.name}
-              value={userName}
-              onChange={handleUserNameChange}
-            />
+          <div className={style.data}>
+            <div className={style.important}>
+              <h3>Please note:</h3>
+              <ul>
+                <li className={style.color}>
+                  Select the data you want to update
+                </li>
+                <li>Your name must be at least 10 characters</li>
+                <li>Your name cannot be empty</li>
+                <li>Your password cannot be shorter than 6 characters</li>
+              </ul>
 
+              <h3>
+                If any of these requirements are not met, your data will not be
+                updated
+              </h3>
+            </div>
+            <label>Name: </label>
+            <div className={style.check}>
+              <input
+                className={style.checkbox}
+                type="checkbox"
+                name="checkboxName"
+                onChange={handleChange}
+              />
+              <input
+                name="name"
+                placeholder={userData.name}
+                value={updatedData.name}
+                onChange={handleChange}
+              />
+            </div>
+            <label className={style.errors}>{errors.name}</label>
             <label>E-mail: </label>
             <h3>{userData.email}</h3>
-            <label>Change password: </label>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={handlePasswordChange}
-            ></input>
-            <button type="submit">Update data</button>
+            <label className={style.labelPsw}>Change password: </label>
+            <div className={style.check}>
+              <input
+                className={style.checkbox}
+                type="checkbox"
+                name="checkboxPassword"
+                onChange={handleChange}
+              />
+              <input
+                type="password"
+                name="password"
+                value={updatedData.password}
+                onChange={handleChange}
+              ></input>
+            </div>
+            <label className={style.errors}>{errors.password}</label>
+            <button type="submit" disabled={true} id="submit">Update data</button>
           </div>
         </form>
         <ShoppingHistory/>
