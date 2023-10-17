@@ -9,6 +9,7 @@ import Home from './Component/Home/Home';
 import Detail from './Component/Detail/Detail';
 import NotFound from "./Component/NotFound/NotFound";
 import Cart from './Component/Cart/Cart';
+
 import PostMovie from "./Component/PostMovie/PostMovie"
 import Favs from './Component/Favorite/Favs';
 import Profile from './Component/Profile/Profile';

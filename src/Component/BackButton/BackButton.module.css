@@ -9,3 +9,6 @@
   .backArrow::before {
     content: '←'; 
   }
+  .backButton:hover {
+    color: #00B9AE;
+  }

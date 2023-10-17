@@ -1,21 +1,51 @@
 .container form {
-    align-items: center;
+  align-items: center;
 }
-.container .form {
-    color: #f3f3f3;
-    background-color: #21242D;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 2rem 26rem;
-    border-radius: 15px;
-    padding-bottom: 2rem;
-
+.formContainer p {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
-
+.formContainer p a:hover {
+  color: #00b9ae;
+}
+.container .formContainer {
+  color: #f3f3f3;
+  background-color: #21242d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 26rem;
+  border-radius: 15px;
+  padding-top: 5px;
+  gap: 5px;
+}
+.container form {
+  display: flex;
+  flex-direction: column;
+}
 .form .campos {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.form input {
+  border-radius: 5px;
+  height: 1.2rem;
+  width: 18rem;
+  border: 1px;
+  color: black;
+  padding-left: 5px;
+}
+.form button {
+  border-radius: 0.5rem;
+  height: 2.5rem;
+  width: 10rem;
+  margin-top: 5px;
+  align-self: center;
+  font-weight: 600;
+  border: 1px;
+  background-color: #00b9ae;
+  cursor: pointer;
+  align-self: center;
 }

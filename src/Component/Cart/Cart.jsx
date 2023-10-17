@@ -1,6 +1,6 @@
 import SideBar from "../SideBar/SideBar";
 import style from "./Cart.module.css"
-
+import BackButton from "../BackButton/BackButton";
 import { useSelector } from "react-redux";
 import MoviesCart from "../MoviesCart/MoviesCart";
 
@@ -8,7 +8,6 @@ import MoviesCart from "../MoviesCart/MoviesCart";
 
 
 import axios from "axios"
-import BackButton from "../BackButton/BackButton";
 
 
 
@@ -18,11 +17,10 @@ const Cart = () => {
     const stateCart = useSelector((state) => state.Cart )
     const total = stateCart.reduce((acc, movie) => acc +  movie.price ,0)
    
-
     const handleShopping = async () => {
-       
+        
         try {
-            const { data } = await axios.post('/Nonflix/shopping/create-order',{movies:stateCart})
+            const { data } = await axios.post('http://localhost:3001/Nonflix/shopping/create-order',{movies:[...stateCart]})
             location.href = data.body.init_point
         } catch (error) {
             console.log(error.message)
@@ -36,9 +34,9 @@ const Cart = () => {
             <SideBar />
             <div className={style.divCart}>
                 <div className={style.backButtonContainer}>
-                    <BackButton/>
+                    <BackButton/> 
                 </div>
-                <h2>Your cart</h2>
+                <h1>Your cart</h1>
                 <div className={style.container}>
                     <div className={style.movies}>
 

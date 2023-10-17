@@ -17,6 +17,10 @@
     font-size: 85%;
     margin: 0;
 }
+.main .menu h2 {
+    padding-left: 2rem;
+    color:#00B9AE;
+}
 .main .menu a, .main .menu a:visited, .main .menu a:after {
     color: #f3f3f3;
     text-decoration: none;
@@ -38,8 +42,8 @@
     align-items: center;
     justify-content: center;
 }
-.main .menu .selected {
-    color:#00B9AE;
+a.activeLink, .selected {
+    color:#00B9AE !important;
 }
 .circle {
     width: 20px;

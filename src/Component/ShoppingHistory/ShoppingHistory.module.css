@@ -1,0 +1,32 @@
+.divMain {
+    margin-top: 50px;
+}
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.title img {
+    height : 35px;
+    width: 35px;
+    margin-right: 5px;
+}
+.movies {
+    display: grid;
+    grid-template-columns: 1fr 2.9fr 1fr;
+    align-items:center
+
+}
+.movies img {
+    
+    height: 90px;
+    width: 70px;
+    margin: 5px;
+}
+
+.shopMovie {
+    padding: 12px;
+    background-color: #696b6b61;
+    border-radius: 10px;
+    margin-top: 10px;
+}
