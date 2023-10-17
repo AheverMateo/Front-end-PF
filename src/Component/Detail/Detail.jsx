@@ -75,7 +75,9 @@ const Detail = () => {
 
   const dispatch = useDispatch();
   const selectedMovie = useSelector((state) => state.movieDetail);
+  console.log(selectedMovie);
   useEffect(() => {
+
     dispatch(getDetailMovie(id));
     return () => {
       dispatch(cleanDetail())

@@ -12,3 +12,9 @@
     text-align: center;
     font-size: 2rem;
 }
+.favorites{
+    margin-left: 2rem;
+    background-color: #21242D;
+    padding: 0 2rem;
+    width: 79%;
+}
