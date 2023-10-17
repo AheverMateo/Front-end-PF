@@ -3,9 +3,38 @@
 }
 .profile {
     background-color: #21242D;
-    margin-left: 1rem;
-    width: 33rem;
+    margin-left: 2rem;
+    width: 79%;
     padding: 3rem;
+}
+.profile h2 .name {
+    font-weight: bolder;
+}
+.important {
+    width: 27rem;
+    margin-top: 1rem;
+    font-size: small;
+    margin-bottom: 1rem;
+    border: 3px solid #00B9AE;
+    padding: 6px;
+}
+.important ul {
+    list-style: inside;
+    padding-left: 15px;
+}
+.labelPsw {
+    margin-top: 1rem;
+}
+.profile .data button {
+    margin-top: 1rem;
+}
+.check {
+    display: flex;
+    flex-direction: row;
+}
+.profile .check .checkbox {
+    width: 2rem;
+    margin-right: 1rem;
 }
 .profile button {
     border-radius: 0.5rem;
@@ -17,12 +46,13 @@
     border: 1px;
     background-color: #00B9AE;
     cursor: pointer;
+    margin-left: -200px;
 }
 .profile img {
     width: 10rem;
     border-radius: 10px;
 }
-.profile label {
+.profile label, .color {
     color: #00B9AE;
 }
 .profile form {
@@ -31,9 +61,24 @@
 }
 .profile input {
     border-radius: 5px;
-    height: 1.2rem;
+    height: 2.2rem;
     width: 18rem;
     border: 1px;
     color: black;
     padding-left: 5px;
+}
+.data .errors {
+    font-size: small;
+    color: yellow;
+    margin-bottom: 1rem;
+    width: 20rem;
+    margin-left: 3rem;
+}
+.data {
+    display: flex;
+    flex-direction: column;
+}
+.profile h2 {
+    font-size: larger;
+    margin-bottom: 1rem;
 }
