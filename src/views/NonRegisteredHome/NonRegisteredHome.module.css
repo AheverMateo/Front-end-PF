@@ -11,3 +11,9 @@
     height: 350px;
 }
 
+.centeredCarouselContainer {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente el contenido */
+    align-items: center; /* Centra verticalmente el contenido */
+    height: 100vh;
+}
