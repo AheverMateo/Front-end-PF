@@ -17,7 +17,8 @@ import {
   CLEAN_DETAIL,
   CLEAN_FAVS,
   DISABLE_ENABLE,
-  GET_PURCHASED_MOVIES
+  GET_PURCHASED_MOVIES,
+  GET_USERS
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -30,6 +31,20 @@ export const getMovies = () => {
       dispatch({
         type: GET_MOVIES,
         payload: dataMovie,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
+export const getUsers = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.get("/Nonflix/users");
+      const users = data.data;
+      dispatch({
+        type: GET_USERS,
+        payload: users,
       });
     } catch (error) {
       console.log(error.response);
