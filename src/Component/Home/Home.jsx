@@ -24,13 +24,13 @@ const Home = () => {
     const status = urlParams.get("status")
     if(status === "approved") {
       setNotification({
-        message : toast.success("successful purchase"),
+        message : toast.success("Purchase completed"),
         isOpen: true
       })
       dispatch(resetCart())
     } else if (status === "failure" || status === "null") {
       setNotification({
-        message : toast.error("Purchase error"),
+        message : toast.error("There was an error in your purchase"),
         isOpen: true
       })
     }

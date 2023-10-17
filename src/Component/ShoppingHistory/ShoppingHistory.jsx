@@ -2,7 +2,8 @@ import style from "./ShoppingHistory.module.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPurchasedMovies } from "../../Redux/actions/actions";
-import shoppingHistoryIcon from "../../assets/baseline_history_white_24dp.png"
+import historyIcon from "../../assets/history_white_24dp.svg"
+
 const ShoppingHistory = () => {
   const shoppingHistory = useSelector((state) => state.shoppingHistory);
   const dispatch = useDispatch();
@@ -11,11 +12,11 @@ const ShoppingHistory = () => {
   }, []);
   let repeatedDate = false;
   let date = "";
-  
+  const month = ["none","January","February","March","April","May","June","July","August","September","October","November","December"];
   return (
     <div className={style.divMain}>
         <div className={style.title}>
-            <img src={shoppingHistoryIcon} alt="shopping" /> 
+            <img className={style.historyIcon} src={historyIcon} alt="shopping" /> 
             <h2>Shopping History</h2>
         </div>
       {
@@ -31,12 +32,14 @@ const ShoppingHistory = () => {
           if (dateSplit && dateSplit[0] !== date) {
             repeatedDate = false;
             date = dateSplit[0];
+            date = date.split('-');
+            //console.log(date[0]);
           } else {
             repeatedDate = true;
           }
           return (
             <div key={buys.id}>
-              {!repeatedDate && <p>{date}</p>}
+              {!repeatedDate && <p className={style.date}>Ordered: {`${month[date[1]]} ${date[2]}, ${date[0]}`} </p>}
               <div className={style.shopMovie}>
                 {buys?.Movies?.map((movie) => {
                   return (
@@ -47,7 +50,7 @@ const ShoppingHistory = () => {
                     </div>
                   );
                 })}
-                <h4>Total: {buys.total}</h4>
+                <h4>Total: {buys.total} ARS</h4>
               </div>
             </div>
           );

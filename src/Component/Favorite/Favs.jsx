@@ -19,7 +19,7 @@ const Favs = () => {
   return (
     <div className={style.home}>
       <SideBar />
-      <div className={style.center}>
+      <div className={style.favorites}>
       <BackButton/>
         <Favorites />
       </div>

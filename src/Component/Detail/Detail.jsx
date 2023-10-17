@@ -91,6 +91,7 @@ const Detail = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+
     dispatch(getDetailMovie(id));
     return () => {
       dispatch(cleanDetail())

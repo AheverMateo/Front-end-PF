@@ -17,6 +17,7 @@ import UploadImagesTohome from './Component/UploadImages/uploadImagesTohome';
 import ProtectedRoute from './Component/utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 import DashBoard from "./Component/DashBoard/DashBoard";
+import Users from "./Component/Users/Users";
 
 function App() {
   
@@ -50,6 +51,7 @@ function App() {
           <Route path='/Favorites' element={<Favs />}/>
           <Route path='/profile' element={<Profile />} />
           <Route path='/dashboard' element={<DashBoard></DashBoard>} />
+          <Route path='/users' element={<Users></Users>} />
         </Route>
         
       </Routes>

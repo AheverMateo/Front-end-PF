@@ -39,7 +39,7 @@ const AdminSideBar = () => {
           <img src={movieIcon} />
           <div>Movies</div>
         </Link>
-        <Link to="/" id="Users">
+        <Link to="/users" id="Users">
           <img src={usersIcon} />
           <div className={style.users}>Users</div>
         </Link>

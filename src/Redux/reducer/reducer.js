@@ -1,4 +1,4 @@
-import { CLEAR_USER_DATA, GET_FAVS, REMOVE_FAV } from '../actions/actionsTypes';
+import { CLEAR_USER_DATA, GET_FAVS, REMOVE_FAV } from "../actions/actionsTypes";
 import {
   GET_MOVIES,
   ADD_TO_CART,
@@ -14,8 +14,9 @@ import {
   CLEAN_DETAIL,
   CLEAN_FAVS,
   DISABLE_ENABLE,
-  GET_PURCHASED_MOVIES
-} from '../actions/actionsTypes';
+  GET_PURCHASED_MOVIES,
+  GET_USERS,
+} from "../actions/actionsTypes";
 
 const initialState = {
   Allmovies: [],
@@ -28,7 +29,8 @@ const initialState = {
   user: {},
   genres: [],
   FavoriteMovies: [],
-  shoppingHistory: []
+  shoppingHistory: [],
+  allUsers: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -37,6 +39,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         Allmovies: action.payload,
+      };
+    case GET_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
       };
     case GET_DETAIL:
       return {
@@ -56,8 +63,8 @@ const rootReducer = (state = initialState, action) => {
     case CLEAN_DETAIL:
       return {
         ...state,
-        movieDetail: {}
-      }
+        movieDetail: {},
+      };
     case GET_NAME:
       return {
         ...state,
@@ -86,61 +93,65 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: {},
         filteredMovies: [],
-        filterParameters: ['Home', null, null]
-      }
+        filterParameters: ["Home", null, null],
+      };
     }
     case ADD_TO_CART: {
-      action.payload.price = 5.00
-      const repeated = [...state.Cart].find(movie => movie.id === action.payload.id)
+      action.payload.price = 5.0;
+      const repeated = [...state.Cart].find(
+        (movie) => movie.id === action.payload.id
+      );
       return {
         ...state,
-        Cart: repeated ? [...state.Cart] : [...state.Cart, action.payload]
-      }
+        Cart: repeated ? [...state.Cart] : [...state.Cart, action.payload],
+      };
     }
     case REMOVE_FROM_CART: {
-      const deleteCart = [...state.Cart].filter(movie => movie.id !== action.payload)
+      const deleteCart = [...state.Cart].filter(
+        (movie) => movie.id !== action.payload
+      );
       return {
         ...state,
-        Cart: deleteCart
-      }
+        Cart: deleteCart,
+      };
     }
     case RESET_CART:
       return {
         ...state,
-        Cart: []
-      }
+        Cart: [],
+      };
     case GET_FAVS:
       return {
         ...state,
         FavoriteMovies: action.payload,
-      }
+      };
     case REMOVE_FAV:
       return {
         ...state,
-        FavoriteMovies: action.payload
-      }
+        FavoriteMovies: action.payload,
+      };
     case CLEAN_FAVS:
       return {
-        ...state, FavoriteMovies: []
-      }
-    case DISABLE_ENABLE:{
-
-      const movies = [...state.Allmovies]
+        ...state,
+        FavoriteMovies: [],
+      };
+    case DISABLE_ENABLE: {
+      const movies = [...state.Allmovies];
       for (const movie of movies) {
         if (movie.id === action.payload) {
-          movie.disabled = !movie.disabled
+          movie.disabled = !movie.disabled;
         }
       }
       return {
         ...state,
-        Allmovies: movies
-      }
+        Allmovies: movies,
+      };
     }
     case GET_PURCHASED_MOVIES:
       return {
         ...state,
-        shoppingHistory: action.payload
-      }
+        shoppingHistory: action.payload,
+      };
     default:
       return {
         ...state,

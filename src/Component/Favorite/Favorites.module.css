@@ -12,9 +12,9 @@
     text-align: center;
     font-size: 2rem;
 }
-.nofavorites{
-    margin-left: 60%;
-    margin-top: 30%;
-    width: 500px;
-    font-size: larger;
+.favorites{
+    margin-left: 2rem;
+    background-color: #21242D;
+    padding: 0 2rem;
+    width: 79%;
 }
