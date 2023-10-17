@@ -4,16 +4,13 @@ import SideBar from "../SideBar/SideBar";
 import style from "./Profile.module.css";
 import { updateUser } from "../../Redux/actions/actions";
 import validations from "./validations";
-import Swal from "sweetalert2";
 import ShoppingHistory from "../ShoppingHistory/ShoppingHistory";
-
-
 
 const Profile = () => {
   const userData = useSelector((state) => state.user);
   const userFirstName = userData.name.split(" ");
   const [updatedData, setUpdatedData] = useState({ name: "", password: "" });
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState(userData.image);
   const [errors, setErrors] = useState({ name: "", password: "" });
   const [checkedFields, setCheckedFields] = useState({
     checkboxName: false,
