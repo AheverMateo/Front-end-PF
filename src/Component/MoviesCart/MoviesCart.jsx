@@ -3,6 +3,8 @@ import style from "./MoviesCart.module.css"
 import { useDispatch } from "react-redux";
 import { removeFromCart } from "../../Redux/actions/actions";
 
+
+
 const MoviesCart = ({title, image, id, price}) => {
     const dispatch = useDispatch()
     const handleDelete = () => {

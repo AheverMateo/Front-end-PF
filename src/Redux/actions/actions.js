@@ -15,7 +15,9 @@ import {
   REMOVE_FAV,
   GET_GENRES,
   CLEAN_DETAIL,
-  CLEAN_FAVS
+  CLEAN_FAVS,
+  DISABLE_ENABLE,
+  GET_PURCHASED_MOVIES
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -144,7 +146,7 @@ export const filterParameters = (parameters) => {
         showConfirmButton: false,
         timer: 1000,
         text: "No movies found",
-        
+
       });
       return errorMsg;
     }
@@ -310,3 +312,29 @@ export const cleanFavs = () => {
     dispatch({ type: CLEAN_FAVS })
   }
 }
+
+export const disableEnableMovies = (id, disabled) => {
+  disabled = !disabled
+  return async (dispatch) => {
+    await axios.put("/Nonflix/movies/update", { id, disabled })
+
+    dispatch({ type: DISABLE_ENABLE, payload: id })
+  }
+}
+export const getPurchasedMovies = () => {
+  return async(dispatch) => {
+    try {
+      const { data } = await axios("http://localhost:3001/Nonflix/shopping/purchasedMovies")
+      
+      dispatch({
+        type: GET_PURCHASED_MOVIES,
+        payload: data
+      })
+      
+    } catch (error) {
+      console.log(error.message);
+    }
+
+
+  }
+} 
