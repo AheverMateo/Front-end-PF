@@ -45,3 +45,10 @@
 .backButtonContainer {
     justify-content: flex-start;
   }
+.emptycar{
+    margin-left: 15%;
+    margin-top: 10%;
+    font-size: larger;
+    display: flex;
+    flex-direction: row;
+}

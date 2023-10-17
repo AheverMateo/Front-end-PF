@@ -66,8 +66,8 @@ const Favorites = () => {
     );
   } else {
     return (
-      <div style={{ alignContent: 'center' }}>
-        <h1 style={{ textAlign: 'center' }}>Don't have Favorites</h1>
+      <div className={style.nofavorites}><br></br><br></br>
+        <h1>You don't have any Favorite Movies yet, use this icon 💖 at the reverse of every movie card to add some!</h1>
       </div>
     );
   }

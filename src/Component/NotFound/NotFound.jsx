@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import SideBar from "../SideBar/SideBar";
 import style from './NotFound.module.css';
+import BackButton from "../BackButton/BackButton";
+import icon from "../../assets/NONFLIX-LOGO.png";
 
 const NotFound = () => {
 
@@ -17,10 +19,14 @@ const NotFound = () => {
         <div className={style.main}>
         <SideBar />
         <div className={style.notFound}>
-            <h1>Oops! Page not found</h1>
-            <h2>404 Error</h2>
-            <h2></h2>
-            <button onClick={goHome}>Back to Home</button>
+            <img src={icon}></img>
+            <h1>Oops! Page not found</h1><br></br>
+            <h2>404 Error</h2><br></br>
+            <div className="div-buttons">
+                <BackButton></BackButton>
+                <h> </h>
+                <button onClick={goHome}>Go Home</button>
+            </div>
         </div>
         </div>
     )

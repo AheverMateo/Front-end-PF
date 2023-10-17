@@ -3,6 +3,7 @@ import style from "./Cart.module.css"
 import BackButton from "../BackButton/BackButton";
 import { useSelector } from "react-redux";
 import MoviesCart from "../MoviesCart/MoviesCart";
+import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 
 
 
@@ -13,7 +14,7 @@ import axios from "axios"
 
 const Cart = () => {
     
-   
+    
     const stateCart = useSelector((state) => state.Cart )
     const total = stateCart.reduce((acc, movie) => acc +  movie.price ,0)
    
@@ -58,7 +59,7 @@ const Cart = () => {
                     {
 
                         !stateCart.length > 0 
-                            ? <h3>Empty car</h3>
+                            ? <div className={style.emptycar}><p >Your cart is Empty</p></div>
                             :   <div className={style.summary}>
                                     <h3>Purchase Summary</h3>
                                     <h4>You have <label>{stateCart.length} </label>movies in your cart</h4>
