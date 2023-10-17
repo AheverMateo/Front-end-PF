@@ -4,12 +4,13 @@ import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { login as loginAction, registerUser } from "../../Redux/actions/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function GoogleAuth() {
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const user = useSelector((state)=> state.user);
 
   const [isRegistered, setIsRegistered] = useState(false);
 
@@ -18,7 +19,8 @@ export default function GoogleAuth() {
     password: "",
     name: "",
     provider: "Google",
-    image: ""
+    image: "",
+    admin: true
   });
 
   const onSuccess = (credentialResponse) => {
@@ -38,7 +40,6 @@ export default function GoogleAuth() {
   useEffect(() => {
     if (userGoogle.email) {
       if (location.pathname === "/Login") {
-        
          dispatch(loginAction(userGoogle)).then((response) => {
           if(response.data !== "The user is not registered"){
             setIsRegistered(true);
@@ -70,7 +71,8 @@ export default function GoogleAuth() {
   useEffect(() => {
     // Access to Home
     if (isRegistered) {
-      navigate("/Home");
+      
+      user.admin ? navigate("/Dashboard") : navigate("/Home");
     }
   }, [isRegistered, navigate]);
 

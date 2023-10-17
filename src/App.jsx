@@ -21,16 +21,19 @@ import DashBoard from "./Component/DashBoard/DashBoard";
 function App() {
   
   const user = useSelector((state) => state.user); 
-  
+  console.log(user)
   // Redirect to home
   const navigate = useNavigate();
   
-  // useEffect(() => {
-  //   console.log("Efecto ejecutado");
-  //   if (user.token) {
-  //     navigate('/Home');
-  //   }
-  // }, [user.token]);
+  useEffect(() => {
+    console.log("Efecto ejecutado");
+    if (user.token) {
+      if(!user.admin){
+        return navigate('/Home');
+
+      }
+    }
+  }, [user.token]);
 
   return (
     <div>
@@ -51,7 +54,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/dashboard' element={<DashBoard></DashBoard>} />
         </Route>
-        
+
       </Routes>
     </div>
   )

@@ -6,11 +6,13 @@ import { Link, useNavigate } from "react-router-dom/dist";
 import { Formik } from "formik";
 import GoogleAuth from "../GoogleAuth/GoogleAuth";
 import { login as loginAction } from "../../Redux/actions/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const user = useSelector((state)=> state.user);
 
   const [login, setLogin] = useState({
     email: "",
@@ -23,9 +25,12 @@ const Login = () => {
   });
   const loginUser = (values) => {
     dispatch(loginAction(values)).then((response) => {
+      user.admin ? navigate('/Dashboard') : navigate('/Home')
       if (response !== "" && response !== undefined) {
+        console.log(user.admin)
         navigate("/Home");
       }
+      // user.admin ? navigate('/Dashboard') : navigate('/Home')
     });
   };
 

@@ -3,8 +3,10 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getPurchasedMovies } from "../../Redux/actions/actions";
 import shoppingHistoryIcon from "../../assets/baseline_history_white_24dp.png"
+
 const ShoppingHistory = () => {
   const shoppingHistory = useSelector((state) => state.shoppingHistory);
+  console.log(shoppingHistory)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPurchasedMovies());

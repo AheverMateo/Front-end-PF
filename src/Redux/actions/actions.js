@@ -204,13 +204,10 @@ export const registerUser = (values) => {
   };
 };
 
-export const login = ({ email, password }) => {
+export const login = (userInfo) => {
   return async (dispatch) => {
     try {
-      const user = await axios.post(`/Nonflix/login/login`, {
-        email,
-        password,
-      });
+      const user = await axios.post(`/Nonflix/login/login`, userInfo);
 
       const userData = user.data;
       return dispatch({
