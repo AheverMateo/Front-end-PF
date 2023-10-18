@@ -252,7 +252,7 @@ const DashBoard = () => {
                             {movie.disabled ? "Disabled" : "Enabled"}
                           </TableCell>
                           <TableCell>
-                            <Link>
+                            <Link to={`/uploadMovie/${movie.id}`}>
                               <Button size="xs">Edit</Button>
                             </Link>
                             {movie.disabled ? (
