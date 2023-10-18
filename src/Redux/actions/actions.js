@@ -50,6 +50,23 @@ export const getGenres = () => {
     }
   };
 };
+
+export const putMovie = (updateData, id) => {
+  console.log(updateData)
+  console.log(id)
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/Nonflix/movies/update/${id}`, updateData);
+      console.log(data)
+      
+    } catch (error) {
+      console.log(error.response)
+      
+    }
+  }
+  
+};
+
 export const getByName = (parameters) => {
   const name = parameters[0];
   const year = parameters[1];

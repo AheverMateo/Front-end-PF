@@ -147,7 +147,7 @@ const DashBoard = () => {
                                                     <TableCell>{movie.year}</TableCell>
                                                     <TableCell>{movie.language}</TableCell>
                                                     <TableCell>{movie.disabled ? "Disabled" : "Enabled"}</TableCell>
-                                                    <TableCell><Link><Button size="xs">Edit</Button></Link>
+                                                    <TableCell><Link to={`/uploadMovie/${movie.id}`}><Button size="xs">Edit</Button></Link>
                                                         {movie.disabled
                                                             ? <Button className="hover:text-green-500" onClick={() => handleDisabled(movie.id, movie.disabled)} size="xs">Enable</Button>
                                                             : <Button className="hover:text-red-500" onClick={() => handleDisabled(movie.id, movie.disabled)} size="xs">Disable</Button>}</TableCell>
@@ -157,7 +157,7 @@ const DashBoard = () => {
                                     </Table>
                                 </Card>
                                 <br></br>
-                                <button onClick={loadMore}>cargar mas</button>
+                                <button onClick={loadMore}>Load more</button>
                             </TabPanel>
                             <TabPanel>
                                 <Card>
