@@ -1,4 +1,10 @@
-import { CLEAR_USER_DATA, GET_FAVS, REMOVE_FAV } from "../actions/actionsTypes";
+import {
+  CLEAR_USER_DATA,
+  GET_BESTFAVORITES,
+  GET_BESTSELLERS,
+  GET_FAVS,
+  REMOVE_FAV,
+} from "../actions/actionsTypes";
 import {
   GET_MOVIES,
   ADD_TO_CART,
@@ -16,6 +22,7 @@ import {
   DISABLE_ENABLE,
   GET_PURCHASED_MOVIES,
   GET_USERS,
+  SALES_BY_DATE,
 } from "../actions/actionsTypes";
 
 const initialState = {
@@ -31,6 +38,9 @@ const initialState = {
   FavoriteMovies: [],
   shoppingHistory: [],
   allUsers: [],
+  bestsellers: [],
+  bestfavorites: [],
+  salesByDate: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -44,6 +54,21 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: action.payload,
+      };
+    case GET_BESTSELLERS:
+      return {
+        ...state,
+        bestsellers: action.payload,
+      };
+    case GET_BESTFAVORITES:
+      return {
+        ...state,
+        bestfavorites: action.payload,
+      };
+    case SALES_BY_DATE:
+      return {
+        ...state,
+        salesByDate: action.payload,
       };
     case GET_DETAIL:
       return {
@@ -94,6 +119,9 @@ const rootReducer = (state = initialState, action) => {
         user: {},
         filteredMovies: [],
         filterParameters: ["Home", null, null],
+        bestfavorites: [],
+        bestsellers: [],
+        salesByDate: []
       };
     }
     case ADD_TO_CART: {

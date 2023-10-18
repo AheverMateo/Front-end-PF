@@ -9,7 +9,7 @@ import {
   TableRow,
   TableBody,
   TableCell,
-  
+  Button
 } from "@tremor/react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +17,6 @@ import {
   getUsers,
 } from "../../Redux/actions/actions";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
 const Users = () => {
   const dispatch = useDispatch();
@@ -47,6 +46,7 @@ const Users = () => {
                         <TableCell>Purchases</TableCell>
                         <TableCell>Admin</TableCell>
                         <TableCell>Profile Image</TableCell>
+                        <TableCell>Actions</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -63,6 +63,10 @@ const Users = () => {
                               src={user.image}
                             ></img>
                           </TableCell>
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
+                            <Button className="hover:text-red-500" size="xs">Enable</Button>
+                            <Button className="hover:text-red-500" size="xs">Disable</Button>
+                          </div>
                         </TableRow>
                       ))}
                     </TableBody>
