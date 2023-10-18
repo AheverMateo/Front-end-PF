@@ -66,7 +66,7 @@ const Users = () => {
                           </TableCell>
                           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
                             <Button className="hover:text-red-500" size="xs">Enable</Button>
-                            <Button className="hover:text-red-500" size="xs">Disabled</Button>
+                            <Button className="hover:text-red-500" size="xs">Disable</Button>
                           </div>
                         </TableRow>
                       ))}

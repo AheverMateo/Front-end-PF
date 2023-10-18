@@ -23,7 +23,7 @@ import Form from './Component/FormPutMovie/FormPutMovie';
 function App() {
   
   const user = useSelector((state) => state.user); 
-  console.log(user)
+
   // Redirect to home
   const navigate = useNavigate();
   

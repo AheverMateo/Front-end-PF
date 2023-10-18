@@ -20,7 +20,7 @@ export default function GoogleAuth() {
     name: "",
     provider: "Google",
     image: "",
-    admin: true
+    admin: false
   });
 
   const onSuccess = (credentialResponse) => {

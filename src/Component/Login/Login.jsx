@@ -25,9 +25,7 @@ const Login = () => {
   });
   const loginUser = (values) => {
     dispatch(loginAction(values)).then((response) => {
-      user.admin ? navigate('/Dashboard') : navigate('/Home')
       if (response !== "" && response !== undefined) {
-        console.log(user.admin)
         navigate("/Home");
       }
       // user.admin ? navigate('/Dashboard') : navigate('/Home')
