@@ -20,7 +20,7 @@ const Cart = () => {
     const handleShopping = async () => {
         
         try {
-            const { data } = await axios.post('http://localhost:3001/Nonflix/shopping/create-order',{movies:[...stateCart]})
+            const { data } = await axios.post('/Nonflix/shopping/create-order',{movies:[...stateCart]})
             location.href = data.body.init_point
         } catch (error) {
             console.log(error.message)
