@@ -1,5 +1,11 @@
-.slideItem{
+/* .slideItem{
     width: 100%;
     height: 800px;
     object-fit: cover;
+} */
+.slideItem{
+    width: 65%;
+    object-fit: cover;
+    margin-right: 0%;
+    margin-left: 17.5%;
 }
