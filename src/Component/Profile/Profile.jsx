@@ -5,8 +5,11 @@ import style from "./Profile.module.css";
 import { updateUser } from "../../Redux/actions/actions";
 import validations from "./validations";
 import ShoppingHistory from "../ShoppingHistory/ShoppingHistory";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Profile = () => {
+  const navigate = useNavigate()
   const userData = useSelector((state) => state.user);
   const userFirstName = userData.name.split(" ");
   const [updatedData, setUpdatedData] = useState({ name: "", password: "" });
@@ -71,7 +74,18 @@ const Profile = () => {
     );
   }, []);
 
-
+  const loadingAdmin = () => {
+    if (userData.admin) {
+      navigate('/dashboard');
+    } else if (!userData.admin) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'You are not an administrator',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
+    }
+  }
   return (
     <div className={style.main}>
       <SideBar />
@@ -145,7 +159,7 @@ const Profile = () => {
         </form>
         <ShoppingHistory/>
       </div>
-      
+        <button onClick={loadingAdmin}>admin</button>
       
     </div>
   );
