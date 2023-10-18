@@ -396,10 +396,10 @@ export const disableEnableMovies = (id, disabled) => {
     dispatch({ type: DISABLE_ENABLE, payload: id })
   }
 }
-export const getPurchasedMovies = () => {
+export const getPurchasedMovies = (userId) => {
   return async(dispatch) => {
     try {
-      const { data } = await axios("/Nonflix/shopping/purchasedMovies")
+      const { data } = await axios(`/Nonflix/shopping/purchasedMovies?userId=${userId}`)
       
       dispatch({
         type: GET_PURCHASED_MOVIES,
