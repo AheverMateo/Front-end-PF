@@ -121,7 +121,10 @@ const rootReducer = (state = initialState, action) => {
         filterParameters: ["Home", null, null],
         bestfavorites: [],
         bestsellers: [],
-        salesByDate: []
+        salesByDate: [],
+        allUsers: [],
+        Cart: []
+
       };
     }
     case ADD_TO_CART: {
