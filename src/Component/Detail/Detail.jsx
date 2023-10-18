@@ -118,7 +118,7 @@ const Detail = () => {
   return (
     <div className={style.main}>
       <SideBar />
-      <div>
+      <div className={style.detailMain}>
         <BackButton />
         <div className={style.detail}>
           <div className={style.poster}>

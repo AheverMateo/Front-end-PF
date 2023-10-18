@@ -13,14 +13,16 @@ import axios from "axios"
 
 const Cart = () => {
     
-   
+    const user = useSelector((state) => state.user )
     const stateCart = useSelector((state) => state.Cart )
     const total = stateCart.reduce((acc, movie) => acc +  movie.price ,0)
-   
+
+    
     const handleShopping = async () => {
         
         try {
-            const { data } = await axios.post('http://localhost:3001/Nonflix/shopping/create-order',{movies:[...stateCart]})
+            stateCart.forEach(movie => movie.user = user.id)
+            const { data } = await axios.post('/Nonflix/shopping/create-order',{movies:[...stateCart]})
             location.href = data.body.init_point
         } catch (error) {
             console.log(error.message)

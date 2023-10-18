@@ -122,7 +122,8 @@ const rootReducer = (state = initialState, action) => {
         bestfavorites: [],
         bestsellers: [],
         salesByDate: [],
-        allUsers: []
+        allUsers: [],
+        Cart: []
 
       };
     }

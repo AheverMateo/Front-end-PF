@@ -399,7 +399,7 @@ export const disableEnableMovies = (id, disabled) => {
 export const getPurchasedMovies = () => {
   return async(dispatch) => {
     try {
-      const { data } = await axios("http://localhost:3001/Nonflix/shopping/purchasedMovies")
+      const { data } = await axios("/Nonflix/shopping/purchasedMovies")
       
       dispatch({
         type: GET_PURCHASED_MOVIES,
