@@ -26,11 +26,11 @@ const Filters = () => {
     
     //copyFilterParameters[3] = "";
       const yearSelector = document.getElementById("selectYear");
-      yearSelector.value = "year";
+      // yearSelector.value = "year";
       const langSelector = document.getElementById("selectLanguage");
-      langSelector.value = "lang";
+      // langSelector.value = "lang";
       const searchInput = document.getElementById("searchInput");
-      searchInput.value = ""
+      // searchInput.value = ""
     dispatch(filterParameters(copyFilterParameters))
   }
 

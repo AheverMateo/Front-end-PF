@@ -10,10 +10,11 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import axios from 'axios'
 
 
+ 
+
+
 // axios.defaults.baseURL = 'http://localhost:3001';
-
-
-axios.defaults.baseURL = 'https://back-end-pf-production-d26d.up.railway.app';
+ axios.defaults.baseURL = 'https://back-end-pf-production-d26d.up.railway.app';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

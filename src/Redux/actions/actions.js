@@ -391,7 +391,7 @@ export const cleanFavs = () => {
 export const disableEnableMovies = (id, disabled) => {
   disabled = !disabled
   return async (dispatch) => {
-    await axios.put("/Nonflix/movies/update", { id, disabled })
+    await axios.put(`/Nonflix/movies/disabled`, { disabled , id })
 
     dispatch({ type: DISABLE_ENABLE, payload: id })
   }
