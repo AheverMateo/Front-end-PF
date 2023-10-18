@@ -6,6 +6,7 @@ import profileIcon from "../../assets/round_person_outline_white_24dp.png";
 import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import favoriteIcon from "../../assets/round_favorite_border_white_24dp.png";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
+import adminIcon from "../../assets/admin_panel_settings_white_24dp.svg";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterParameters,
@@ -56,23 +57,22 @@ const SideBar = () => {
 
   return (
     <div className={style.main}>
-      
       <Link to="/Home">
         <div className={style.logo}>
           <img className="sidebar_image" src={logo} />
         </div>
-        
       </Link>
       <div className={style.menu}>
-      <h2>Hello {userFirstName[0]}!</h2>
+        <h2>Hello {userFirstName[0]}!</h2>
         <h3>Menu</h3>
-        <Link to="/Home" id="Home"
-            onClick={() => handleHomeClick()}
-            className={selectedGenre === "Home" ? style.selected : style.none}>
+        <Link
+          to="/Home"
+          id="Home"
+          onClick={() => handleHomeClick()}
+          className={selectedGenre === "Home" ? style.selected : style.none}
+        >
           <img src={homeIcon} />
-          
-            Home
-          
+          Home
         </Link>
         <NavLink
           to="/Favorites"
@@ -116,6 +116,18 @@ const SideBar = () => {
             ))
           : "Loading..."}
         <h3>General</h3>
+        {userData.admin && (
+          <NavLink
+            to="/Dashboard"
+            className={(navData) =>
+              navData.isActive ? style.selected : "none"
+            }
+            id="profile"
+          >
+            <img src={adminIcon} />
+            Admin dashboard
+          </NavLink>
+        )}
         <NavLink
           to="/Profile"
           className={(navData) => (navData.isActive ? style.selected : "none")}
@@ -125,7 +137,7 @@ const SideBar = () => {
           <img src={profileIcon} />
           Profile
         </NavLink>
-        
+
         <Link to="/">
           <img src={logOutIcon} />
           <div onClick={() => handleLogOut()}>Logout</div>
