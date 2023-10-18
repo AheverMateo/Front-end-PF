@@ -1,131 +1,332 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState, useRef } from "react";
+import { postMovieValidation } from "../Validation/postMovieValidation";
+import axios from "axios";
+import style from "./PostMovie.module.css";
+import Swal from "sweetalert2";
+import "@sweetalert2/theme-dark/dark.css";
+import logo from "../../assets/NONFLIX-LOGO.png";
 import { Link, useParams } from "react-router-dom";
-import style from "./FormPutMovie.module.css";
-import { putMovie } from "../../Redux/actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { getGenres } from "../../Redux/actions/actions";
+import AdminSideBar from "../AdminSideBar/AdminSideBar";
+
+
 
 const Form = () => {
-    const { id } = useParams();
-    
-    const allMovies = useSelector((state) => state.Allmovies);
-    
+  const { id } = useParams();
 
-    const movieId = allMovies.find((movie)=> movie.id === id)
-   
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const [errors, setErrors] = useState({
-        title: "",
-        duration: "",
-        trailer: "",
-        description: "",
-        image: "",
-        year: "",
-        language: "",
-        torrent: ""
-       
+  const allMovies = useSelector((state) => state.Allmovies);
+
+  const movieId = allMovies.find((movie)=> movie.id === id);
+
+  const [originalTorrent, setOriginalTorrent] = useState(movieId.torrent);
+
+  const [movie, setMovie] = useState({
+    title: movieId.title,
+    duration: movieId.duration,
+    trailer: movieId.trailer,
+    year: movieId.year,
+    description: movieId.description,
+    torrent: originalTorrent || "",
+    language: movieId.language,
+    image: movieId.image,
+    genre: [movieId.genre],
+  });
+
+  useEffect(() => {
+    dispatch(getGenres());
+  }, []);
+  const genres = useSelector((state) => state.genres);
+
+  const [error, setError] = useState({
+    title: "",
+    duration: "",
+    trailer: "",
+    year: "",
+    description: "",
+    language: "",
+    image: "",
+    torrent: "",
+  });
+
+  const handleChange = (e) => {
+    setMovie({ ...movie, [e.target.name]: e.target.value });
+    setError({
+      ...error,
+      [e.target.name]: postMovieValidation(e.target.name, e.target.value),
     });
+  };
 
-    const [input, setInput] = useState({
-        title: movieId.title,
-        duration: movieId.duration,
-        trailer: movieId.trailer,
-        description: movieId.description,
-        image: movieId.image,
-        year: movieId.year,
-        language: movieId.language,
-        torrent: movieId.torrent
-        
-    });
+  const handleFile = (e) => {
+//     if (
+//       e.target.files[e.target.files.length - 1].name.split(".").pop() !==
+//       "torrent"
+//     ) {
+//       setError({ ...error, torrent: "You must upload a torrent file" });
+//       return;
+//     }
+//     setError({ ...error, torrent: "" });
+//     setMovie({ ...movie, torrent: e.target.files[e.target.files.length - 1] });
+//   };
+if (e.target.files.length > 0) {
+    if (e.target.files[0].name.split(".").pop() !== "torrent") {
+      setError({ ...error, torrent: "You must upload a torrent file" });
+      return;
+    }
+    setError({ ...error, torrent: "" });   
+    setMovie({ ...movie, torrent: e.target.files[0] });
+  } 
+};
 
- const handleChange = (event) => {
-    const { name, value } = event.target;
-    // if(name === "duration"){const minutes = value.split(":")
-    // let total = (minutes[0]*60) + parseInt(minutes[1])
-    // setInput((prevInput) => ({
-    //     ...prevInput,
-    //     [name]: total,
-    // }))} else {
+  const handleSubmit = async () => {
+    try {
+      setMovie({ ...movie, year: Number(movie.year) });
+      await axios.put(`/Nonflix/movies/update/${id}`, movie);
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Movie added to catalog",
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "We cannot create this new movie. Check for errors please.",
+        footer: error.response.data,
+      });
+    }
+  };
 
-    setInput((prevInput) => ({
-        ...prevInput,
-        [name]: value,
-    }));
-   
- }
+  const handleGenre = (e) => {
+    if (movie.genre.includes(e.target.value)) {
+      setMovie({
+        ...movie,
+        genre: [...movie.genre.filter((genre) => genre !== e.target.value)],
+      });
+    } else {
+      setMovie({ ...movie, genre: [...movie.genre, e.target.value] });
+    }
+  };
 
- 
-
- const handleSubmit = async (event) => {
-    event.preventDefault();
-   
-    dispatch(putMovie(input, id))  
-    
-
-
- }
-    
   
-    return (
-        <div>
-            <div className={style.globalContainer}>        
+  const [activeButton, setActiveButton] = useState("image-button");
+
+  // cloudinary upload widget
+  const cloudinaryRef = useRef();
+  const widgetRef = useRef();
+
+  useEffect(() => {
+    cloudinaryRef.current = window.cloudinary;
+    widgetRef.current = cloudinaryRef.current.createUploadWidget(
+      {
+        cloudName: "dy8pp1s5f",
+        uploadPreset: "imagenes_admins",
+      },
+      function (error, result) {
+        if (!error && result && result.event === "success") {
+          const imageUrl = result.info.url;
+          if (activeButton === "image-button") {
+            setMovie((prevMovie) => ({
+              ...prevMovie,
+              image: imageUrl,
+            }));
+          } else if (activeButton === "trailer-button") {
+            setMovie((prevMovie) => ({
+              ...prevMovie,
+              trailer: imageUrl,
+            }));
+          }
+        }
+      }
+    );
+  }, [activeButton]);
+
+  const handleImageUpload = () => {
+    setActiveButton("trailer-button");
+    widgetRef.current.open();
+    // console.log(activeButton)
+  };
+
+  const handleTrailerUpload = () => {
+    setActiveButton("image-button");
+    widgetRef.current.open();
+    // console.log(activeButton)
+  };
+
+
+
+  
+  return (
+    <div className={style.globalContainer}>
+      <AdminSideBar />
+      <div className={style.createMovieContainer}>
+      <div className={style.h1}>
+        
         <h1 className={style.h1}>Modify the movie</h1>
+        
+      </div>
+      <div className={style.firstContainer}>
+        <div className={style.firstFormDiv}>
+          <div className={style.inputDivs}>
+            <label>Title</label>
+            <input
+              className={error.title !== "" ? "wrong" : ""}
+              name="title"
+              value={movie.title}
+              onChange={handleChange}
+              type="text"
+            ></input>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.title}</p>
+          </div>
+          <div className={style.inputDivs}>
+            <label>Year</label>
+            <input
+              className={error.year !== "" ? "wrong" : ""}
+              name="year"
+              value={movie.year}
+              onChange={handleChange}
+              type="text"
+            ></input>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.year}</p>
+          </div>
+          <div className={style.inputDivs}>
+            <label>Duration (min)</label>
+            <input
+              className={error.duration !== "" ? "wrong" : ""}
+              name="duration"
+              value={movie.duration}
+              onChange={handleChange}
+              type="text"
+            ></input>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.duration}</p>
+          </div>
+          <div className={style.inputDivs}>
+            <label>Description</label>
+            <textarea
+              className={style.description}
+              name="description"
+              value={movie.description}
+              onChange={handleChange}
+            ></textarea>
+          </div><br></br>
+          <div className={style.inputDivs}>
+            <label>Torrent</label>
+            <input  className={style.torrentInput}  name="torrent" onChange={handleFile} type="file"></input>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.torrent}</p>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.description}</p>
+          </div>
         </div>
-            
-{/* <p>{JSON.stringify(input)}</p> */}
-<div className={style.firstContainer}>
-<div className={style.firstFormDiv}>
-            <form onSubmit={handleSubmit}>
-                <div className={style.firstContainer}>
-                <label htmlFor="title">Title</label>
-                <input name="title" onChange={handleChange} value={input.title} />
-                </div>
-                
+        <div className={style.secondFormDiv}>
+          <div className={style.inputDivs}>
+            <label>Cover URL</label>
+            <input
+              className={error.image !== "" ? "wrong" : ""}
+              name="image"
+              value={movie.image}
+              onChange={handleChange}
+              type="text"
+            ></input>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={`${style.notOk} ${style.spacing}}`}>{error.image}</p>
 
-                <div className={style.firstContainer}>
-                    <label htmlFor="duration">Duration</label>
-                    <input type="text" name='duration' onChange={handleChange} value={input.duration}/>
-                </div>
+            <button className={style.uploadButton} onClick={handleImageUpload}>
+              Upload Image
+            </button>
+            <img className={style.imageShown} src={movie.image ? movie.image : ""}></img>
+          </div>
+          <div className={style.inputDivs}>
+            <label>Trailer URL</label>
+            <input
+              className={error.trailer !== "" ? "wrong" : ""}
+              name="trailer"
+              value={movie.trailer}
+              onChange={handleChange}
+              type="text"
+            ></input>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.trailer}</p>
 
-                <div className={style.firstContainer}>
-                    <label htmlFor="trailer">Trailer</label>
-                    <input type="text" name='trailer' onChange={handleChange} value={input.trailer}/>
+            <button className={style.uploadButton} onClick={handleTrailerUpload}>
+                  Upload Trailer
+            </button>
+          </div>
+        </div>
+        <div className={style.thirdFormDiv}>
+          <div className={style.inputDivs}>
+            <label>Language</label>
+            <select
+              className={error.language !== "" ? "wrong" : ""}
+              name="language"
+              value={movie.language}
+              onChange={handleChange}
+              >
+              <option value="">Select a Language</option>
+              <option value="es">Spanish</option>
+              <option value="en">English</option>
+              <option value="fr">French</option>
+            </select>
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>{error.language}</p>
+          </div>
+          <p className={style.generosMargin}>Genres</p>
+          <div className={style.checkboxContainer}>
+            {genres.map((genre) => {
+              return (
+                <div key={genre}>
+                  
+                  <input
+                    
+                    name="genre"
+                    value={genre}
+                    onChange={handleGenre}
+                    type="checkbox"
+                  />
+                  <label>{genre}</label>
                 </div>
-                <div className={style.firstContainer}>
-                    <label htmlFor="description">Description</label>
-                    <input type="text" name='description' onChange={handleChange} value={input.description}/>
-                </div>
-                <div className={style.firstContainer}>
-                    <label htmlFor="image">Image</label>
-                    <input type="text" name='image' onChange={handleChange} value={input.image}/>
-                </div>
-                <div className={style.firstContainer}>
-                    <label htmlFor="year">Year</label>
-                    <input type="number" name='year' onChange={handleChange} value={input.year}/>
-                </div>
-                <div className={style.firstContainer}>
-                    <label htmlFor="language">Language</label>
-                    <select name="language" onChange={handleChange} >
-                    <option value="lang">Language</option>
-                    <option value="en">English</option>
-                    <option value="fr">French</option>
-                    <option value="es">Spanish</option>
-                    </select>
-                </div>
-                
-
-                <button className={style.okVal} type='submit'>Modify</button>
-                <div>
+              );
+              
+            })}
+          </div>
+          <div className={style.inputDivs}>
+            <p className={style.notOk}>
+              {movie.genre.length === 0 ? "Add at least one genre" : ""}
+            </p>
+          </div>
+        </div>
+      </div>
+      {Object.values(movie).every((value) => value !== "" && value !== null) &&
+      Object.values(error).every(
+        (errorMsg) => errorMsg === "" && movie.genre.length > 0
+      ) ? (
+        <button className={style.okVal} onClick={handleSubmit}>
+          Upload Movie
+        </button>
+      ) : (
+        <div className={style.notOk}>Complete all fields correctly</div>
+      )}
+    </div>
+    <div>
                 <Link to='/dashboard'>
                     <button className={style.okVal}>Back</button> 
                 </Link>
 
                 </div>
-            </form>
-            </div>
-            </div>
-        </div>
-    )
+    </div>
+  );
 };
-
 export default Form;
