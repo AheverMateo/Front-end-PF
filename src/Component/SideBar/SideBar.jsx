@@ -13,6 +13,7 @@ import {
   setCurrentPage,
   clearUserData,
   getGenres,
+  resetCart,
 } from "../../Redux/actions/actions";
 import { useEffect, useState } from "react";
 
@@ -53,6 +54,7 @@ const SideBar = () => {
   };
   const handleLogOut = () => {
     dispatch(clearUserData());
+    dispatch(resetCart());
   };
 
   return (
