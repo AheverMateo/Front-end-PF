@@ -5,6 +5,7 @@ import homeIcon from "../../assets/round_home_white_24dp.png";
 import profileIcon from "../../assets/round_person_outline_white_24dp.png";
 import logOutIcon from "../../assets/round_logout_white_24dp.png";
 import ordersIcon from "../../assets/receipt_long_white_24dp.svg";
+import graphicsIcon from "../../assets/insights_white_24dp.svg";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -47,6 +48,10 @@ const AdminSideBar = () => {
         <Link to="/">
           <img src={ordersIcon} />
           <div>Orders</div>
+        </Link>
+        <Link to="/graphics">
+          <img src={graphicsIcon} />
+          <div>Graphics</div>
         </Link>
 
         <h3>General</h3>

@@ -18,6 +18,7 @@ import ProtectedRoute from './Component/utils/ProtectedRoute';
 import { useSelector } from 'react-redux';
 import DashBoard from "./Component/DashBoard/DashBoard";
 import Users from "./Component/Users/Users";
+import Graphics from './Component/Graphics/Graphics';
 
 function App() {
   
@@ -52,6 +53,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/dashboard' element={<DashBoard></DashBoard>} />
           <Route path='/users' element={<Users></Users>} />
+          <Route path='/graphics' element={<Graphics></Graphics>} />
         </Route>
         
       </Routes>

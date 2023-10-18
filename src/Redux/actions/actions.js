@@ -18,7 +18,10 @@ import {
   CLEAN_FAVS,
   DISABLE_ENABLE,
   GET_PURCHASED_MOVIES,
-  GET_USERS
+  GET_USERS,
+  GET_BESTSELLERS,
+  GET_BESTFAVORITES,
+  SALES_BY_DATE
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -45,6 +48,49 @@ export const getUsers = () => {
       dispatch({
         type: GET_USERS,
         payload: users,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
+export const getBestsellers = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.get("/Nonflix/bestsellers");
+      const bestsellers = data.data;
+      dispatch({
+        type: GET_BESTSELLERS,
+        payload: bestsellers,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
+
+export const getBestfavorites = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.get("/Nonflix/bestfavorite");
+      const bestfavorites = data.data;
+      dispatch({
+        type: GET_BESTFAVORITES,
+        payload: bestfavorites,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
+export const getSalesByDate = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.get("/Nonflix/salesbydate");
+      const salesByDate = data.data;
+      dispatch({
+        type: SALES_BY_DATE,
+        payload: salesByDate,
       });
     } catch (error) {
       console.log(error.response);
