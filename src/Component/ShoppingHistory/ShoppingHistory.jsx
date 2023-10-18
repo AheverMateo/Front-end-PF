@@ -6,6 +6,7 @@ import historyIcon from "../../assets/history_white_24dp.svg"
 
 const ShoppingHistory = () => {
   const shoppingHistory = useSelector((state) => state.shoppingHistory);
+  console.log(shoppingHistory)
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPurchasedMovies());

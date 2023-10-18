@@ -23,16 +23,19 @@ import Form from './Component/FormPutMovie/FormPutMovie';
 function App() {
   
   const user = useSelector((state) => state.user); 
-  
+
   // Redirect to home
   const navigate = useNavigate();
   
-  // useEffect(() => {
-  //   console.log("Efecto ejecutado");
-  //   if (user.token) {
-  //     navigate('/Home');
-  //   }
-  // }, [user.token]);
+  useEffect(() => {
+    console.log("Efecto ejecutado");
+    if (user.token) {
+      if(!user.admin){
+        return navigate('/Home');
+
+      }
+    }
+  }, [user.token]);
 
   return (
     <div>
@@ -55,7 +58,7 @@ function App() {
           <Route path='/users' element={<Users></Users>} />
           <Route path='/uploadMovie/:id' element={<Form></Form>} />
         </Route>
-        
+
       </Routes>
     </div>
   )
