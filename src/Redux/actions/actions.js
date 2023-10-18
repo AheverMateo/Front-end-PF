@@ -51,6 +51,23 @@ export const getUsers = () => {
     }
   };
 };
+
+export const putMovie = (input, id) => {
+  // console.log(input)
+  // console.log(id)
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(`/Nonflix/movies/update/${id}`, input);
+      console.log(data)
+      
+    } catch (error) {
+      console.log(error.response)
+      
+    }
+  }
+  
+};
+
 export const getGenres = () => {
   return async (dispatch) => {
     try {
