@@ -17,7 +17,6 @@ import {
   getUsers,
 } from "../../Redux/actions/actions";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 
 const Users = () => {
   const dispatch = useDispatch();
