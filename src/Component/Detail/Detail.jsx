@@ -17,6 +17,7 @@ const Detail = () => {
   const movieId = id;
   const selectedMovie = useSelector((state) => state.movieDetail);
   const shoppingHistory = useSelector((state) => state.shoppingHistory);
+  console.log(shoppingHistory);
 
   const [reviews, setReviews] = useState([
     {
@@ -102,18 +103,21 @@ const Detail = () => {
     if (selectedMovie?.Reviews !== undefined && selectedMovie.Reviews.length > 0) {
       setReviews([...reviews, ...selectedMovie?.Reviews])
     }
-    console.log(selectedMovie.Reviews)
   }, [selectedMovie?.Reviews])
 
   let showReview = false;
 
-  shoppingHistory[0].message !== "You have not made any purchases" && shoppingHistory.map((shop) => {
-    shop.Movies.map((movie) => {
-      if (movie.id === id) {
-        showReview = true;
-      }
-    })
-  })
+  if (shoppingHistory.length > 0 && shoppingHistory[0].message !== "You have not made any purchases") {
+    shoppingHistory.map((shop) => {
+      shop.Movies.map((movie) => {
+        if (movie.id === id) {
+          showReview = true;
+        }
+      })
+    });
+  } else {
+    showReview = false;
+  }
 
   return (
     <div className={style.main}>
