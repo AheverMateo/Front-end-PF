@@ -17,11 +17,12 @@ const Cart = () => {
     
     const stateCart = useSelector((state) => state.Cart )
     const total = stateCart.reduce((acc, movie) => acc +  movie.price ,0)
+    const email = useSelector((state) => state.user.email )//tomo el email del usuario logeado
    
     const handleShopping = async () => {
         
         try {
-            const { data } = await axios.post('http://localhost:3001/Nonflix/shopping/create-order',{movies:[...stateCart]})
+            const { data } = await axios.post('http://localhost:3001/Nonflix/shopping/create-order',{movies:[...stateCart], email})
             location.href = data.body.init_point
         } catch (error) {
             console.log(error.message)
