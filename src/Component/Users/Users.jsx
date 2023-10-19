@@ -11,10 +11,13 @@ import {
   TableCell,
   Button
 } from "@tremor/react";
+import Swal from "sweetalert2";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUsers,
+  disableEnableUsers,
+  disableEnableUsersAdmin
 } from "../../Redux/actions/actions";
 import { useEffect, useState } from "react";
 
@@ -26,6 +29,44 @@ const Users = () => {
   }, []);
 
   const users = useSelector((state) => state.allUsers);
+  const userToken = useSelector((state) => state.user);
+
+
+  // Enable en disabled Users
+  const handleDisabled = (id, active)=>{
+
+    dispatch(disableEnableUsers(id, userToken.token, active))
+    Swal.fire({
+      position: "top-end",
+      title: "Great!",
+      text: "The action activate User was successful!",
+      icon: "success",
+      showConfirmButton: false,
+      backdrop: false,
+      timer: 2000,
+      customClass: {
+        popup: "small-alert",
+      },
+    });
+  }
+
+  // Enable en disabled Admin Users
+  const handleDisabledAdmin = (id, admin)=>{
+
+    dispatch(disableEnableUsersAdmin(id, userToken.token, admin))
+    Swal.fire({
+      position: "top-end",
+      title: "Great!",
+      text: "The action activate Admin User was successful!",
+      icon: "success",
+      showConfirmButton: false,
+      backdrop: false,
+      timer: 2000,
+      customClass: {
+        popup: "small-alert",
+      },
+    });
+  }
 
   return (
     <div className="flex flex-row">
@@ -46,7 +87,9 @@ const Users = () => {
                         <TableCell>Purchases</TableCell>
                         <TableCell>Admin</TableCell>
                         <TableCell>Profile Image</TableCell>
-                        <TableCell>Actions</TableCell>
+                        <TableCell>User</TableCell>
+                        <TableCell>User Activate</TableCell>
+                        <TableCell>Activate Admin</TableCell>
                       </TableRow>
                     </TableHead>
                     <TableBody>
@@ -63,10 +106,56 @@ const Users = () => {
                               src={user.image}
                             ></img>
                           </TableCell>
-                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-                            <Button className="hover:text-red-500" size="xs">Enable</Button>
-                            <Button className="hover:text-red-500" size="xs">Disable</Button>
-                          </div>
+                          <TableCell>{`${user.active}`}</TableCell>
+                          <TableCell>
+
+                          {user.active ? (
+                              <Button
+                                className="hover:text-green-500"
+                                onClick={() =>
+                                  handleDisabled(user.id, user.active)
+                                }
+                                size="xs"
+                              >
+                                Disable
+                              </Button>
+                            ) : (
+                              <Button
+                                className="hover:text-red-500"
+                                onClick={() =>
+                                  handleDisabled(user.id, user.active)
+                                }
+                                size="xs"
+                              >
+                                Enable
+                              </Button>
+                            )}
+                            </TableCell>
+
+                            
+                            <TableCell>
+                            {user.admin ? (
+                              <Button
+                                className="hover:text-green-500"
+                                onClick={() =>
+                                  handleDisabledAdmin(user.id, user.admin)
+                                }
+                                size="xs"
+                              >
+                                Disable
+                              </Button>
+                            ) : (
+                              <Button
+                                className="hover:text-red-500"
+                                onClick={() =>
+                                  handleDisabledAdmin(user.id, user.admin)
+                                }
+                                size="xs"
+                              >
+                                Enable
+                              </Button>
+                            )}
+                            </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
