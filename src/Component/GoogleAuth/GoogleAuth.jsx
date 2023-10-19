@@ -45,10 +45,11 @@ export default function GoogleAuth() {
          dispatch(loginAction(userGoogle)).then((response) => {
           if(response.data !== "The user is not registered"){
             setIsRegistered(true);
+            console.log(response.data)
             }
         }).catch((error)=>  Swal.fire({
           title: "Oops!",
-          text: "User disabled, Contact to support",
+          text: user.activate ? 'User no Registerd' : "User Disabled, Contact to Support",
           icon: "error",
         }))
         

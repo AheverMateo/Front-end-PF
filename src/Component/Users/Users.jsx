@@ -107,6 +107,8 @@ const Users = () => {
                             ></img>
                           </TableCell>
                           <TableCell>{`${user.active}`}</TableCell>
+                          <TableCell>
+
                           {user.active ? (
                               <Button
                                 className="hover:text-green-500"
@@ -128,7 +130,10 @@ const Users = () => {
                                 Enable
                               </Button>
                             )}
+                            </TableCell>
 
+                            
+                            <TableCell>
                             {user.admin ? (
                               <Button
                                 className="hover:text-green-500"
@@ -150,7 +155,7 @@ const Users = () => {
                                 Enable
                               </Button>
                             )}
-
+                            </TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
