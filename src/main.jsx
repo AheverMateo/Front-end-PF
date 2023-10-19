@@ -14,7 +14,8 @@ import axios from 'axios'
 
 
  //axios.defaults.baseURL = 'http://localhost:3001';
-axios.defaults.baseURL = 'https://back-end-pf-production-d26d.up.railway.app';
+//axios.defaults.baseURL = 'https://back-end-pf-production-d26d.up.railway.app'; -- Mateo
+axios.defaults.baseURL = 'back-end-pf-production-7cce.up.railway.app';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
