@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import SideBar from "../SideBar/SideBar";
 import style from "./Detail.module.css";
-import { cleanDetail, getDetailMovie } from "../../Redux/actions/actions";
+import { cleanDetail, getDetailMovie, getPurchasedMovies } from "../../Redux/actions/actions";
 import { addToCart } from "../../Redux/actions/actions";
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -18,6 +18,13 @@ const Detail = () => {
   const selectedMovie = useSelector((state) => state.movieDetail);
   const shoppingHistory = useSelector((state) => state.shoppingHistory);
   console.log(shoppingHistory);
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPurchasedMovies(user.id));
+    
+  }, []);
 
   const [reviews, setReviews] = useState([
     {
@@ -90,7 +97,6 @@ const Detail = () => {
     }
   };
 
-  const dispatch = useDispatch();
   useEffect(() => {
 
     dispatch(getDetailMovie(id));
