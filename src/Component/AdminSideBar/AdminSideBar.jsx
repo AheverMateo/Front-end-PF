@@ -45,13 +45,17 @@ const AdminSideBar = () => {
           <div className={style.users}>Users</div>
         </Link>
         
-        <Link to="/">
+        <Link to="/orders">
           <img src={ordersIcon} />
           <div>Orders</div>
         </Link>
         <Link to="/graphics">
           <img src={graphicsIcon} />
           <div>Graphics</div>
+        </Link>
+        <Link to="/Home">
+          <img src={homeIcon} />
+          <div>Nonflix HOME</div>
         </Link>
 
         <h3>General</h3>

@@ -20,6 +20,11 @@
     font-size: 2rem;
     padding-bottom: 2rem;
 }
+.containerCart {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
 .container {
     display: flex;
     flex-direction: row;
@@ -45,3 +50,20 @@
 .backButtonContainer {
     justify-content: flex-start;
   }
+
+  .emptycart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid;
+    padding: 1rem;
+    color: #00B9AE;
+    justify-content: center;
+    
+}   
+.emptycart h1 {
+    font-size: larger;
+}
+.emptycart img {
+    width: 10rem;
+}

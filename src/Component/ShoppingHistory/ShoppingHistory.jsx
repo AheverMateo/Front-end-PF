@@ -6,10 +6,11 @@ import historyIcon from "../../assets/history_white_24dp.svg"
 
 const ShoppingHistory = () => {
   const shoppingHistory = useSelector((state) => state.shoppingHistory);
-  console.log(shoppingHistory)
+  const user = useSelector((state) => state.user)
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getPurchasedMovies());
+    dispatch(getPurchasedMovies(user.id));
+    
   }, []);
   let repeatedDate = false;
   let date = "";
@@ -24,11 +25,11 @@ const ShoppingHistory = () => {
         
       
         shoppingHistory?.map((buys) => {
-            if(buys?.message) {
-                return  <div key={buys.message}>
-                    <p>{buys.message}</p>
-                </div>
-            }
+          if(buys?.message) {
+            return  <div key={buys.message}>
+              <p>{buys.message}</p>
+            </div>
+          }
           let dateSplit = buys?.createdAt?.split("T");
           if (dateSplit && dateSplit[0] !== date) {
             repeatedDate = false;
@@ -38,23 +39,30 @@ const ShoppingHistory = () => {
           } else {
             repeatedDate = true;
           }
-          return (
-            <div key={buys.id}>
-              {!repeatedDate && <p className={style.date}>Ordered: {`${month[date[1]]} ${date[2]}, ${date[0]}`} </p>}
-              <div className={style.shopMovie}>
-                {buys?.Movies?.map((movie) => {
-                  return (
-                    <div key={movie.id} className={style.movies}>
-                      <img src={movie.image} alt="movie" />
-                      <h4>{movie.title}</h4>
-                      <p>$ 5.00 USD</p>
-                    </div>
-                  );
-                })}
-                <h4>Total: {buys.total} ARS</h4>
+          
+
+            return (
+              
+              <div key={buys.id}>
+                
+                {!repeatedDate && <p className={style.date}>Ordered: {`${month[date[1]]} ${date[2]}, ${date[0]}`} </p>}
+                <div className={style.shopMovie}>
+                  {buys?.Movies?.map((movie) => {
+                    return (
+                      <div key={movie.id} className={style.movies}>
+                        <img src={movie.image} alt="movie" />
+                        <h4>{movie.title}</h4>
+                        <p>$ 5.00 USD</p>
+                      </div>
+                    );
+                  })}
+                  <h4>Total: {buys.total} ARS</h4>
+                </div>
+                
               </div>
-            </div>
-          );
+            );
+          
+         
         })
       }
     </div>

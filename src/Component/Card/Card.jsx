@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import style from "./Card.module.css";
+import "./Card.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFav, addToCart, removeFav, removeFromCart } from "../../Redux/actions/actions";
 import shoppingCartIcon from "../../assets/round_shopping_cart_white_24dp.png";
+import Swal from "sweetalert2";
+
 
 const Card = ({ id, image, year, title, duration,lenguage, torrent}) => {
   const [isFav, setIsFav] = useState(false);
@@ -14,6 +17,30 @@ const Card = ({ id, image, year, title, duration,lenguage, torrent}) => {
   const user = useSelector((state) => state.user)
 
   const handleAddCart = () => {
+    !addedToCart
+      ? Swal.fire({
+        position: "top-end",
+        title: `"${title}" was added to your Cart 🛒`,
+        icon: "success",
+        showConfirmButton: false,
+        backdrop: false,
+        timer: 2000,
+        customClass: {
+          popup: "small-alert",
+        },
+      }) 
+      : Swal.fire({
+        position: "top-end",
+        title:`"${title}" was removed from your Cart 🛒`,
+        icon: "success",
+        showConfirmButton: false,
+        backdrop: false,
+        timer: 2000,
+        customClass: {
+          popup: "small-alert",
+        },
+      })
+
     if (!addedToCart){
     setAddedToCart(true)
     dispatch(addToCart({ id, image, year, title, duration,lenguage, torrent}))
@@ -26,8 +53,34 @@ const Card = ({ id, image, year, title, duration,lenguage, torrent}) => {
   const handleFavorite = () => {
     isFav
       ? dispatch(removeFav(id, user.id))
-      : dispatch(addFav(id, user.id));//User.id
+      : dispatch(addFav(id, user.id));
+
+      !isFav
+      ? Swal.fire({
+        position: "top-end",
+        title: `"${title}" was added to your Favorites💖`,
+        icon: "success",
+        showConfirmButton: false,
+        backdrop: false,
+        timer: 2000,
+        customClass: {
+          popup: "small-alert",
+        },
+      }) 
+      : Swal.fire({
+        position: "top-end",
+        title:`"${title}" was removed from your Favorites💔`,
+        icon: "success",
+        showConfirmButton: false,
+        backdrop: false,
+        timer: 2000,
+        customClass: {
+          popup: "small-alert",
+        },
+      })
+      
     setIsFav(!isFav);
+
   };
 
   useEffect(() => {

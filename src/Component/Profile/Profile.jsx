@@ -7,6 +7,7 @@ import validations from "./validations";
 import ShoppingHistory from "../ShoppingHistory/ShoppingHistory";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import AdminSideBar from "../AdminSideBar/AdminSideBar";
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -74,21 +75,11 @@ const Profile = () => {
     );
   }, []);
 
-  const loadingAdmin = () => {
-    if (userData.admin) {
-      navigate('/dashboard');
-    } else if (!userData.admin) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'You are not an administrator',
-        footer: '<a href="">Why do I have this issue?</a>'
-      })
-    }
-  }
+  
   return (
     <div className={style.main}>
-      <SideBar />
+      {userData.admin ? <AdminSideBar /> : <SideBar />
+}
       <div className={style.profile}>
         <h2>
           Hi <label className={style.name}>{userFirstName[0]}</label>, welcome
@@ -159,7 +150,7 @@ const Profile = () => {
         </form>
         <ShoppingHistory/>
       </div>
-        <button onClick={loadingAdmin}>admin</button>
+        
       
     </div>
   );

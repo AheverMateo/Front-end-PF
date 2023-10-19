@@ -1,3 +1,8 @@
+.detailMain {
+  background-color: #21242D;
+  width: 79%;
+  margin-left: 2rem;
+}
 .main {
     display: flex;
     flex-direction: row;

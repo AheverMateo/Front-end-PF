@@ -3,6 +3,7 @@ import {
   GET_BESTFAVORITES,
   GET_BESTSELLERS,
   GET_FAVS,
+  GET_ORDERS,
   REMOVE_FAV,
 } from "../actions/actionsTypes";
 import {
@@ -43,6 +44,7 @@ const initialState = {
   bestsellers: [],
   bestfavorites: [],
   salesByDate: [],
+  orders: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -57,6 +59,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         allUsers: action.payload,
       };
+      case GET_ORDERS:
+        return {
+          ...state,
+          orders: action.payload,
+        };
     case GET_BESTSELLERS:
       return {
         ...state,
@@ -123,7 +130,10 @@ const rootReducer = (state = initialState, action) => {
         filterParameters: ["Home", null, null],
         bestfavorites: [],
         bestsellers: [],
-        salesByDate: []
+        salesByDate: [],
+        allUsers: [],
+        Cart: [],
+        orders: []
       };
     }
     case ADD_TO_CART: {
