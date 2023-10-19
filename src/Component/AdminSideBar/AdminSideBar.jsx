@@ -53,6 +53,10 @@ const AdminSideBar = () => {
           <img src={graphicsIcon} />
           <div>Graphics</div>
         </Link>
+        <Link to="/Home">
+          <img src={homeIcon} />
+          <div>Nonflix HOME</div>
+        </Link>
 
         <h3>General</h3>
         <Link to="/Profile">
