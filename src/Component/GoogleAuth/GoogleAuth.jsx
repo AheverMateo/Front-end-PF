@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { login as loginAction, registerUser } from "../../Redux/actions/actions";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function GoogleAuth() {
   const navigate = useNavigate();
@@ -20,7 +21,8 @@ export default function GoogleAuth() {
     name: "",
     provider: "Google",
     image: "",
-    admin: false
+    admin: false,
+    active: true,
   });
 
   const onSuccess = (credentialResponse) => {
@@ -39,12 +41,16 @@ export default function GoogleAuth() {
 
   useEffect(() => {
     if (userGoogle.email) {
-      if (location.pathname === "/Login") {
+      if (location.pathname === "/Login" ) {
          dispatch(loginAction(userGoogle)).then((response) => {
           if(response.data !== "The user is not registered"){
             setIsRegistered(true);
             }
-        }).catch((error)=> console.log(error))
+        }).catch((error)=>  Swal.fire({
+          title: "Oops!",
+          text: "User disabled, Contact to support",
+          icon: "error",
+        }))
         
       }
 

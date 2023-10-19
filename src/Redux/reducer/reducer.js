@@ -23,6 +23,8 @@ import {
   GET_PURCHASED_MOVIES,
   GET_USERS,
   SALES_BY_DATE,
+  ACTIVE_USER,
+  ACTIVE_USERADMIN
 } from "../actions/actionsTypes";
 
 const initialState = {
@@ -180,6 +182,31 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         shoppingHistory: action.payload,
       };
+      
+    case ACTIVE_USER: {
+        const users = [...state.allUsers];
+        for (const user of users) {
+          if (user.id === action.payload) {
+            user.active = !user.active;
+          }
+        }
+        return {
+          ...state,
+          allUsers: users,
+        };
+      }
+    case ACTIVE_USERADMIN: {
+        const users = [...state.allUsers];
+        for (const user of users) {
+          if (user.id === action.payload) {
+            user.admin = !user.admin;
+          }
+        }
+        return {
+          ...state,
+          allUsers: users,
+        };
+      }
     default:
       return {
         ...state,
