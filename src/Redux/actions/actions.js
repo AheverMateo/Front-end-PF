@@ -22,6 +22,8 @@ import {
   GET_BESTSELLERS,
   GET_BESTFAVORITES,
   SALES_BY_DATE,
+  ACTIVE_USER,
+  ACTIVE_USERADMIN,
   GET_ORDERS
 } from "./actionsTypes";
 import Swal from "sweetalert2";
@@ -303,10 +305,13 @@ export const login = (userInfo) => {
       const user = await axios.post(`/Nonflix/login/login`, userInfo);
 
       const userData = user.data;
-      return dispatch({
-        type: USER_DATA,
-        payload: userData,
-      });
+      if(userData.active){
+        return dispatch({
+          type: USER_DATA,
+          payload: userData,
+        });
+
+      }
     } catch (error) {
       const errorMsg = error.response.data.error
         ? error.response.data.error
@@ -428,3 +433,32 @@ export const getPurchasedMovies = (userId) => {
 
   }
 } 
+
+export const disableEnableUsers = (id, token, active) => {
+  const updatedActive = !active;
+  return async (dispatch) => {
+    await axios.put("/Nonflix/login/update", { id, password: "", active: updatedActive },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    dispatch({ type: ACTIVE_USER, payload: id })
+  }
+}
+export const disableEnableUsersAdmin = (id, token, admin) => {
+  const updatedAdmin = !admin;
+  return async (dispatch) => {
+    await axios.put("/Nonflix/login/update", { id, password: "", admin: updatedAdmin },
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    dispatch({ type: ACTIVE_USERADMIN, payload: id })
+  }
+}

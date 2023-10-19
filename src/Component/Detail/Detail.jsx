@@ -26,18 +26,7 @@ const Detail = () => {
     
   }, []);
 
-  const [reviews, setReviews] = useState([
-    {
-      title: "Great Movie",
-      description: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In velit, voluptate ullam modi tempora libero magnam culpa. Incidunt harum hic reiciendis. Possimus, enim fugiat iusto architecto dolores ratione cumque nemo.</p>,
-      rating: 9
-    },
-    {
-      title: "Bad Movie",
-      description: <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque inventore dolorum, adipisci quasi ipsa natus laudantium itaque non incidunt. Accusantium consequatur optio animi quos quaerat placeat nostrum esse deserunt enim.</p>,
-      rating: 3
-    },
-  ]);
+  const [reviews, setReviews] = useState([]);
 
   const [newReview, setNewReview] = useState({
     title: "",

@@ -14,7 +14,10 @@ const Cart = () => {
 
   const handleShopping = async () => {
     try {
-      stateCart.forEach((movie) => (movie.user = user.id));
+      stateCart.forEach(movie => {
+        movie.user = user.id
+        movie.email = user.email
+    })
       const { data } = await axios.post("/Nonflix/shopping/create-order", {
         movies: [...stateCart],
       });

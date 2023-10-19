@@ -30,7 +30,6 @@ function App() {
   const navigate = useNavigate();
   
   useEffect(() => {
-    console.log("Efecto ejecutado");
     if (user.token) {
       if(!user.admin){
         return navigate('/Home');
