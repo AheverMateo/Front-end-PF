@@ -83,8 +83,6 @@ const Users = () => {
                       <TableRow>
                         <TableCell>Name</TableCell>
                         <TableCell>Email</TableCell>
-                        <TableCell>Number of Reviews</TableCell>
-                        <TableCell>Purchases</TableCell>
                         <TableCell>Admin</TableCell>
                         <TableCell>Profile Image</TableCell>
                         <TableCell>User</TableCell>
@@ -97,8 +95,6 @@ const Users = () => {
                         <TableRow key={user.name}>
                           <TableCell>{user.name}</TableCell>
                           <TableCell>{user.email}</TableCell>
-                          <TableCell>{user.reviews}</TableCell>
-                          <TableCell>{user.purchases}</TableCell>
                           <TableCell>{`${user.admin}`}</TableCell>
                           <TableCell>
                             <img
