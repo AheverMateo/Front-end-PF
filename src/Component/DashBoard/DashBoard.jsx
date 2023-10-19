@@ -174,7 +174,7 @@ const DashBoard = () => {
                   </Table>
                 </Card>
                 <br></br>
-                <button onClick={loadMore}>Load more users...</button>
+                <button onClick={loadMore}>Load more...</button>
               </TabPanel>
               
              
