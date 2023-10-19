@@ -164,7 +164,7 @@ if (e.target.files.length > 0) {
       <div className={style.createMovieContainer}>
       <div className={style.h1}>
         
-        <h1 className={style.h1}>Modify the movie</h1>
+        <h1 className={style.h1}>Update movie data</h1>
         
       </div>
       <div className={style.firstContainer}>
@@ -314,18 +314,13 @@ if (e.target.files.length > 0) {
         (errorMsg) => errorMsg === "" && movie.genre.length > 0
       ) ? (
         <button className={style.okVal} onClick={handleSubmit}>
-          Upload Movie
+          Update data
         </button>
       ) : (
         <div className={style.notOk}>Complete all fields correctly</div>
       )}
     </div>
-    <div>
-                <Link to='/dashboard'>
-                    <button className={style.okVal}>Back</button> 
-                </Link>
-
-                </div>
+    
     </div>
   );
 };

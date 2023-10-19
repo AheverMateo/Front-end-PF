@@ -7,6 +7,7 @@ import { cleanFavs, getFavs, getMovies } from "../../Redux/actions/actions";
 import style from "./Favorites.module.css";
 import Pagination from "../Pagination/Pagination";
 import SideBar from "../SideBar/SideBar";
+import brokenHeart from "../../assets/brokenheart2.png"
 
 const Favorites = () => {
 
@@ -66,8 +67,10 @@ const Favorites = () => {
     );
   } else {
     return (
-      <div style={{ alignContent: 'center' }}>
-        <h1 style={{ textAlign: 'center' }}>Don't have Favorites</h1>
+      <div className={style.emptyfavorites}>
+        <h1 style={{ textAlign: 'center' }}>This is our movies hearts</h1>
+        <img src={brokenHeart} />
+        <h1 style={{ textAlign: 'center' }}>Waiting for you to select them as your favorite</h1>
       </div>
     );
   }

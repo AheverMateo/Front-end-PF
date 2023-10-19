@@ -21,7 +21,8 @@ import {
   GET_USERS,
   GET_BESTSELLERS,
   GET_BESTFAVORITES,
-  SALES_BY_DATE
+  SALES_BY_DATE,
+  GET_ORDERS
 } from "./actionsTypes";
 import Swal from "sweetalert2";
 
@@ -48,6 +49,20 @@ export const getUsers = () => {
       dispatch({
         type: GET_USERS,
         payload: users,
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+};
+export const getOrders = () => {
+  return async (dispatch) => {
+    try {
+      const data = await axios.get("/Nonflix/movies/orders");
+      const orders = data.data;
+      dispatch({
+        type: GET_ORDERS,
+        payload: orders,
       });
     } catch (error) {
       console.log(error.response);

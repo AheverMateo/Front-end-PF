@@ -20,6 +20,7 @@ import DashBoard from "./Component/DashBoard/DashBoard";
 import Users from "./Component/Users/Users";
 import Form from './Component/FormPutMovie/FormPutMovie';
 import Graphics from './Component/Graphics/Graphics';
+import Orders from './Component/Orders/Orders';
 
 function App() {
   
@@ -59,6 +60,7 @@ function App() {
           <Route path='/users' element={<Users></Users>} />
           <Route path='/uploadMovie/:id' element={<Form></Form>} />
           <Route path='/graphics' element={<Graphics></Graphics>} />
+          <Route path='/orders' element={<Orders></Orders>} />
         </Route>
 
       </Routes>

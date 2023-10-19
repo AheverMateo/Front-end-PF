@@ -45,7 +45,7 @@ const AdminSideBar = () => {
           <div className={style.users}>Users</div>
         </Link>
         
-        <Link to="/">
+        <Link to="/orders">
           <img src={ordersIcon} />
           <div>Orders</div>
         </Link>

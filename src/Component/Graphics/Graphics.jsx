@@ -37,7 +37,7 @@ const Graphics = () => {
   }, 0);
 
   const salesByMovie = bestsellers.map(movie=> { return {name: movie.name, value: +(+movie.value * 1749.66).toFixed(2)}})
-  console.log(salesByMovie);
+  
   const valueFormatter = (number) =>
     `$ ${new Intl.NumberFormat("us").format(number).toString()}`;
 
